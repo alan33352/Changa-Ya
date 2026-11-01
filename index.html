@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <style>
 :root{--bg:#f3f6fa;--card:#fff;--ink:#0f1c2e;--mut:#5a6a7e;--line:#d9e1ec;--acc:#1456a0;--accink:#fff;--soft:#e4edf8;--warn:#b4411b;--warnbg:#fbe9e1;--sh:0 1px 2px rgba(15,28,46,.06),0 12px 28px -16px rgba(15,28,46,.25);--f-ui:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-disp:var(--f-ui);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-:root.dark{--bg:#0a1220;--card:#111c2e;--ink:#e8eef7;--mut:#9aa9bd;--line:#223049;--acc:#6db0f0;--accink:#07121f;--soft:#16243a;--warn:#f0a07d;--warnbg:#2c1f1a;--sh:0 1px 2px rgba(0,0,0,.4),0 12px 28px -16px rgba(0,0,0,.75);color-scheme:dark}
+:root.dark{--bg:#0f1318;--card:#171c23;--ink:#e9edf3;--mut:#9aa5b4;--line:#27303b;--acc:#6db0f0;--accink:#07121f;--soft:#1c2531;--warn:#f0a07d;--warnbg:#2c1f1a;--sh:0 1px 2px rgba(0,0,0,.4),0 12px 28px -16px rgba(0,0,0,.75);color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .3s,color .3s}
 h1,h2,.ser{font-family:var(--f-disp);font-weight:800;letter-spacing:-.025em}
@@ -100,9 +100,53 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
 .gsteps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;column-gap:.85rem;padding:.8rem 1rem;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px)}
 .gsteps li::before{content:counter(s);grid-row:span 2;display:grid;place-items:center;width:2rem;height:2rem;border-radius:999px;background:#fff;color:#0f2a4a;font-weight:800;font-size:.85rem}
 .gsteps b{font-size:.95rem}.gsteps span{font-size:.85rem;color:rgba(255,255,255,.78)}
-@media(max-width:639px){.gsteps{display:none}}
+@media(max-width:639px){.gsteps li{padding:.6rem .75rem}.gsteps span{font-size:.8rem}.gl h1{font-size:1.9rem}}
 .gtrust{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem;padding-top:1.1rem;border-top:1px solid var(--line)}
 .gtrust span{font-size:.72rem;font-weight:600;padding:.25rem .6rem;border-radius:999px;background:var(--soft);color:var(--acc)}
+
+/* ===== Navegación, inicio, perfil ===== */
+main{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom,0px))!important}
+#toasts{bottom:6.8rem!important}
+#bnav{position:fixed;z-index:42;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:0 .75rem calc(.6rem + env(safe-area-inset-bottom,0px));pointer-events:none}
+.bn-in{pointer-events:auto;width:100%;max-width:30rem;display:grid;grid-template-columns:1fr 1.25fr 1fr 1fr;align-items:end;gap:.15rem;padding:.4rem;border-radius:24px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 12px 34px -10px rgba(10,25,50,.35)}
+.nv{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.55rem .25rem;border-radius:16px;color:var(--mut);font-size:.68rem;font-weight:600;transition:color .2s,background-color .2s}
+.nv.on{color:var(--acc);background:var(--soft)}
+.nv-main{background:var(--acc);color:var(--accink);transform:translateY(-12px);padding:.75rem .25rem .6rem;box-shadow:0 10px 22px -8px var(--acc);font-weight:700}
+.nv-main.on{background:var(--acc);color:var(--accink)}.nv-main svg{width:26px;height:26px}
+.hhero{position:relative;overflow:hidden;border-radius:24px;padding:2.5rem 1.5rem;color:#fff;background:radial-gradient(120% 90% at 85% 0,#2c6fb8 0,transparent 60%),linear-gradient(160deg,#0d2a4d,#143f73);text-align:center}
+.hhero::after{content:"";position:absolute;inset:auto -10% -45% -10%;height:70%;background:radial-gradient(closest-side,rgba(140,196,255,.28),transparent);animation:fl 9s ease-in-out infinite alternate}
+@keyframes fl{to{transform:translateY(-12%) scale(1.15)}}
+.hhero>*{position:relative;z-index:1}.hlogo{width:64px;height:64px;margin:0 auto}
+.hbrand{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.03em;margin-top:.6rem}
+.hhero p{max-width:30rem;margin:.6rem auto 0;color:rgba(255,255,255,.85);font-size:1.05rem}
+.hcta{margin-top:1.4rem;padding:.8rem 1.4rem;border-radius:14px;background:#fff;color:#0d2a4d;font-weight:700}
+.hh{font-size:1.5rem;margin:2.5rem 0 .6rem}.hp{color:var(--mut);max-width:42rem}
+.hgrid{display:grid;gap:.8rem;margin-top:1rem}@media(min-width:768px){.hgrid{grid-template-columns:repeat(3,1fr)}}
+.hgrid .cd{padding:1.1rem}.hgrid .ic,.sic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--soft);color:var(--acc);margin-bottom:.6rem}
+.hsteps{display:grid;gap:.9rem;margin-top:1rem}
+.hstep{display:grid;gap:1rem;padding:1rem;align-items:center}@media(min-width:640px){.hstep{grid-template-columns:15rem 1fr}}
+.ill{border-radius:14px;background:linear-gradient(160deg,var(--soft),var(--card));border:1px solid var(--line);padding:.5rem}.ill svg{display:block;width:100%;height:auto}
+.mg{animation:mgm 5s ease-in-out infinite}@keyframes mgm{0%,100%{transform:translateY(0)}33%{transform:translateY(30px)}66%{transform:translateY(60px)}}
+.rp{transform-box:fill-box;transform-origin:center;animation:rp 2.4s ease-out infinite}@keyframes rp{0%{transform:scale(.3);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+.ck{stroke-dasharray:34;stroke-dashoffset:34;animation:ck 2.4s ease infinite}@keyframes ck{0%,45%{stroke-dashoffset:34}75%,100%{stroke-dashoffset:0}}
+.st{opacity:.18;animation:stf 3.6s ease-in-out infinite}@keyframes stf{0%,12%{opacity:.18}30%,80%{opacity:1}100%{opacity:.18}}
+.faq details{border:1px solid var(--line);background:var(--card);border-radius:14px;margin-top:.6rem;padding:0 1rem}
+.faq summary{cursor:pointer;padding:.95rem 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+.faq summary::after{content:"+";color:var(--acc);font-weight:700;font-size:1.2rem;line-height:1}.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding:0 0 1rem;color:var(--mut);font-size:.92rem}
+.hcred{margin-top:2.5rem;padding:1.6rem;text-align:center;display:grid;gap:.7rem;justify-items:center}
+.hcred a.ct{display:inline-flex;gap:.5rem;align-items:center;font-weight:600;color:var(--acc)}
+.lg{display:flex;flex-direction:column;gap:.35rem;margin-top:.6rem;border-top:1px solid var(--line);padding-top:1rem;width:100%}.lg button{font-size:.85rem;color:var(--mut);text-decoration:underline}
+.pcard{overflow:hidden;padding:0}.pcover{height:96px;background:radial-gradient(100% 140% at 90% 0,#2c6fb8,transparent 60%),linear-gradient(160deg,#0d2a4d,#143f73)}
+.pbody{display:flex;gap:1rem;align-items:flex-end;padding:0 1.25rem;margin-top:-2.4rem;flex-wrap:wrap}.pav{border:4px solid var(--card);border-radius:999px;display:inline-block}
+.pstats{display:grid;grid-template-columns:repeat(3,1fr);margin:1.1rem 1.25rem;border:1px solid var(--line);border-radius:14px}
+.pstats div{display:grid;text-align:center;padding:.7rem .3rem}.pstats div+div{border-left:1px solid var(--line)}.pstats b{font-size:1.15rem}.pstats span{font-size:.72rem;color:var(--mut)}
+.meter{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),#5aa6e6);border-radius:99px}
+.psec{padding:1.25rem;margin-top:1rem}.psec h3{font-size:1.05rem;display:flex;gap:.5rem;align-items:center}.psec .sub{font-size:.85rem;color:var(--mut);margin:.2rem 0 .9rem}
+.pg{display:grid;gap:.75rem}@media(min-width:640px){.pg.two{grid-template-columns:1fr 1fr}}.pg label{font-size:.8rem;font-weight:600}
+.tips{display:grid;gap:.55rem;margin:.2rem 0 1rem;padding:0;list-style:none}.tips li{display:flex;gap:.6rem;font-size:.88rem}.tips li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:99px;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231456a0' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat}
+#viewFind>.cd{border-radius:20px;padding:1rem}#q{min-height:52px;padding-left:2.9rem;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%235a6a7e' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat .95rem center}
+.card{border-radius:18px;overflow:hidden;position:relative}.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--acc),#5aa6e6)}
 </style>
 </head>
 <body class="min-h-screen">
@@ -112,18 +156,17 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
    <svg class="logo w-8 h-8" viewBox="0 0 32 32" fill="none"><rect x="1.5" y="1.5" width="29" height="29" rx="8" stroke="var(--ink)" stroke-width="2"/><path d="M9 21l5-10 3 6 2-3 4 7" stroke="var(--acc)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
    <span class="ser font-bold text-lg truncate" id="brand"></span>
   </div>
-  <nav class="hidden sm:flex" id="nav1"><button class="tb" data-r="find">Buscar trabajo</button><button class="tb" data-r="post">Publicar trabajo</button></nav>
   <button id="themeBtn" class="bo px-2.5 sm:px-3 py-1.5 text-sm"></button>
   <div class="relative"><button id="bellBtn" class="bo px-2.5 sm:px-3 py-1.5 text-sm">Avisos <span id="badge" class="ml-1 inline-block min-w-5 px-1 rounded-full text-xs text-center" style="background:var(--warn);color:var(--bg)"></span></button>
    <div id="notif" class="hidden cd absolute right-0 mt-2 w-72 max-w-[85vw] p-2 shadow-lg"></div></div>
   <button id="meBtn" class="bp w-9 h-9 text-sm" aria-label="Mi perfil">MP</button>
  </div>
- <div class="sm:hidden px-4 flex" id="nav2"><button class="tb flex-1" data-r="find">Buscar trabajo</button><button class="tb flex-1" data-r="post">Publicar trabajo</button></div>
  <div class="border-t text-xs mut" style="border-color:var(--line)"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-1.5 flex flex-wrap gap-x-5"><span><span class="inline-block w-1.5 h-1.5 rounded-full mr-1.5" style="background:var(--acc)"></span><b class="acc" id="stJobs">0</b> changas activas</span></div></div>
 </header>
 
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
- <section id="viewFind">
+ <section id="viewHome"></section>
+ <section id="viewFind" class="hidden">
   <h1 id="heroT"></h1><p class="mut mt-2 mb-6 max-w-2xl text-base" id="heroS"></p>
   <div class="cd p-3 sm:p-4 space-y-3">
    <input id="q" class="in" placeholder="Buscar: plomero, pintura, flete…">
@@ -144,8 +187,12 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
   <h3 class="font-bold text-lg mt-8 mb-3">Mis changas publicadas</h3><div id="mine" class="grid sm:grid-cols-2 gap-4"></div>
   <h3 class="font-bold text-lg mt-8 mb-3">Mis postulaciones</h3><div id="myApps" class="grid sm:grid-cols-2 gap-4"></div>
  </section>
+<section id="viewMe" class="hidden"><div id="meBox"></div></section>
 </main>
-<footer class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-xs mut flex flex-wrap gap-2 justify-between border-t" style="border-color:var(--line)"><span id="foot"></span><span><button class="underline mr-4" onclick="openTerms()">Términos y privacidad</button><button id="admLink" class="underline">Acceso administrador</button></span></footer>
+<span id="foot" class="hidden"></span>
+<nav id="bnav" aria-label="Principal"><div class="bn-in"><button class="nv" data-r="home"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Inicio</span></button><button class="nv nv-main" data-r="find"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg><span>Trabajos</span></button><button class="nv" data-r="post"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg><span>Publicar</span></button><button class="nv" data-r="me"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Perfil</span></button></div></nav>
+<div id="legal" class="hidden fixed inset-0 z-[58] overflow-y-auto" style="background:var(--bg)"></div>
+
 
 <!-- MODAL DE INTRODUCCIÓN Y REGISTRO -->
 <div id="gate" class="hidden fixed inset-0 z-[45] overflow-y-auto"></div>
@@ -201,9 +248,9 @@ function avatar(name,sz='w-9 h-9 text-sm'){const c=['#3b6ea5','#4f7f8f','#6a5f9e
 function toast(msg,ok=true){const d=document.createElement('div');d.className='pointer-events-auto rounded-lg px-4 py-3 text-sm font-medium shadow-lg';d.style.cssText='animation:toast .3s ease both;background:'+(ok?'var(--ink);color:var(--bg)':'var(--warn);color:var(--bg)');d.textContent=msg;$('toasts').appendChild(d);setTimeout(()=>{d.style.transition='opacity .3s';d.style.opacity='0';setTimeout(()=>d.remove(),300)},3000)}
 function notify(t,b){notifs.unshift([t,b,true]);renderNotif()}
 function renderNotif(){const n=notifs.filter(x=>x[2]).length;$('badge').textContent=n;$('badge').style.display=n?'inline-block':'none';$('notif').innerHTML=!notifs.length?'<div class="p-2.5 text-sm mut">Sin avisos por ahora.</div>':notifs.slice(0,6).map(x=>`<div class="p-2.5 rounded-lg"><div class="text-sm font-semibold">${esc(x[0])}</div><div class="text-xs mut">${esc(x[1])}</div></div>`).join('')}
-function setTheme(t){V.theme=t;document.documentElement.classList.toggle('dark',t==='dark');$('themeBtn').textContent=t==='dark'?'Claro':'Oscuro';document.querySelector('meta[name=theme-color]').content=t==='dark'?'#0a1220':'#f3f6fa';saveV()}
-function setRole(r){role=r;$('viewFind').classList.toggle('hidden',r!=='find');$('viewPost').classList.toggle('hidden',r!=='post');document.querySelectorAll('.tb[data-r]').forEach(b=>b.classList.toggle('on',b.dataset.r===r));r==='find'?loadFeed():(renderMine(),loadJobs())}
-function applyCfg(){const c=ST.cfg;$('brand').innerHTML=esc(c.name);$('heroT').textContent=c.heroT;$('heroS').textContent=c.heroS;$('foot').textContent='© '+new Date().getFullYear()+' '+c.name;document.title=c.name+' · Oficios y changas';const cur=$('fBar').value;$('fBar').innerHTML=barOpts(cur,'Todas las zonas')}
+function setTheme(t){V.theme=t;document.documentElement.classList.toggle('dark',t==='dark');$('themeBtn').textContent=t==='dark'?'Claro':'Oscuro';document.querySelector('meta[name=theme-color]').content=t==='dark'?'#0f1318':'#f3f6fa';saveV()}
+function setRoleOld(r){role=r;$('viewFind').classList.toggle('hidden',r!=='find');$('viewPost').classList.toggle('hidden',r!=='post');document.querySelectorAll('.tb[data-r]').forEach(b=>b.classList.toggle('on',b.dataset.r===r));r==='find'?loadFeed():(renderMine(),loadJobs())}
+function applyCfg(){const c=ST.cfg;$('brand').innerHTML=esc(c.name);if(role==='home')renderHome();$('heroT').textContent=c.heroT;$('heroS').textContent=c.heroS;$('foot').textContent='© '+new Date().getFullYear()+' '+c.name;document.title=c.name+' · Oficios y changas';const cur=$('fBar').value;$('fBar').innerHTML=barOpts(cur,'Todas las zonas')}
 function refreshAll(){applyCfg();renderFeed();if(role==='post')renderMine();if(!$('admin').classList.contains('hidden')&&aTab!=='cfg')renderAdmin()}
 
 const mapJob=r=>({id:r.id,user:r.user_id,title:r.title,cat:r.cat,desc:r.descr,pay:r.pay,barrio:r.barrio,urg:r.urg,photos:r.photos||[],phone:r.phone||'',author:r.author||'Usuario',hidden:!!r.hidden,status:r.status||'open',assigned:r.assigned_to||null,assignedAt:r.assigned_at?Date.parse(r.assigned_at):0,t:Date.parse(r.created_at)});
@@ -381,7 +428,7 @@ function drawGate(){const m=G.mode,f=(id,l,t,ac)=>t==='password'?pwField(id,l,ac
  else if(m==='newpw')b=`<h3 class="font-bold text-lg mb-1">Nueva contraseña</h3><p class="text-sm mut mb-4">Elegí una contraseña nueva para tu cuenta.</p><div class="space-y-3">${f('gP','Nueva contraseña','password','new-password')}${f('gP2','Repetir contraseña','password','new-password')}</div><p id="gE" class="text-sm mt-3 min-h-5" style="color:var(--warn)"></p><button id="gGo" class="bp w-full py-2.5" onclick="doNewPw()">Guardar contraseña</button>`;
  else b=`<div class="flex border-b mb-4" style="border-color:var(--line)"><button class="tb flex-1 ${m==='reg'?'on':''}" onclick="G.mode='reg';drawGate()">Crear cuenta</button><button class="tb flex-1 ${m==='login'?'on':''}" onclick="G.mode='login';drawGate()">Ingresar</button></div><div class="space-y-3">${m==='reg'?`<div class="grid grid-cols-2 gap-3">${f('gN','Nombre','text','given-name')}${f('gA','Apellido','text','family-name')}</div>`:''}${f('gM','Correo electrónico','email','username')}${f('gP','Contraseña','password',m==='reg'?'new-password':'current-password')}${m==='reg'?f('gP2','Repetir contraseña','password','new-password'):''}${m==='reg'?'<label class="flex gap-2 text-sm items-start"><input type="checkbox" id="gT" class="mt-1"><span>Acepto los <button type="button" class="underline acc" onclick="openTerms()">términos y la política de privacidad</button>.</span></label>':''}</div><p id="gE" class="text-sm mt-3 min-h-5" style="color:var(--warn)">${sb?'':'Falta configurar Supabase.'}</p><button id="gGo" class="bp w-full py-2.5" onclick="${m==='reg'?'doReg()':'doLog()'}">${m==='reg'?'Crear cuenta':'Entrar'}</button><div class="flex justify-between items-center mt-3"><button class="text-sm mut underline" onclick="G.mode='intro';drawGate()">← Volver a la introducción</button>${m==='login'?'<button class="text-sm mut underline" onclick="G.mode=\'forgot\';drawGate()">¿Olvidaste tu contraseña?</button>':''}</div>`;
  const nm=esc(ST.cfg.name),intro=m==='intro',brand=`<div class="flex items-center gap-2.5"><svg class="w-10 h-10" viewBox="0 0 32 32" fill="none"><rect x="1.5" y="1.5" width="29" height="29" rx="8" stroke="currentColor" stroke-width="2"/><path d="M9 21l5-10 3 6 2-3 4 7" stroke="#8cc4ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-2xl font-extrabold tracking-tight">${nm}</span></div>`,hero=intro?`<h1 class="mt-8">Changas y oficios de tu zona, en un toque.</h1><p class="gsub">Conectá directo con quien necesita una mano o con quien sabe hacerla. Sin intermediarios.</p><ol class="gsteps"><li><b>Publicá o encontrá</b><span>Buscá por oficio, barrio y urgencia, o publicá lo que necesitás en segundos.</span></li><li><b>Postulate al instante</b><span>Anotate con un toque y coordiná los detalles por WhatsApp.</span></li><li><b>Calificá y crecé</b><span>Completá el trabajo y calificá a la otra parte para generar confianza.</span></li></ol>`:'';
- $('gate').innerHTML=`<div class="gwrap"><div class="gin ${intro?'gi':''}"><div class="gl"><div class="flex">${brand}</div>${hero}</div><div><div class="cd p-6 sm:p-8 fade">${b}</div><p class="text-xs text-center mt-4 gl2">Tus datos se usan solo para el funcionamiento de la plataforma.</p><p class="text-center mt-2"><button class="underline text-xs gl2" onclick="openAdmin()">Acceso administrador</button></p></div></div></div>`}
+ $('gate').innerHTML=`<div class="gwrap"><div class="gin ${intro?'gi':''}"><div class="gl"><div class="flex">${brand}</div>${hero}</div><div class="gcard"><div class="cd p-6 sm:p-8 fade">${b}</div><p class="text-xs text-center mt-4 gl2">Tus datos se usan solo para el funcionamiento de la plataforma.</p><p class="text-center mt-2"><button class="underline text-xs gl2" onclick="openAdmin()">Acceso administrador</button></p></div></div></div>`}
 async function doReg(){if(!sb)return gerr('Falta configurar Supabase.');const n=$('gN').value.trim(),a=$('gA').value.trim(),e=$('gM').value.trim().toLowerCase(),p=$('gP').value;
  if(n.length<2||a.length<2)return gerr('Ingresá tu nombre y apellido.');
  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e))return gerr('Ingresá un correo válido.');
@@ -405,7 +452,7 @@ async function doLog(){if(!sb)return gerr('Falta configurar Supabase.');const e=
   lf=0;await startSession(data.user)}catch(x){$('gGo').disabled=false;gerr('No hay conexión con el servidor.')}}
 async function startSession(u){let n=(u.user_metadata&&u.user_metadata.nombre)||'',a=(u.user_metadata&&u.user_metadata.apellido)||'';
  try{const {data}=await sb.from('profiles').select('nombre,apellido').eq('id',u.id).maybeSingle();if(data){n=data.nombre||n;a=data.apellido||a}}catch(e){}
- ME={id:u.id,name:(n+' '+a).trim()||'Usuario'};$('meBtn').textContent=((n[0]||'')+(a[0]||'')).toUpperCase()||'YO';
+ ME={id:u.id,email:u.email||'',n,a,name:(n+' '+a).trim()||'Usuario'};VER=undefined;setRole('home');$('meBtn').textContent=((n[0]||'')+(a[0]||'')).toUpperCase()||'YO';
  $('gate').classList.add('hidden');if(n)toast('Hola, '+n);loadJobs()}
 async function logoutUser(){try{await sb.auth.signOut()}catch(e){}ME={id:null,name:''};J=[];AP=new Set();APPS=[];notifs=[];renderNotif();renderFeed();closeModal();G={mode:'intro',email:'',last:0};showGate();toast('Sesión cerrada')}
 async function checkSession(){if(!sb){G.mode='intro';return showGate()}if(REC0){G.mode='newpw';return showGate()}try{const {data}=await sb.auth.getSession();data.session?startSession(data.session.user):showGate()}catch(e){showGate()}}
@@ -422,21 +469,77 @@ async function loadUsers(){const box=$('usrBox');if(!box)return;if(!sb){box.text
  const U=data||[],csv='Nombre,Apellido,Correo,Alta\n'+U.map(x=>[x.nombre,x.apellido,x.email,new Date(x.created_at).toLocaleString('es-AR')].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',')).join('\n');
  box.innerHTML=`<div class="mb-3">${U.length} cuentas registradas</div><div class="space-y-2">${U.length?U.map(x=>`<div class="cd p-3 flex flex-wrap items-center gap-3"><div class="mr-auto min-w-0"><div class="font-semibold truncate">${esc(x.nombre||'')} ${esc(x.apellido||'')}</div><div class="text-xs mut">${esc(x.email)} · ${new Date(x.created_at).toLocaleDateString('es-AR')}</div></div></div>`).join(''):'<div class="cd p-8 text-center mut">Todavía no hay usuarios.</div>'}</div><textarea readonly rows="6" class="in text-xs mt-4" style="font-family:ui-monospace,monospace">${esc(csv)}</textarea>`}
 
+
+/* NAVEGACIÓN */
+function setRole(r){role=r;[['Home','home'],['Find','find'],['Post','post'],['Me','me']].forEach(([k,v])=>$('view'+k).classList.toggle('hidden',v!==r));document.querySelectorAll('.nv').forEach(b=>b.classList.toggle('on',b.dataset.r===r));scrollTo(0,0);
+ if(r==='home')renderHome();else if(r==='find')loadFeed();else if(r==='post'){renderMine();loadJobs()}else renderMe()}
+const SVG=(p,z=22)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const STARP='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z';
+const ILL=[
+ `<svg viewBox="0 0 220 130"><g>${[18,48,78].map(y=>`<rect x="20" y="${y}" width="140" height="24" rx="8" fill="var(--card)" stroke="var(--line)"/><rect x="30" y="${y+9}" width="60" height="6" rx="3" fill="var(--line)"/><rect x="128" y="${y+8}" width="22" height="8" rx="4" fill="var(--acc)" opacity=".8"/>`).join('')}</g><g class="mg"><circle cx="176" cy="30" r="14" fill="var(--card)" fill-opacity=".6" stroke="var(--acc)" stroke-width="4"/><path d="M186 40l14 14" stroke="var(--acc)" stroke-width="4" stroke-linecap="round"/></g></svg>`,
+ `<svg viewBox="0 0 220 130"><rect x="30" y="12" width="160" height="106" rx="16" fill="var(--card)" stroke="var(--line)" stroke-width="2"/><rect x="48" y="28" width="90" height="8" rx="4" fill="var(--line)"/><rect x="48" y="44" width="124" height="6" rx="3" fill="var(--soft)"/><rect x="48" y="56" width="100" height="6" rx="3" fill="var(--soft)"/><rect x="55" y="78" width="110" height="26" rx="10" fill="var(--acc)"/><circle class="rp" cx="110" cy="91" r="14" fill="var(--acc)"/><path class="ck" d="M98 91l8 8 16-16" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ `<svg viewBox="0 0 220 130"><rect x="20" y="20" width="180" height="90" rx="16" fill="var(--card)" stroke="var(--line)" stroke-width="2"/>${[0,1,2,3,4].map(i=>`<g transform="translate(${34+31*i} 42) scale(1.1)"><path class="st" style="animation-delay:${i*.35}s" d="${STARP}" fill="var(--acc)"/></g>`).join('')}<rect x="52" y="90" width="116" height="6" rx="3" fill="var(--soft)"/></svg>`];
+const HSTEPS=[['Publicá o encontrá','Buscá por oficio, barrio y urgencia, o publicá lo que necesitás en pocos segundos.'],['Postulate al instante','Anotate con un toque y coordiná los detalles directo por WhatsApp.'],['Calificá y crecé','Cuando el trabajo termina, calificá a la otra persona. Cada reseña suma confianza.']];
+const HVAL=[['Sin intermediarios','<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>','Hablás directo con quien publica o con quien se postula. Los acuerdos son entre ustedes.'],['Contacto por WhatsApp','<path d="M4 5h16v11H9l-5 4z"/>','Un toque y abrís el chat para coordinar horario, precio y detalles.'],['Reputación real','<path d="'+STARP+'"/>','Las calificaciones entre usuarios te ayudan a elegir con más tranquilidad.']];
+const FAQ=[['¿Tiene costo usar la app?','Crear tu cuenta, publicar una changa y postularte no tiene costo dentro de la app.'],['¿Cómo se paga el trabajo?','El pago lo acuerdan directamente las dos partes. La app no procesa ni retiene pagos.'],['¿Cómo me comunico con la otra persona?','Desde cada changa podés escribir por WhatsApp. Al postularte, quien publicó también ve tu contacto.'],['¿Cuánto tiempo se ve una changa?','Las changas abiertas se muestran hasta 30 días. Podés editarlas, cerrarlas o eliminarlas cuando quieras.'],['¿Cómo verifico mi cuenta?','En la pestaña Perfil completá la sección Verificación con tu DNI y teléfono. Revisamos los datos y, si todo está bien, tu perfil muestra la insignia de verificada.'],['¿Qué hago si veo algo sospechoso?','Usá el botón Denunciar de la publicación. Revisamos cada denuncia y podemos ocultar o eliminar contenido.']];
+function renderHome(){const nm=esc(ST.cfg.name),mail='changaya.app0@gmail.com',tel='+5493765034704',lg='<svg class="hlogo" viewBox="0 0 32 32" fill="none"><rect x="1.5" y="1.5" width="29" height="29" rx="8" stroke="currentColor" stroke-width="2"/><path d="M9 21l5-10 3 6 2-3 4 7" stroke="#8cc4ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ $('viewHome').innerHTML=`<div class="hhero">${lg}<div class="hbrand">${nm}</div><p>Changas y oficios de tu zona, con contacto directo por WhatsApp.</p><button class="hcta" onclick="setRole('find')">Ver trabajos disponibles</button></div>
+ <h2 class="hh">Más información</h2><p class="hp"><b>${nm}</b> conecta a personas que necesitan resolver una tarea u oficio con trabajadores independientes de la zona dispuestos a hacerla. Todo en un solo lugar, rápido y sin vueltas.</p>
+ <div class="hgrid">${HVAL.map(v=>`<div class="cd"><div class="ic">${SVG(v[1])}</div><h3>${v[0]}</h3><p class="text-sm mut mt-1">${v[2]}</p></div>`).join('')}</div>
+ <h2 class="hh">Cómo usar la app</h2><div class="hsteps">${HSTEPS.map((x,i)=>`<article class="cd hstep"><div class="ill">${ILL[i]}</div><div><span class="tag u2">Paso ${i+1}</span><h3 class="text-lg mt-2">${x[0]}</h3><p class="mut mt-1">${x[1]}</p></div></article>`).join('')}</div>
+ <h2 class="hh">Preguntas frecuentes</h2><div class="faq">${FAQ.map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('')}</div>
+ <footer class="hcred cd"><div class="flex items-center gap-2" style="color:var(--ink)">${lg.replace('class="hlogo"','width="34" height="34"')}<b class="text-xl">${nm}</b></div><p class="mut max-w-md">¿Dudas, consultas o sugerencias? Escribinos y te respondemos a la brevedad.</p>
+ <a class="ct" href="mailto:${mail}">${SVG('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',18)}${mail}</a><a class="ct" href="https://wa.me/${tel.replace(/\D/g,'')}" target="_blank" rel="noopener">${SVG('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>',18)}${tel}</a>
+ <div class="lg"><button onclick="openLegal('t')">Términos y condiciones</button><button onclick="openLegal('p')">Política de privacidad</button></div>
+ <div class="text-xs mut">© ${new Date().getFullYear()} ${nm}</div><button class="text-xs mut underline" onclick="openAdmin()">Acceso administrador</button></footer>`}
+/* LEGAL */
+const LEGAL={t:['Términos y condiciones',[['1. Aceptación','Al crear una cuenta o usar la plataforma aceptás estos términos. Si no estás de acuerdo, no la uses.'],['2. Qué es la plataforma','Es un espacio que facilita el contacto entre quienes publican una changa u oficio y quienes se postulan. No somos empleadores, agencia ni parte de los acuerdos entre usuarios, y no garantizamos que se concrete un trabajo ni su resultado.'],['3. Cuenta','Tenés que ser mayor de 18 años y brindar datos verdaderos. Sos responsable de tu contraseña y de lo que se haga desde tu cuenta.'],['4. Publicaciones y conducta','Está prohibido publicar contenido ilegal, engañoso, discriminatorio u ofensivo, ofrecer actividades ilícitas, usar datos de terceros sin permiso o suplantar identidades. Podemos ocultar o eliminar contenido y suspender cuentas que incumplan estas reglas.'],['5. Acuerdos y pagos','Precio, forma de pago, horarios y condiciones se acuerdan directamente entre las partes. La plataforma no procesa pagos ni responde por incumplimientos.'],['6. Calificaciones','Las reseñas deben reflejar experiencias reales. Podemos quitar reseñas falsas, abusivas o que incluyan datos personales.'],['7. Verificación','Verificar la cuenta ayuda a generar confianza, pero no implica una garantía sobre la persona ni sobre el trabajo que realice.'],['8. Seguridad','Recomendamos coordinar los detalles antes de encontrarse, no adelantar dinero sin conocer a la otra parte y avisarnos de cualquier conducta sospechosa con el botón Denunciar.'],['9. Responsabilidad','En la medida permitida por la ley, no respondemos por daños derivados de los acuerdos entre usuarios, por la calidad de los servicios ni por interrupciones del servicio.'],['10. Cambios','Podemos actualizar estos términos. Si seguís usando la plataforma después de un cambio, lo aceptás.'],['11. Ley aplicable','Se rigen por las leyes de la República Argentina. Consultas: changaya.app0@gmail.com.']]],
+ p:['Política de privacidad',[['1. Datos que recopilamos','Nombre, apellido, correo electrónico, teléfono, zona, publicaciones, postulaciones y calificaciones. Si pedís la verificación, también tu DNI.'],['2. Para qué los usamos','Para que la plataforma funcione, permitir el contacto entre usuarios, verificar cuentas, moderar contenido y mantener la seguridad.'],['3. Qué ven otros usuarios','Tu nombre, tu calificación y, al publicar o postularte, tu teléfono de contacto. Tu correo y tu DNI no se muestran a otros usuarios.'],['4. Con quién los compartimos','No vendemos tus datos. Usamos un proveedor de infraestructura para almacenarlos y, si lo pedís, abrimos WhatsApp para que te comuniques con otra persona.'],['5. Datos de verificación','El DNI se usa solo para validar tu identidad y se trata con acceso restringido.'],['6. Conservación','Guardamos tus datos mientras tengas cuenta o sea necesario para cumplir obligaciones legales.'],['7. Tus derechos','Podés pedir acceso, corrección o eliminación de tus datos escribiendo a changaya.app0@gmail.com. La Ley 25.326 de Protección de Datos Personales te reconoce estos derechos, y la Agencia de Acceso a la Información Pública es el órgano de control.'],['8. Seguridad','Aplicamos medidas técnicas razonables para proteger tu información. Ningún sistema es infalible, por eso cuidá tu contraseña.'],['9. Cambios','Si actualizamos esta política, publicaremos la nueva versión en esta pantalla.']]]};
+function openLegal(k){const L=LEGAL[k];$('legal').innerHTML=`<div class="max-w-2xl mx-auto px-4 pb-16"><div class="sticky top-0 py-3 flex items-center gap-3" style="background:var(--bg)"><button class="bo px-3" onclick="$('legal').classList.add('hidden')">Volver</button><div class="flex gap-1 ml-auto"><button class="tb ${k==='t'?'on':''}" onclick="openLegal('t')">Términos</button><button class="tb ${k==='p'?'on':''}" onclick="openLegal('p')">Privacidad</button></div></div><h1 class="mt-4 mb-1">${L[0]}</h1><p class="text-xs mut mb-5">${esc(ST.cfg.name)} · Última actualización: ${new Date().toLocaleDateString('es-AR')}</p>${L[1].map(x=>`<h3 class="mt-5 text-base">${x[0]}</h3><p class="mut mt-1 leading-relaxed">${x[1]}</p>`).join('')}</div>`;$('legal').classList.remove('hidden');$('legal').scrollTop=0}
+function openTerms(){openLegal('t')}
+/* PERFIL */
+let VER=undefined;
+const PF=()=>lsG('chya_pf_'+ME.id,{});
+async function loadVer(){VER=null;try{const {data,error}=await sb.from('verifications').select('status').eq('user_id',ME.id).order('created_at',{ascending:false}).limit(1);if(!error&&data&&data[0])VER=data[0].status}catch(e){}renderMe(1)}
+function renderMe(skip){if(!ME.id){$('meBox').innerHTML='';return}if(VER===undefined&&!skip&&sb){loadVer()}
+ const p=PF(),x=RATE[ME.id],rv=RV.filter(r=>r.reviewed_id===ME.id).slice(0,10),pct=Math.round([ME.n,ME.a,p.tel,p.zona,p.oficio,p.bio].filter(Boolean).length/6*100),
+ bd=VER==='approved'?'<span class="tag u2">Cuenta verificada</span>':VER==='pending'?'<span class="tag u1">Verificación en revisión</span>':'<span class="tag u3">Sin verificar</span>',
+ lock=VER==='approved'||VER==='pending';
+ $('meBox').innerHTML=`<div class="cd pcard fade"><div class="pcover"></div><div class="pbody"><span class="pav">${avatar(ME.name,'w-20 h-20 text-2xl')}</span><div class="pb-1"><h2 class="text-xl">${esc(ME.name)}</h2><div class="text-sm mut">${esc(ME.email||'')}</div><div class="mt-2">${bd}</div></div></div>
+ <div class="pstats"><div><b>${mine().filter(live).length}</b><span>Activas</span></div><div><b>${doneCount(ME.id)}</b><span>Realizadas</span></div><div><b>${x?x.avg.toFixed(1).replace('.',','):'—'}</b><span>Calificación</span></div></div>
+ <div class="px-5 pb-5"><div class="meter"><i style="width:${pct}%"></i></div><div class="text-xs mut mt-1">Perfil completo al ${pct}%</div></div></div>
+ <div class="cd psec"><h3>${SVG('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',20)}Datos personales</h3><p class="sub">Esta información ayuda a que te elijan con más confianza.</p>
+ <div class="pg two"><div><label>Nombre</label><input id="pN" class="in" value="${esc(ME.n||'')}"></div><div><label>Apellido</label><input id="pA" class="in" value="${esc(ME.a||'')}"></div><div><label>Teléfono (WhatsApp)</label><input id="pT" class="in" inputmode="tel" value="${esc(p.tel||'')}"></div><div><label>Zona</label><select id="pZ" class="in">${barOpts(p.zona||'','Elegí tu zona')}</select></div></div>
+ <div class="pg mt-3"><div><label>Oficio u ocupación</label><input id="pO" class="in" maxlength="60" value="${esc(p.oficio||'')}" placeholder="Ej: electricista, pintor, niñera"></div><div><label>Sobre mí</label><textarea id="pB" rows="3" maxlength="300" class="in" placeholder="Contá tu experiencia en pocas palabras">${esc(p.bio||'')}</textarea></div></div>
+ <button class="bp mt-4 px-6" onclick="saveProfile()">Guardar cambios</button></div>
+ <div class="cd psec"><h3>${SVG('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',20)}Verificación de cuenta</h3><p class="sub">Enviá tus datos y, una vez revisados, tu perfil muestra la insignia de cuenta verificada.</p>
+ ${lock?`<p class="text-sm font-semibold">${VER==='approved'?'Tu cuenta está verificada.':'Recibimos tus datos y los estamos revisando.'}</p>`:`<div class="pg two"><div><label>Número de DNI</label><input id="vD" class="in" inputmode="numeric" maxlength="9" placeholder="Sin puntos"></div><div><label>Teléfono de contacto</label><input id="vT" class="in" inputmode="tel" value="${esc(p.tel||'')}"></div></div><p class="text-xs mut mt-2">Tus datos se usan solo para validar tu identidad y no se muestran a otros usuarios.</p><button class="bp mt-3 px-6" onclick="sendVer()">Enviar para verificar</button>`}</div>
+ <div class="cd psec"><h3>${SVG('<path d="'+STARP+'"/>',20)}Reseñas recibidas</h3><p class="sub">${x?stars(x.avg,16)+' '+x.avg.toFixed(1).replace('.',',')+' · '+x.n+(x.n===1?' reseña':' reseñas'):'Todavía no tenés reseñas. Aparecen cuando completás trabajos.'}</p>
+ <div class="space-y-2">${rv.map(r=>`<div class="p-3 rounded-xl" style="background:var(--soft)"><div class="flex justify-between text-sm"><b>${esc(r.reviewer_name||'Usuario')}</b><span class="mut text-xs">${ago(Date.parse(r.created_at))}</span></div><div class="mt-0.5">${stars(r.stars,14)}</div>${r.comment?`<p class="text-sm mt-1">${esc(r.comment)}</p>`:''}</div>`).join('')}</div></div>
+ <div class="cd psec"><h3>${SVG('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',20)}Seguridad</h3><p class="sub">Cuidate y cuidá a la comunidad.</p><ul class="tips"><li>Coordiná los detalles por WhatsApp antes de encontrarte.</li><li>No adelantes dinero a alguien que no conocés.</li><li>Revisá las reseñas y la insignia de verificación.</li><li>Nunca compartas tu contraseña. Denunciá lo que te parezca sospechoso.</li></ul>
+ <div class="flex flex-wrap gap-2"><button class="bo px-4" onclick="changePw()">Cambiar contraseña</button><button class="bo px-4" style="color:var(--warn)" onclick="logoutUser()">Cerrar sesión</button></div></div>`}
+async function saveProfile(){const n=$('pN').value.trim(),a=$('pA').value.trim();if(n.length<2||a.length<2)return toast('Ingresá nombre y apellido.',false);
+ if(sb){const {error}=await sb.from('profiles').update({nombre:n,apellido:a}).eq('id',ME.id);if(error)return toast('No se pudo guardar.',false)}
+ lsS('chya_pf_'+ME.id,{tel:digits($('pT').value),zona:$('pZ').value,oficio:$('pO').value.trim(),bio:$('pB').value.trim()});
+ ME.n=n;ME.a=a;ME.name=n+' '+a;$('meBtn').textContent=(n[0]+a[0]).toUpperCase();toast('Perfil guardado');renderMe(1)}
+async function sendVer(){const d=digits($('vD').value),t=digits($('vT').value);if(d.length<7)return toast('Ingresá un DNI válido.',false);if(t.length<8)return toast('Ingresá un teléfono válido.',false);
+ const {error}=await sb.from('verifications').insert({user_id:ME.id,dni:d,phone:t,status:'pending'});if(error)return toast('No se pudo enviar. Probá de nuevo más tarde.',false);VER='pending';toast('Datos enviados. Los revisamos a la brevedad.');renderMe(1)}
+async function changePw(){try{await sb.auth.resetPasswordForEmail(ME.email,{redirectTo:location.origin+location.pathname})}catch(e){}toast('Te enviamos un correo para crear una nueva contraseña.')}
 /* Inicio */
 $('q').oninput=e=>{F.q=e.target.value;renderFeed()};
 $('fCat').innerHTML='<option value="">Todos los oficios</option>'+catOpts('');$('fCat').onchange=e=>{F.cat=e.target.value;F.grp='';renderChips();renderFeed()};
 $('fPay').onchange=e=>{F.pay=+e.target.value;renderFeed()};$('fBar').onchange=e=>{F.bar=e.target.value;renderFeed()};$('fUrg').onchange=e=>{F.urg=e.target.value;renderFeed()};$('fSort').onchange=e=>{F.sort=e.target.value;renderFeed()};
 $('clear').onclick=()=>{F={q:'',cat:'',pay:0,bar:'',urg:'',grp:'',sort:'t'};$('q').value='';['fCat','fPay','fBar','fUrg'].forEach(i=>$(i).selectedIndex=0);$('fSort').value='t';renderChips();renderFeed()};
-document.querySelectorAll('.tb[data-r]').forEach(b=>b.onclick=()=>setRole(b.dataset.r));
+document.querySelectorAll('.nv').forEach(b=>b.onclick=()=>setRole(b.dataset.r));
 $('themeBtn').onclick=()=>setTheme(V.theme==='dark'?'light':'dark');
 $('bellBtn').onclick=e=>{e.stopPropagation();$('notif').classList.toggle('hidden');notifs.forEach(n=>n[2]=false);lsS('chya_seen',Date.now());renderNotif()};
 document.addEventListener('click',e=>{if(!$('notif').contains(e.target))$('notif').classList.add('hidden')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('modal2');closeModal()}});
 document.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.target.tagName!=='INPUT'||e.target.type==='file')return;const r=e.target.closest('#gate,#modal,#modal2');if(!r)return;const b=r.querySelector('#gGo,#aGo,#next,button.bp.w-full');if(b&&!b.disabled){e.preventDefault();b.click()}});
 addEventListener('scroll',()=>document.querySelector('header').classList.toggle('sc',scrollY>4),{passive:true});
-$('meBtn').onclick=()=>{if(ME.id)openProfile(ME.id)};$('newJob').onclick=openWizard;$('admLink').onclick=openAdmin;
+$('meBtn').onclick=()=>setRole('me');$('newJob').onclick=openWizard;
 setInterval(()=>{if(ME.id&&!document.hidden)loadJobs()},30000);
-setTheme(V.theme);applyCfg();renderChips();renderNotif();setRole('find');checkSession();
+setTheme(V.theme);applyCfg();renderChips();renderNotif();setRole('home');checkSession();
 loadSite();
 </script>
 </body>
