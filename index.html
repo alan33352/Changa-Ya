@@ -36,7 +36,7 @@ button{touch-action:manipulation;cursor:pointer}
 .bp:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}.bo:disabled{opacity:.6;cursor:default}
 .bp.text-xs,.bo.text-xs{min-height:34px}
 .chip{min-height:36px;padding:.35rem .95rem;font-weight:500}
-#themeBtn,#bellBtn,#meBtn{height:40px;min-height:40px}#meBtn{width:40px;border-radius:999px;font-size:.8rem}
+#themeBtn,#bellBtn,#meBtn{height:40px;min-height:40px}#meBtn{width:40px;padding:0;border-radius:999px;font-size:.8rem;position:relative;overflow:hidden}
 .in{width:100%;min-height:44px;border-radius:10px;padding:.65rem .9rem;font-size:16px;outline:none;border:1px solid var(--line);background:var(--card);color:var(--ink);transition:border-color .2s,box-shadow .2s}
 .in::placeholder{color:var(--mut);opacity:.65}
 .in:focus{border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 20%,transparent)}.in:focus-visible{outline:none}
@@ -63,12 +63,12 @@ header{transition:box-shadow .25s}header.sc{box-shadow:var(--sh)}
 .logo{transition:transform .3s}.logo:hover{transform:rotate(-6deg)}
 #chips{scrollbar-width:none}#chips::-webkit-scrollbar{display:none}
 @media (pointer:coarse){.bp,.bo,.tb{min-height:44px}.bp.text-xs,.bo.text-xs{min-height:38px}.chip{min-height:40px}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}#gbPh .ph.on{animation:none}}
 
 /* ===== Estilo v2 ===== */
 .bp,.bo{border-radius:12px;font-weight:700}
 .cd{border-radius:16px}.tag{font-weight:600}
-header{backdrop-filter:saturate(1.4) blur(8px)}
+header{-webkit-backdrop-filter:saturate(1.4) blur(8px);backdrop-filter:saturate(1.4) blur(8px)}
 #viewFind>h1{font-size:clamp(2rem,4.8vw,3rem);line-height:1.05;max-width:20ch}
 /* Pantalla de ingreso con ciudad animada */
 #gate{background:transparent!important}
@@ -77,8 +77,8 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
 #gbSky{position:absolute;inset:0;background:linear-gradient(180deg,#0a1a38 0%,#1d4378 55%,#e59a5c 100%)}
 #gbSky::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#040a18 0%,#0c2146 60%,#27508a 100%);animation:dn 40s ease-in-out infinite alternate}
 @keyframes dn{from{opacity:0}to{opacity:1}}
-.cl{--h:calc(clamp(220px,24vw,560px)*var(--k));position:absolute;left:0;bottom:0;height:var(--h);width:calc(var(--h)*9);animation:pan linear infinite;will-change:transform}
-@keyframes pan{to{transform:translateX(-33.3333%)}}
+.cl{--h:calc(clamp(220px,24vw,560px)*var(--k));position:absolute;left:0;bottom:0;height:var(--h);width:calc(var(--h)*9);animation:pan linear infinite;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+@keyframes pan{from{transform:translate3d(0,0,0)}to{transform:translate3d(-33.3333%,0,0)}}
 .wn{animation:tw 5s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.12}50%{opacity:.95}}
 .gbshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,28,.62),rgba(6,14,28,.3) 45%,rgba(6,14,28,.7))}
@@ -97,7 +97,7 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
 .gl h1{font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.04;color:#fff;max-width:14ch}
 .gsub{margin-top:1rem;font-size:1.05rem;line-height:1.55;color:rgba(255,255,255,.82);max-width:34rem}
 .gsteps{list-style:none;margin:1.75rem 0 0;padding:0;display:grid;gap:.6rem;max-width:34rem;counter-reset:s}
-.gsteps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;column-gap:.85rem;padding:.8rem 1rem;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px)}
+.gsteps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;column-gap:.85rem;padding:.8rem 1rem;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .gsteps li::before{content:counter(s);grid-row:span 2;display:grid;place-items:center;width:2rem;height:2rem;border-radius:999px;background:#fff;color:#0f2a4a;font-weight:800;font-size:.85rem}
 .gsteps b{font-size:.95rem}.gsteps span{font-size:.85rem;color:rgba(255,255,255,.78)}
 @media(max-width:639px){.gsteps li{padding:.6rem .75rem}.gsteps span{font-size:.8rem}.gl h1{font-size:1.9rem}}
@@ -113,7 +113,7 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
 main{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom,0px))!important}
 #toasts{bottom:6.8rem!important}
 #bnav{position:fixed;z-index:42;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:0 .75rem calc(.6rem + env(safe-area-inset-bottom,0px));pointer-events:none}
-.bn-in{pointer-events:auto;width:100%;max-width:30rem;display:grid;grid-template-columns:repeat(4,1fr);align-items:end;gap:.15rem;padding:.4rem;border-radius:24px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 12px 34px -10px rgba(10,25,50,.35)}
+.bn-in{pointer-events:auto;width:100%;max-width:30rem;display:grid;grid-template-columns:repeat(4,1fr);align-items:end;gap:.15rem;padding:.4rem;border-radius:24px;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 12px 34px -10px rgba(10,25,50,.35)}
 .nv{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.55rem .25rem;border-radius:16px;color:var(--mut);font-size:.68rem;font-weight:600;transition:color .2s,background-color .2s}
 .hhero{position:relative;overflow:hidden;border-radius:24px;padding:2.5rem 1.5rem;color:#fff;background:radial-gradient(120% 90% at 85% 0,#2c6fb8 0,transparent 60%),linear-gradient(160deg,#0d2a4d,#143f73);text-align:center}
 .hhero::after{content:"";position:absolute;inset:auto -10% -45% -10%;height:70%;background:radial-gradient(closest-side,rgba(140,196,255,.28),transparent);animation:fl 9s ease-in-out infinite alternate}
@@ -168,7 +168,7 @@ header{border-bottom:1px solid var(--line)}
 .sx{display:flex;align-items:center;justify-content:space-between;gap:.5rem;width:100%;min-height:48px;padding:.6rem .9rem;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font-size:.95rem;font-weight:500;text-align:left;transition:border-color .2s,box-shadow .2s,background-color .2s}
 .sx span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sx.ph span{color:var(--mut)}
 .sx svg{flex:none;color:var(--mut)}.sx:hover{border-color:var(--acc);background:var(--soft)}.sx:active{transform:scale(.985)}
-.sxov{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,16,30,.5);backdrop-filter:blur(4px);animation:ovin .2s}
+.sxov{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,16,30,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:ovin .2s}
 .sxov.out{opacity:0;transition:opacity .18s}.sxov.out .sxp{transform:translateY(24px);transition:transform .18s}
 .sxp{width:100%;max-width:30rem;max-height:80vh;display:flex;flex-direction:column;background:var(--card);color:var(--ink);border-radius:26px 26px 0 0;box-shadow:0 -20px 60px -20px rgba(0,0,0,.5);animation:shin .32s cubic-bezier(.2,.9,.25,1);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(min-width:640px){.sxov{align-items:center}.sxp{border-radius:24px;max-height:70vh}}
@@ -188,6 +188,17 @@ header{border-bottom:1px solid var(--line)}
 .vt-in b{color:var(--ink);font-size:.88rem}.vt-in small{color:var(--mut);font-size:.74rem}.vt-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .vt-c{position:absolute;left:0;right:0;bottom:0;padding:.35rem;font-size:.75rem;font-weight:600;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.65))}
 .vst{display:flex;gap:.8rem;align-items:flex-start;padding:1rem;border-radius:14px;background:var(--soft);color:var(--acc)}.vst b{color:var(--ink)}.vst.ok{background:color-mix(in srgb,#1f9d62 14%,var(--card));color:#1f9d62}
+
+/* ===== Foto de perfil y verificaciones (admin) ===== */
+.avw{position:relative;overflow:hidden}.avimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pav{position:relative}.avcam{position:absolute;right:-2px;bottom:-2px;width:34px;height:34px;min-height:34px;border-radius:999px;display:grid;place-items:center;background:var(--acc);color:var(--accink);border:3px solid var(--card);cursor:pointer}
+.vgrid{display:grid;gap:.6rem;grid-template-columns:repeat(2,1fr)}@media(min-width:760px){.vgrid{grid-template-columns:repeat(4,1fr)}}
+.vph{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--soft);border:1px solid var(--line);cursor:zoom-in;padding:0}
+.vph img{width:100%;height:100%;object-fit:cover}.vph span.cap{position:absolute;left:0;right:0;bottom:0;padding:.3rem .5rem;font-size:.72rem;font-weight:700;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7));text-align:left}
+.vph .none{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:.5rem;font-size:.75rem;color:var(--mut)}
+.vfil{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.vzoom{max-width:94vw;max-height:90dvh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.tabbadge{display:inline-block;min-width:1.2rem;margin-left:.35rem;padding:0 .35rem;border-radius:99px;background:var(--warn);color:var(--bg);font-size:.7rem;font-weight:700;text-align:center}
 </style>
 </head>
 <body class="min-h-screen">
@@ -285,7 +296,9 @@ const mine=()=>J.filter(j=>j.user===ME.id);
 const mode=()=>sb?'shared':'local';
 
 function ago(t){const s=Math.max(1,Math.round((Date.now()-t)/60000));if(s<60)return 'hace '+s+' min';const h=Math.round(s/60);return h<24?'hace '+h+' h':'hace '+Math.round(h/24)+' d'}
-function avatar(name,sz='w-9 h-9 text-sm'){const c=['#3b6ea5','#4f7f8f','#6a5f9e','#a0623f','#3f7d6b','#7a5c8a'],n=(name||'?').trim()||'?',i=n.split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();return `<span class="${sz} rounded-full grid place-items-center font-semibold text-white shrink-0" style="background:${c[n.charCodeAt(0)%6]}">${esc(i)}</span>`}
+const AVV={};
+const avUrl=uid=>uid&&typeof SB_URL!=='undefined'?`${SB_URL}/storage/v1/object/public/avatars/${uid}.jpg?v=${AVV[uid]||1}`:'';
+function avatar(name,sz='w-9 h-9 text-sm',uid){const c=['#3b6ea5','#4f7f8f','#6a5f9e','#a0623f','#3f7d6b','#7a5c8a'],n=(name||'?').trim()||'?',i=n.split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();return `<span class="avw ${sz} rounded-full grid place-items-center font-semibold text-white shrink-0" style="background:${c[n.charCodeAt(0)%6]}">${esc(i)}${uid?`<img class="avimg" src="${avUrl(uid)}" alt="" loading="lazy" onerror="this.remove()">`:''}</span>`}
 function toast(msg,ok=true){const d=document.createElement('div');d.className='pointer-events-auto rounded-lg px-4 py-3 text-sm font-medium shadow-lg';d.style.cssText='animation:toast .3s ease both;background:'+(ok?'var(--ink);color:var(--bg)':'var(--warn);color:var(--bg)');d.textContent=msg;$('toasts').appendChild(d);setTimeout(()=>{d.style.transition='opacity .3s';d.style.opacity='0';setTimeout(()=>d.remove(),300)},3000)}
 function notify(t,b){notifs.unshift([t,b,true]);renderNotif()}
 function renderNotif(){const n=notifs.filter(x=>x[2]).length;$('badge').textContent=n;$('badge').style.display=n?'inline-block':'none';$('notif').innerHTML=!notifs.length?'<div class="p-2.5 text-sm mut">Sin avisos por ahora.</div>':notifs.slice(0,6).map(x=>`<div class="p-2.5 rounded-lg"><div class="text-sm font-semibold">${esc(x[0])}</div><div class="text-xs mut">${esc(x[1])}</div></div>`).join('')}
@@ -313,7 +326,7 @@ function jobCard(j,own){
  <div><h3 class="font-bold leading-snug">${esc(j.title)}</h3><p class="text-sm mut mt-1 line-clamp-2 cursor-pointer" onclick="this.classList.toggle('line-clamp-2')" title="Tocá para expandir">${esc(j.desc)}</p></div>
  ${ph?`<div class="flex gap-2">${ph}</div>`:''}
  <div class="flex items-center justify-between gap-2"><div class="ser text-2xl font-bold acc">${money(j.pay)}</div><div class="flex gap-1.5"><span class="tag">${esc(j.barrio)}</span><span class="tag">${CATS[j.cat]||''}</span></div></div>
- ${own?own_:`<button class="flex items-center gap-2 text-left" onclick="openProfile('${j.user}')">${avatar(j.author)}<span class="text-sm"><b>${esc(j.author)}</b><br><span class="text-xs mut">${rateTxt(j.user)}</span></span></button>
+ ${own?own_:`<button class="flex items-center gap-2 text-left" onclick="openProfile('${j.user}')">${avatar(j.author,undefined,j.user)}<span class="text-sm"><b>${esc(j.author)}</b><br><span class="text-xs mut">${rateTxt(j.user)}</span></span></button>
  <div class="grid grid-cols-2 gap-2"><button class="${ap?'bo':'bp'} py-2.5" onclick="apply('${j.id}')" ${ap?'disabled':''}>${ap?'Postulado':'Postularme'}</button><a class="bo py-2.5 text-center" href="${wa}" target="_blank" rel="noopener" onclick="toast('Abriendo WhatsApp…')">WhatsApp</a></div><button class="text-xs mut underline self-start" onclick="reportForm('${j.id}')">Denunciar</button>`}</article>`}
 function appCard(j){const sel=j.assigned===ME.id,st=j.status==='open'?['Esperando respuesta','u3']:j.status==='assigned'?(sel?['Te eligieron','u2']:['Eligieron a otra persona','u3']):(sel?['Realizada','u2']:['Cerrada','u3']);
  return `<article class="fade cd p-4 flex flex-col gap-2"><div class="flex justify-between gap-2"><span class="tag ${st[1]}">${st[0]}</span><span class="text-xs mut">${ago(j.t)}</span></div><h3 class="font-bold">${esc(j.title)}</h3><div class="text-sm mut">${esc(j.author)} · ${esc(j.barrio)} · ${money(j.pay)}</div>
@@ -353,7 +366,7 @@ function closeModal(id='modal'){$(id).classList.add('hidden');$(id).innerHTML=''
 const sheet='w-full sm:max-w-md max-h-[90dvh] overflow-y-auto rounded-t-2xl sm:rounded-2xl p-6 sh-in';
 const sheetS='background:var(--card);border:1px solid var(--line)';
 function openProfile(uid){const me=uid===ME.id,name=me?ME.name:((J.find(x=>x.user===uid)||{}).author||'Usuario'),n=J.filter(x=>x.user===uid&&live(x)).length,d=doneCount(uid),x=RATE[uid],rv=RV.filter(r=>r.reviewed_id===uid).slice(0,6);
- openModal(`<div class="${sheet}" style="${sheetS}"><div class="flex justify-between"><div class="flex items-center gap-3">${avatar(name,'w-14 h-14 text-lg')}<div><h3 class="font-bold text-lg">${esc(name)}</h3><p class="text-sm mut">${me?'Tu perfil':'Usuario registrado'}</p></div></div><button class="text-xl self-start" onclick="closeModal()" aria-label="Cerrar">×</button></div>
+ openModal(`<div class="${sheet}" style="${sheetS}"><div class="flex justify-between"><div class="flex items-center gap-3">${avatar(name,'w-14 h-14 text-lg',uid)}<div><h3 class="font-bold text-lg">${esc(name)}</h3><p class="text-sm mut">${me?'Tu perfil':'Usuario registrado'}</p></div></div><button class="text-xl self-start" onclick="closeModal()" aria-label="Cerrar">×</button></div>
  <div class="flex flex-wrap gap-2 mt-3"><span class="tag">${d} ${d===1?'trabajo realizado':'trabajos realizados'}</span><span class="tag">${n} ${n===1?'changa abierta':'changas abiertas'}</span></div>
  <div class="ser mt-4 text-3xl font-bold">${x?x.avg.toFixed(1).replace('.',','):'Sin calificar'} ${x?stars(x.avg,18):''}</div>${x?`<div class="text-sm mut">${x.n} ${x.n===1?'calificación':'calificaciones'}</div>`:''}
  ${rv.length?`<h4 class="font-bold mt-4 mb-2">Reseñas</h4><div class="space-y-2">${rv.map(r=>`<div class="rounded-lg p-3" style="background:var(--soft)"><div class="flex justify-between text-sm gap-2"><b>${esc(r.reviewer_name)}</b>${stars(r.stars)}</div>${r.comment?`<p class="text-sm mut mt-1">${esc(r.comment)}</p>`:''}</div>`).join('')}</div>`:''}
@@ -401,19 +414,20 @@ async function doLogin(){const err=m=>{$('aErr').textContent=m},e=$('aE').value.
 
 /* Panel de control */
 const MODEMSG={shared:'Conectado a la base compartida: los cambios los ven todos los visitantes.',ro:'Tu cuenta no tiene permiso de edición en la base compartida: los cambios se guardan solo en este navegador.',local:'Base compartida no disponible: los cambios se guardan solo en este navegador.'};
-function showAdmin(){$('admin').classList.remove('hidden');document.body.style.overflow='hidden';renderAdmin();loadJobs()}
+function showAdmin(){$('admin').classList.remove('hidden');document.body.style.overflow='hidden';renderAdmin();loadJobs();verCount()}
 function hideAdmin(){$('admin').classList.add('hidden');if(authed)$('gate').classList.add('hidden');document.body.style.overflow='';renderFeed()}
 function logout(){authed=false;hideAdmin();toast('Sesión cerrada')}
 async function persist(){if(sb){try{const {error}=await sb.from('site').upsert({key:'state',data:JSON.parse(JSON.stringify(ST)),updated_at:new Date().toISOString()});if(error)throw error;return true}catch(e){toast('No se pudo guardar: '+(e.message||'error'),false);return false}}lsS('chya_st',ST);return true}
 function renderAdmin(){
- const tabs=[['res','Resumen'],['jobs','Changas'],['rep','Denuncias'],['cfg','Contenido'],['usr','Usuarios'],['dat','Datos']],on=J.filter(j=>!j.hidden).length;let b='';
- if(aTab==='res')b=`<div class="grid sm:grid-cols-3 gap-3">${[['Changas visibles',on],['Changas ocultas',J.length-on],['Urgentes',J.filter(j=>j.urg==='now'&&!j.hidden).length]].map(x=>`<div class="cd p-4"><div class="text-sm mut">${x[0]}</div><div class="ser text-3xl font-bold mt-1">${x[1]}</div></div>`).join('')}</div><div class="cd p-4 mt-4 text-sm"><b>Estado de sincronización</b><p class="mut mt-1">${MODEMSG[mode()]}</p></div>`;
+ const tabs=[['res','Resumen'],['jobs','Changas'],['rep','Denuncias'],['cfg','Contenido'],['ver','Verificaciones'],['usr','Usuarios'],['dat','Datos']],on=J.filter(j=>!j.hidden).length;let b='';
+ if(aTab==='res')b=`<div class="grid sm:grid-cols-3 gap-3">${[['Changas visibles',on],['Changas ocultas',J.length-on],['Urgentes',J.filter(j=>j.urg==='now'&&!j.hidden).length]].map(x=>`<div class="cd p-4"><div class="text-sm mut">${x[0]}</div><div class="ser text-3xl font-bold mt-1">${x[1]}</div></div>`).join('')}</div><div class="cd p-4 mt-4 text-sm"><b>Estado de sincronización</b><p class="mut mt-1">${MODEMSG[mode()]}</p></div><div class="cd p-4 mt-4 text-sm"><b>Verificaciones pendientes</b><p class="mut mt-1"><span id="verSum">${VQ.n}</span> solicitudes esperando revisión. <button class="underline acc" onclick="aTab='ver';renderAdmin()">Revisar ahora</button></p></div>`;
  if(aTab==='jobs')b=`<div class="text-sm mut mb-3">${J.length} changas publicadas por usuarios</div><div class="space-y-2">${J.length?J.map(j=>`<div class="cd p-3 flex flex-wrap items-center gap-3 ${j.hidden?'opacity-60':''}"><div class="mr-auto min-w-0"><div class="font-semibold truncate">${esc(j.title)}</div><div class="text-xs mut">${esc(j.author)} · ${CATS[j.cat]||''} · ${esc(j.barrio)} · ${money(j.pay)} · ${ago(j.t)}${j.hidden?' · Oculta':''}</div></div><button class="bo px-3 py-1.5 text-sm" onclick="jobForm('${j.id}')">Editar</button><button class="bo px-3 py-1.5 text-sm" onclick="togJob('${j.id}')">${j.hidden?'Mostrar':'Ocultar'}</button><button class="bo px-3 py-1.5 text-sm" style="color:var(--warn)" onclick="delJob('${j.id}',this)">Eliminar</button></div>`).join(''):'<div class="cd p-8 text-center mut">Todavía no hay changas publicadas.</div>'}</div>`;
  if(aTab==='cfg')b=`<div class="cd p-4 space-y-3 max-w-xl"><div><label class="text-sm font-semibold">Nombre del sitio</label><input id="cN" class="in mt-1" value="${esc(ST.cfg.name)}"></div><div><label class="text-sm font-semibold">Título principal</label><input id="cT" class="in mt-1" value="${esc(ST.cfg.heroT)}"></div><div><label class="text-sm font-semibold">Subtítulo</label><input id="cS" class="in mt-1" value="${esc(ST.cfg.heroS)}"></div><div><label class="text-sm font-semibold">Zonas adicionales (separadas por coma)</label><textarea id="cB" rows="3" class="in mt-1">${esc(ST.cfg.barrios)}</textarea></div><div><label class="text-sm font-semibold">Correo de contacto (se muestra en Términos)</label><input id="cK" class="in mt-1" value="${esc(ST.cfg.contact||'')}"></div><p id="cErr" class="text-sm min-h-5" style="color:var(--warn)"></p><button class="bp px-5 py-2.5" onclick="saveCfg()">Guardar cambios</button></div>`;
  if(aTab==='dat')b=`<div class="cd p-4 max-w-2xl"><p class="text-sm mut mb-2">Copia de los datos actuales del sitio (JSON).</p><textarea readonly rows="10" class="in text-xs" style="font-family:ui-monospace,monospace">${esc(JSON.stringify(ST,null,1))}</textarea><div class="flex gap-2 mt-3"><button class="bo px-4 py-2 text-sm" onclick="resetData(this)">Restaurar textos originales</button></div></div>`;
  if(aTab==='rep')b=repTab();
  if(aTab==='usr')b=usrTab();
- $('admin').innerHTML=`<div class="max-w-5xl mx-auto px-4 py-6"><div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4"><h2 class="text-2xl font-bold mr-auto">Panel de control</h2><button class="bo px-3 py-1.5 text-sm" onclick="hideAdmin()">Ver sitio</button><button class="bo px-3 py-1.5 text-sm" onclick="logout()">Cerrar sesión</button></div><div class="flex border-b mb-5 overflow-x-auto" style="border-color:var(--line)">${tabs.map(t=>`<button class="tb ${aTab===t[0]?'on':''}" onclick="aTab='${t[0]}';renderAdmin()">${t[1]}</button>`).join('')}</div><div class="fade">${b}</div></div>`}
+ if(aTab==='ver')b=verTab();
+ $('admin').innerHTML=`<div class="max-w-5xl mx-auto px-4 py-6"><div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4"><h2 class="text-2xl font-bold mr-auto">Panel de control</h2><button class="bo px-3 py-1.5 text-sm" onclick="hideAdmin()">Ver sitio</button><button class="bo px-3 py-1.5 text-sm" onclick="logout()">Cerrar sesión</button></div><div class="flex border-b mb-5 overflow-x-auto" style="border-color:var(--line)">${tabs.map(t=>`<button class="tb ${aTab===t[0]?'on':''}" onclick="aTab='${t[0]}';renderAdmin()">${t[1]}${t[0]==='ver'?`<span id="verBadge" class="tabbadge" style="display:${VQ.n?'inline-block':'none'}">${VQ.n}</span>`:''}</button>`).join('')}</div><div class="fade">${b}</div></div>`}
 function jobForm(id){const j=J.find(x=>x.id===id);if(!j)return;
  const sel=(i,o,v)=>`<select id="${i}" class="in mt-1">${o.map(([k,n])=>`<option value="${esc(k)}" ${String(k)===String(v)?'selected':''}>${esc(n)}</option>`).join('')}</select>`;
  openModal(`<div class="${sheet}" style="${sheetS}"><div class="flex justify-between mb-3"><h3 class="font-bold text-lg">Editar changa</h3><button class="text-xl" onclick="closeModal('modal2')" aria-label="Cerrar">×</button></div><div class="space-y-3"><div><label class="text-sm font-semibold">Título</label><input id="jT" class="in mt-1" value="${esc(j.title)}"></div><div><label class="text-sm font-semibold">Descripción</label><textarea id="jD" rows="3" class="in mt-1">${esc(j.desc)}</textarea></div><div class="grid grid-cols-2 gap-3"><div><label class="text-sm font-semibold">Categoría</label><select id="jC" class="in mt-1">${catOpts(j.cat)}</select></div><div><label class="text-sm font-semibold">Pago (ARS)</label><input id="jP" inputmode="numeric" autocomplete="off" class="in mt-1" value="${fmtN(j.pay)}" oninput="moneyIn(this)"></div><div><label class="text-sm font-semibold">Zona</label><select id="jB" class="in mt-1">${barOpts(j.barrio)}</select></div><div><label class="text-sm font-semibold">Urgencia</label>${sel('jU',Object.entries(URG).map(([k,v])=>[k,v[0]]),j.urg)}</div></div><div><label class="text-sm font-semibold">WhatsApp de contacto</label><input id="jF" inputmode="tel" class="in mt-1" value="${esc(j.phone)}"></div></div><p id="jErr" class="text-sm mt-3 min-h-5" style="color:var(--warn)"></p><button class="bp w-full py-2.5 mt-1" onclick="saveJob('${id}')">Guardar</button></div>`,'modal2')}
@@ -485,7 +499,7 @@ async function doLog(){if(!sb)return gerr('Falta configurar Supabase.');const e=
   lf=0;await startSession(data.user)}catch(x){$('gGo').disabled=false;gerr('No hay conexión con el servidor.')}}
 async function startSession(u){let n=(u.user_metadata&&u.user_metadata.nombre)||'',a=(u.user_metadata&&u.user_metadata.apellido)||'';
  try{const {data}=await sb.from('profiles').select('nombre,apellido').eq('id',u.id).maybeSingle();if(data){n=data.nombre||n;a=data.apellido||a}}catch(e){}
- ME={id:u.id,email:u.email||'',n,a,name:(n+' '+a).trim()||'Usuario'};VER=undefined;VF={};VU={};setRole('home');$('meBtn').textContent=((n[0]||'')+(a[0]||'')).toUpperCase()||'YO';
+ ME={id:u.id,email:u.email||'',n,a,name:(n+' '+a).trim()||'Usuario'};VER=undefined;VF={};VU={};setRole('home');meBtnSet();
  $('gate').classList.add('hidden');if(n)toast('Hola, '+n);loadJobs()}
 async function logoutUser(){try{await sb.auth.signOut()}catch(e){}ME={id:null,name:''};J=[];AP=new Set();APPS=[];notifs=[];renderNotif();renderFeed();closeModal();G={mode:'intro',email:'',last:0};showGate();toast('Sesión cerrada')}
 async function checkSession(){if(!sb){G.mode='intro';return showGate()}if(REC0){G.mode='newpw';return showGate()}try{const {data}=await sb.auth.getSession();data.session?startSession(data.session.user):showGate()}catch(e){showGate()}}
@@ -539,7 +553,7 @@ function renderMe(skip){if(!ME.id){$('meBox').innerHTML='';return}if(VER===undef
  const p=PF(),x=RATE[ME.id],rv=RV.filter(r=>r.reviewed_id===ME.id).slice(0,10),pct=Math.round([ME.n,ME.a,p.tel,p.zona,p.oficio,p.bio].filter(Boolean).length/6*100),
  bd=VER==='approved'?'<span class="tag u2">Cuenta verificada</span>':VER==='pending'?'<span class="tag u1">Verificación en revisión</span>':'<span class="tag u3">Sin verificar</span>',
  lock=VER==='approved'||VER==='pending';
- $('meBox').innerHTML=`<div class="cd pcard fade"><div class="pcover"></div><div class="pid"><span class="pav">${avatar(ME.name,'w-20 h-20 text-2xl')}</span><div class="pname"><h2 class="text-xl">${esc(ME.name)}</h2><div class="text-sm mut">${esc(ME.email||'')}</div><div class="mt-2">${bd}</div></div></div>
+ $('meBox').innerHTML=`<div class="cd pcard fade"><div class="pcover"></div><div class="pid"><span class="pav">${avatar(ME.name,'w-20 h-20 text-2xl',ME.id)}<label class="avcam" aria-label="Cambiar foto de perfil">${SVG('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',17)}<input type="file" accept="image/*" hidden onchange="pickAvatar(this)"></label></span><div class="pname"><h2 class="text-xl">${esc(ME.name)}</h2><div class="text-sm mut">${esc(ME.email||'')}</div><div class="mt-2">${bd}</div><button class="text-xs underline mut mt-1" onclick="delAvatar()">Quitar foto de perfil</button></div></div>
  <div class="pstats"><div><b>${mine().filter(live).length}</b><span>Activas</span></div><div><b>${doneCount(ME.id)}</b><span>Realizadas</span></div><div><b>${x?x.avg.toFixed(1).replace('.',','):'—'}</b><span>Calificación</span></div></div>
  <div class="px-5 pb-5"><div class="meter"><i style="width:${pct}%"></i></div><div class="text-xs mut mt-1">Perfil completo al ${pct}%</div></div></div>
  <div class="cd psec"><h3>${SVG('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',20)}Datos personales</h3><p class="sub">Esta información ayuda a que te elijan con más confianza.</p>
@@ -555,7 +569,7 @@ function renderMe(skip){if(!ME.id){$('meBox').innerHTML='';return}if(VER===undef
 async function saveProfile(){const n=$('pN').value.trim(),a=$('pA').value.trim();if(n.length<2||a.length<2)return toast('Ingresá nombre y apellido.',false);
  if(sb){const {error}=await sb.from('profiles').update({nombre:n,apellido:a}).eq('id',ME.id);if(error)return toast('No se pudo guardar.',false)}
  lsS('chya_pf_'+ME.id,{tel:phd($('pT').value),zona:$('pZ').value,oficio:$('pO').value.trim(),bio:$('pB').value.trim()});
- ME.n=n;ME.a=a;ME.name=n+' '+a;$('meBtn').textContent=(n[0]+a[0]).toUpperCase();toast('Perfil guardado');renderMe(1)}
+ ME.n=n;ME.a=a;ME.name=n+' '+a;meBtnSet();toast('Perfil guardado');renderMe(1)}
 async function changePw(){try{await sb.auth.resetPasswordForEmail(ME.email,{redirectTo:location.origin+location.pathname})}catch(e){}toast('Te enviamos un correo para crear una nueva contraseña.')}
 
 const SUNP='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',MOONP='<path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/>';
@@ -599,6 +613,44 @@ async function sendVer(){if(!sb)return toast('Falta configurar Supabase.',false)
   const {error}=await sb.from('verifications').insert({user_id:ME.id,dni:d,phone:t,dni_front:Pt.front,dni_back:Pt.back,selfie:Pt.self,status:'pending'});if(error)throw error;
   Object.values(VU).forEach(u=>URL.revokeObjectURL(u));VF={};VU={};VER='pending';toast('Datos enviados. Los revisamos a la brevedad.');renderMe(1)}
  catch(e){bt.disabled=false;bt.textContent='Enviar para verificar';toast('No se pudo enviar. Probá de nuevo más tarde.',false)}}
+
+/* FOTO DE PERFIL */
+function meBtnSet(){const b=$('meBtn');if(!b||!ME.id)return;const t=(((ME.n||'')[0]||'')+((ME.a||'')[0]||'')).toUpperCase()||'YO';b.innerHTML=esc(t)+`<img class="avimg" src="${avUrl(ME.id)}" alt="" onerror="this.remove()">`}
+function cropSq(f,m=512){return new Promise((ok,no)=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const s=Math.min(im.width,im.height),o=Math.min(m,s),c=document.createElement('canvas');c.width=c.height=o;c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,o,o);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):no(),'image/jpeg',.85)};im.onerror=()=>no();im.src=u})}
+async function pickAvatar(inp){const f=inp.files&&inp.files[0];inp.value='';if(!f)return;if(!/^image\//.test(f.type))return toast('Elegí un archivo de imagen.',false);if(!sb)return toast('Falta configurar Supabase.',false);
+ try{toast('Subiendo foto…');const b=await cropSq(f),{error}=await sb.storage.from('avatars').upload(ME.id+'.jpg',b,{contentType:'image/jpeg',upsert:true,cacheControl:'300'});if(error)throw error;AVV[ME.id]=Date.now();meBtnSet();renderMe(1);renderFeed();toast('Foto de perfil actualizada')}
+ catch(e){toast('No se pudo subir la foto. Probá de nuevo.',false)}}
+async function delAvatar(){if(!sb)return;const {error}=await sb.storage.from('avatars').remove([ME.id+'.jpg']);if(error)return toast('No se pudo quitar la foto.',false);AVV[ME.id]=Date.now();meBtnSet();renderMe(1);renderFeed();toast('Foto quitada')}
+
+/* ADMIN: SOLICITUDES DE VERIFICACIÓN */
+let VQ={f:'pending',n:0};
+const zoomImg=u=>openModal(`<div class="p-3" style="display:grid;place-items:center"><img class="vzoom" src="${u}" alt=""><button class="bp mt-3 px-6" onclick="closeModal('modal2')">Cerrar</button></div>`,'modal2');
+function verTab(){setTimeout(loadVerifs,0);return '<div id="verBox" class="text-sm mut">Cargando solicitudes…</div>'}
+async function verCount(){if(!sb)return;try{const {count}=await sb.from('verifications').select('user_id',{count:'exact',head:true}).eq('status','pending');VQ.n=count||0;const t=$('verBadge');if(t){t.textContent=VQ.n;t.style.display=VQ.n?'inline-block':'none'}}catch(e){}}
+async function loadVerifs(){const box=$('verBox');if(!box)return;if(!sb){box.textContent='Supabase no está configurado.';return}
+ const {data,error}=await sb.from('verifications').select('*').order('created_at',{ascending:false}).limit(200);
+ if(error){box.innerHTML='<div class="cd p-4" style="color:var(--warn)">No se pudieron cargar las solicitudes: '+esc(error.message)+'<br><span class="mut">Revisá que ejecutaste el archivo supabase_verificaciones.sql.</span></div>';return}
+ const all=data||[],cnt=k=>all.filter(v=>v.status===k).length;VQ.n=cnt('pending');
+ const list=all.filter(v=>v.status===VQ.f).slice(0,30),ids=[...new Set(list.map(v=>v.user_id))];
+ let prof={};if(ids.length){const r=await sb.from('profiles').select('id,nombre,apellido,email').in('id',ids);(r.data||[]).forEach(x=>prof[x.id]=x)}
+ let urls={};const paths=list.flatMap(v=>[v.dni_front,v.dni_back,v.selfie]).filter(Boolean);
+ if(paths.length){const r=await sb.storage.from('verifications').createSignedUrls(paths,1800);(r.data||[]).forEach(x=>{if(x.signedUrl)urls[x.path]=x.signedUrl})}
+ const dniUsers={};all.forEach(v=>{(dniUsers[v.dni]||(dniUsers[v.dni]=new Set())).add(v.user_id)});
+ const ph=(u,cap)=>u?`<button type="button" class="vph" onclick="zoomImg('${u}')"><img src="${u}" alt="${cap}" loading="lazy"><span class="cap">${cap}</span></button>`:`<div class="vph" style="cursor:default"><div class="none">${cap}: no se pudo cargar</div></div>`;
+ const fil=[['pending','Pendientes'],['approved','Aprobadas'],['rejected','Rechazadas']];
+ box.innerHTML=`<div class="vfil">${fil.map(([k,l])=>`<button class="${VQ.f===k?'bp':'bo'} px-4 text-sm" onclick="VQ.f='${k}';loadVerifs()">${l} (${cnt(k)})</button>`).join('')}</div>
+ <div class="space-y-3">${list.length?list.map(v=>{const u=prof[v.user_id]||{},nm=((u.nombre||'')+' '+(u.apellido||'')).trim()||'Usuario',dup=dniUsers[v.dni]&&dniUsers[v.dni].size>1,key=encodeURIComponent(JSON.stringify([v.id==null?null:v.id,v.user_id,v.created_at]));
+  return `<div class="cd p-4 ${v.status!=='pending'?'opacity-90':''}"><div class="flex flex-wrap items-start gap-3 mb-3"><div class="flex items-center gap-3 mr-auto min-w-0">${avatar(nm,'w-12 h-12 text-base',v.user_id)}<div class="min-w-0"><div class="font-semibold truncate">${esc(nm)}</div><div class="text-xs mut truncate">${esc(u.email||'')}</div><div class="text-xs mut">${ago(Date.parse(v.created_at))}</div></div></div>
+  <div class="text-sm text-right"><div><b>DNI:</b> ${esc(v.dni)}</div><div><b>Tel:</b> ${esc(v.phone||'')}</div>${dup?'<span class="tag u1 mt-1">DNI repetido en otra cuenta</span>':''}</div></div>
+  <div class="vgrid">${ph(urls[v.dni_front],'DNI frente')}${ph(urls[v.dni_back],'DNI dorso')}${ph(urls[v.selfie],'Selfie')}<div class="vph" style="cursor:zoom-in" onclick="zoomImg('${avUrl(v.user_id)}')"><img src="${avUrl(v.user_id)}" alt="Foto de perfil" onerror="var q=this.parentNode;q.innerHTML='<div class=&quot;none&quot;>Sin foto de perfil</div>';q.style.cursor='default';q.onclick=null"><span class="cap">Foto de perfil</span></div></div>
+  <p class="text-xs mut mt-2">Compará que la cara del DNI, la selfie y la foto de perfil sean la misma persona y que los datos coincidan.</p>
+  ${v.status==='pending'?`<div class="flex flex-wrap gap-2 mt-3"><button class="bp px-5 text-sm" onclick="verAct('${key}','approved',this)">Aprobar</button><button class="bo px-4 text-sm" style="color:var(--warn)" onclick="verAct('${key}','rejected',this)">Rechazar</button></div>`:`<div class="mt-3 flex gap-2 items-center"><span class="tag ${v.status==='approved'?'u2':'u1'}">${v.status==='approved'?'Aprobada':'Rechazada'}</span>${v.status==='rejected'?`<button class="bo px-3 text-xs" onclick="verAct('${key}','approved',this)">Aprobar igual</button>`:`<button class="bo px-3 text-xs" style="color:var(--warn)" onclick="verAct('${key}','rejected',this)">Revocar</button>`}</div>`}</div>`}).join(''):`<div class="cd p-8 text-center mut">No hay solicitudes ${VQ.f==='pending'?'pendientes':VQ.f==='approved'?'aprobadas':'rechazadas'}.</div>`}</div>`;
+ const t=$('verBadge');if(t){t.textContent=VQ.n;t.style.display=VQ.n?'inline-block':'none'}}
+async function verAct(key,st,btn){const [id,uid,ca]=JSON.parse(decodeURIComponent(key));
+ if(!btn.dataset.s){btn.dataset.s=1;const o=btn.textContent;btn.textContent='Confirmar '+(st==='approved'?'aprobación':st==='rejected'&&o==='Revocar'?'revocación':'rechazo');setTimeout(()=>{if(btn.isConnected){delete btn.dataset.s;btn.textContent=o}},4000);return}
+ btn.disabled=true;let q=sb.from('verifications').update({status:st});q=id!=null?q.eq('id',id):q.eq('user_id',uid).eq('created_at',ca);
+ const {data,error}=await q.select();if(error||!data||!data.length){btn.disabled=false;return toast('No se pudo actualizar. Revisá los permisos de admin (SQL).',false)}
+ toast(st==='approved'?'Cuenta verificada':'Solicitud rechazada');loadVerifs()}
 /* Inicio */
 $('q').oninput=e=>{F.q=e.target.value;renderFeed()};
 $('fCat').innerHTML='<option value="">Todos los oficios</option>'+catOpts('');$('fCat').onchange=e=>{F.cat=e.target.value;F.grp='';renderChips();renderFeed()};
