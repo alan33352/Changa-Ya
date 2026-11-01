@@ -104,6 +104,11 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
 .gtrust{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem;padding-top:1.1rem;border-top:1px solid var(--line)}
 .gtrust span{font-size:.72rem;font-weight:600;padding:.25rem .6rem;border-radius:999px;background:var(--soft);color:var(--acc)}
 
+/* Respaldo si Tailwind no carga */
+*,*::before,*::after{box-sizing:border-box}
+.hidden{display:none}
+#gate,#legal{position:fixed;inset:0;overflow-y:auto}#gate{z-index:45}#legal{z-index:58}
+#gate .gl,#gate .gcard{position:relative}
 /* ===== Navegación, inicio, perfil ===== */
 main{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom,0px))!important}
 #toasts{bottom:6.8rem!important}
@@ -249,7 +254,6 @@ function toast(msg,ok=true){const d=document.createElement('div');d.className='p
 function notify(t,b){notifs.unshift([t,b,true]);renderNotif()}
 function renderNotif(){const n=notifs.filter(x=>x[2]).length;$('badge').textContent=n;$('badge').style.display=n?'inline-block':'none';$('notif').innerHTML=!notifs.length?'<div class="p-2.5 text-sm mut">Sin avisos por ahora.</div>':notifs.slice(0,6).map(x=>`<div class="p-2.5 rounded-lg"><div class="text-sm font-semibold">${esc(x[0])}</div><div class="text-xs mut">${esc(x[1])}</div></div>`).join('')}
 function setTheme(t){V.theme=t;document.documentElement.classList.toggle('dark',t==='dark');$('themeBtn').textContent=t==='dark'?'Claro':'Oscuro';document.querySelector('meta[name=theme-color]').content=t==='dark'?'#0f1318':'#f3f6fa';saveV()}
-function setRoleOld(r){role=r;$('viewFind').classList.toggle('hidden',r!=='find');$('viewPost').classList.toggle('hidden',r!=='post');document.querySelectorAll('.tb[data-r]').forEach(b=>b.classList.toggle('on',b.dataset.r===r));r==='find'?loadFeed():(renderMine(),loadJobs())}
 function applyCfg(){const c=ST.cfg;$('brand').innerHTML=esc(c.name);if(role==='home')renderHome();$('heroT').textContent=c.heroT;$('heroS').textContent=c.heroS;$('foot').textContent='© '+new Date().getFullYear()+' '+c.name;document.title=c.name+' · Oficios y changas';const cur=$('fBar').value;$('fBar').innerHTML=barOpts(cur,'Todas las zonas')}
 function refreshAll(){applyCfg();renderFeed();if(role==='post')renderMine();if(!$('admin').classList.contains('hidden')&&aTab!=='cfg')renderAdmin()}
 
@@ -344,13 +348,6 @@ const EYE='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="c
 const EYEOFF='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.8 9.8 0 0112 6c6.4 0 10 6 10 6a17 17 0 01-3.2 3.9M6.6 6.7C3.9 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 004.2-1"/><path d="M9.9 9.9a3 3 0 004.2 4.2"/></svg>';
 function pwField(id,label,ac){return `<div><label class="text-sm font-semibold">${label}</label><div class="relative mt-1"><input id="${id}" type="password" autocomplete="${ac}" class="in" style="padding-right:2.75rem"><button type="button" class="absolute right-0 top-0 h-full px-3 mut" aria-label="Mostrar contraseña" onclick="togglePw(this)">${EYE}</button></div></div>`}
 function togglePw(b){const i=b.parentElement.querySelector('input'),show=i.type==='password';i.type=show?'text':'password';b.innerHTML=show?EYEOFF:EYE;b.setAttribute('aria-label',show?'Ocultar contraseña':'Mostrar contraseña')}
-function openTerms(){const c=ST.cfg.contact;openModal(`<div class="${sheet}" style="${sheetS}"><div class="flex justify-between mb-3"><h3 class="font-bold text-lg">Términos y privacidad</h3><button class="text-xl" onclick="closeModal()" aria-label="Cerrar">×</button></div><div class="text-sm space-y-3 leading-relaxed">
-<p><b>Qué es ${esc(ST.cfg.name)}.</b> Es una plataforma que conecta a personas que necesitan resolver una tarea con trabajadores independientes. No somos empleadores ni parte de los acuerdos: el trabajo, el precio y el pago se arreglan directamente entre las personas.</p>
-<p><b>Datos que guardamos.</b> Nombre, apellido y correo de tu cuenta; tu contraseña se guarda cifrada. Lo que publicás (título, descripción, zona, pago, fotos y número de WhatsApp) lo ven los usuarios registrados. Tus postulaciones las ve quien publicó la changa.</p>
-<p><b>Para qué los usamos.</b> Para mostrar las publicaciones, permitir postulaciones y mantener la seguridad del sitio. No vendemos tus datos.</p>
-<p><b>Conducta.</b> Está prohibido publicar estafas, datos falsos, contenido ilegal o inapropiado. Podemos ocultar o eliminar publicaciones y suspender cuentas que incumplan estas reglas.</p>
-<p><b>Cuidados.</b> No adelantes dinero a desconocidos, verificá quién es la otra persona y, si podés, encontrate en lugares públicos. Podés denunciar cualquier publicación con el botón “Denunciar”.</p>
-<p><b>Tus derechos.</b> Podés pedir ver, corregir o borrar tus datos${c?' escribiendo a <b>'+esc(c)+'</b>':' contactando al administrador del sitio'}.</p></div></div>`)}
 /* Acceso administrador */
 let fails=0,lockUntil=0;
 function openAdmin(){if(authed)return showAdmin();
@@ -471,7 +468,7 @@ async function loadUsers(){const box=$('usrBox');if(!box)return;if(!sb){box.text
 
 
 /* NAVEGACIÓN */
-function setRole(r){role=r;[['Home','home'],['Find','find'],['Post','post'],['Me','me']].forEach(([k,v])=>$('view'+k).classList.toggle('hidden',v!==r));document.querySelectorAll('.nv').forEach(b=>b.classList.toggle('on',b.dataset.r===r));scrollTo(0,0);
+function setRole(r){role=r;[['Home','home'],['Find','find'],['Post','post'],['Me','me']].forEach(([k,v])=>$('view'+k).classList.toggle('hidden',v!==r));document.querySelectorAll('.nv').forEach(b=>{b.classList.toggle('on',b.dataset.r===r);b.dataset.r===r?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current')});scrollTo(0,0);
  if(r==='home')renderHome();else if(r==='find')loadFeed();else if(r==='post'){renderMine();loadJobs()}else renderMe()}
 const SVG=(p,z=22)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const STARP='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z';
@@ -499,6 +496,7 @@ function openLegal(k){const L=LEGAL[k];$('legal').innerHTML=`<div class="max-w-2
 function openTerms(){openLegal('t')}
 /* PERFIL */
 let VER=undefined;
+const phd=v=>String(v==null?'':v).replace(/\D/g,'').slice(0,15);
 const PF=()=>lsG('chya_pf_'+ME.id,{});
 async function loadVer(){VER=null;try{const {data,error}=await sb.from('verifications').select('status').eq('user_id',ME.id).order('created_at',{ascending:false}).limit(1);if(!error&&data&&data[0])VER=data[0].status}catch(e){}renderMe(1)}
 function renderMe(skip){if(!ME.id){$('meBox').innerHTML='';return}if(VER===undefined&&!skip&&sb){loadVer()}
@@ -520,9 +518,9 @@ function renderMe(skip){if(!ME.id){$('meBox').innerHTML='';return}if(VER===undef
  <div class="flex flex-wrap gap-2"><button class="bo px-4" onclick="changePw()">Cambiar contraseña</button><button class="bo px-4" style="color:var(--warn)" onclick="logoutUser()">Cerrar sesión</button></div></div>`}
 async function saveProfile(){const n=$('pN').value.trim(),a=$('pA').value.trim();if(n.length<2||a.length<2)return toast('Ingresá nombre y apellido.',false);
  if(sb){const {error}=await sb.from('profiles').update({nombre:n,apellido:a}).eq('id',ME.id);if(error)return toast('No se pudo guardar.',false)}
- lsS('chya_pf_'+ME.id,{tel:digits($('pT').value),zona:$('pZ').value,oficio:$('pO').value.trim(),bio:$('pB').value.trim()});
+ lsS('chya_pf_'+ME.id,{tel:phd($('pT').value),zona:$('pZ').value,oficio:$('pO').value.trim(),bio:$('pB').value.trim()});
  ME.n=n;ME.a=a;ME.name=n+' '+a;$('meBtn').textContent=(n[0]+a[0]).toUpperCase();toast('Perfil guardado');renderMe(1)}
-async function sendVer(){const d=digits($('vD').value),t=digits($('vT').value);if(d.length<7)return toast('Ingresá un DNI válido.',false);if(t.length<8)return toast('Ingresá un teléfono válido.',false);
+async function sendVer(){if(!sb)return toast('Falta configurar Supabase.',false);const d=digits($('vD').value),t=phd($('vT').value);if(d.length<7)return toast('Ingresá un DNI válido.',false);if(t.length<8)return toast('Ingresá un teléfono válido.',false);
  const {error}=await sb.from('verifications').insert({user_id:ME.id,dni:d,phone:t,status:'pending'});if(error)return toast('No se pudo enviar. Probá de nuevo más tarde.',false);VER='pending';toast('Datos enviados. Los revisamos a la brevedad.');renderMe(1)}
 async function changePw(){try{await sb.auth.resetPasswordForEmail(ME.email,{redirectTo:location.origin+location.pathname})}catch(e){}toast('Te enviamos un correo para crear una nueva contraseña.')}
 /* Inicio */
@@ -534,7 +532,7 @@ document.querySelectorAll('.nv').forEach(b=>b.onclick=()=>setRole(b.dataset.r));
 $('themeBtn').onclick=()=>setTheme(V.theme==='dark'?'light':'dark');
 $('bellBtn').onclick=e=>{e.stopPropagation();$('notif').classList.toggle('hidden');notifs.forEach(n=>n[2]=false);lsS('chya_seen',Date.now());renderNotif()};
 document.addEventListener('click',e=>{if(!$('notif').contains(e.target))$('notif').classList.add('hidden')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('modal2');closeModal()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('modal2');closeModal();$('legal').classList.add('hidden')}});
 document.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.target.tagName!=='INPUT'||e.target.type==='file')return;const r=e.target.closest('#gate,#modal,#modal2');if(!r)return;const b=r.querySelector('#gGo,#aGo,#next,button.bp.w-full');if(b&&!b.disabled){e.preventDefault();b.click()}});
 addEventListener('scroll',()=>document.querySelector('header').classList.toggle('sc',scrollY>4),{passive:true});
 $('meBtn').onclick=()=>setRole('me');$('newJob').onclick=openWizard;
