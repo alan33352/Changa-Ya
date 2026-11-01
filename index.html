@@ -132,7 +132,7 @@ const CATG=[
 ['Gastronomía',[['coc','Cocinero/a'],['ayucoc','Ayudante de cocina'],['pastel','Pastelería y repostería'],['mozo','Mozo/a'],['barman','Barman y coctelería'],['pizza','Pizzero/a y parrillero/a'],['cater','Catering y viandas']]],
 ['Vehículos y transporte',[['tras','Fletes y mudanzas'],['cond','Chofer / remís'],['repar','Repartidor / delivery'],['mec','Mecánica del automotor'],['moto','Mecánica de motos'],['gom','Gomería'],['lavau','Lavado de autos'],['chap','Chapa y pintura'],['elecau','Electricidad del automotor']]],
 ['Tecnología y diseño',[['tec','Soporte técnico / PC'],['cel','Reparación de celulares'],['elecd','Service de electrodomésticos'],['camar','Instalación de cámaras'],['web','Diseño web'],['graf','Diseño gráfico'],['foto','Fotografía y video'],['redes','Redes sociales']]],
-['Eventos y otros',[['dj','DJ y sonido'],['anim','Animación infantil'],['decor','Decoración y eventos'],['seg','Seguridad / sereno'],['admin','Administrativo / oficina'],['venta','Vendedor/a'],['otro','Otros oficios']]]];
+['Eventos y outros',[['dj','DJ y sonido'],['anim','Animación infantil'],['decor','Decoración y eventos'],['seg','Seguridad / sereno'],['admin','Administrativo / oficina'],['venta','Vendedor/a'],['otro','Otros oficios']]]];
 const CATS=Object.fromEntries(CATG.flatMap(g=>g[1]));
 const CATGRP=Object.fromEntries(CATG.flatMap(g=>g[1].map(c=>[c[0],g[0]])));
 const catOpts=sel=>CATG.map(g=>`<optgroup label="${g[0]}">${g[1].map(c=>`<option value="${c[0]}" ${c[0]===sel?'selected':''}>${c[1]}</option>`).join('')}</optgroup>`).join('');
@@ -144,9 +144,11 @@ let V=lsG('chya_v',{theme:matchMedia('(prefers-color-scheme:dark)').matches?'dar
 const saveV=()=>lsS('chya_v',V);
 let authed=false,role='find',aTab='res',notifs=[],J=[],AP=new Set(),APPS=[],RV=[],RATE={},ME={id:null,name:''},jobErr=false;
 let F={q:'',cat:'',pay:0,bar:'',urg:'',grp:'',sort:'t'};
-const ZPOS=[['Posadas Centro','Centro'],['Posadas Oeste','Oeste'],['Posadas Sudoeste','Sudoeste'],['Posadas Sur','Sur'],['Posadas Sudeste','Sudeste']];
-const LEG=new Set(['Centro','Villa Cabello','Itaembé Miní','Villa Sarita','Garupá','Candelaria']);
-function barGroups(){const ex=ST.cfg.barrios.split(',').map(x=>x.trim()).filter(x=>x&&!LEG.has(x));return [['Posadas',ZPOS],['Otras ciudades',[['Garupá','Garupá'],['Candelaria','Candelaria'],...ex.map(b=>[b,b]),['Otra zona','Otra zona de Misiones']]]]}
+
+/* Zonas exactas solicitadas por el usuario */
+const ZPOS=[['Centro','Centro'],['Villa Cabello','Villa Cabello'],['Itaembé Miní','Itaembé Miní'],['Itaembé Guazú','Itaembé Guazú'],['Villa Sarita','Villa Sarita'],['El Brete','El Brete']];
+const LEG=new Set(['Centro','Villa Cabello','Itaembé Miní','Itaembé Guazú','Villa Sarita','El Brete','Garupá','Candelaria']);
+function barGroups(){const ex=ST.cfg.barrios.split(',').map(x=>x.trim()).filter(x=>x&&!LEG.has(x));return [['Zonas Principales',ZPOS],['Otras zonas',[['Garupá','Garupá'],['Candelaria','Candelaria'],...ex.map(b=>[b,b]),['Otras zonas','Otras zonas']]]]}
 const barrios=()=>barGroups().flatMap(g=>g[1].map(x=>x[0]));
 function barOpts(sel,all){const known=barrios().includes(sel);return (all?`<option value="">${all}</option>`:'')+(sel&&!known?`<option value="${esc(sel)}" selected>${esc(sel)}</option>`:'')+barGroups().map(g=>`<optgroup label="${g[0]}">${g[1].map(([v,l])=>`<option value="${esc(v)}" ${v===sel?'selected':''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}
 const live=j=>!j.hidden&&j.status==='open'&&Date.now()-j.t<2592e6;
@@ -176,9 +178,9 @@ function jobCard(j,own){
  const ph=(j.photos||[]).map(p=>`<img src="${esc(p)}" alt="" class="w-14 h-14 rounded-md object-cover">`).join('');
  const wa=waLink(j.phone,`Hola, vi tu publicación “${j.title}” en la app y me interesa el trabajo. Mi nombre es ${ME.name}.`);
  const own_=`${j.hidden?'<span class="tag u1 self-start">Oculta por el administrador</span>':''}${j.status!=='open'?`<span class="tag u2 self-start">${j.status==='done'?'Realizada':'Asignada'}${asg?' · '+esc(asg.name):''}</span>`:''}
- <div class="text-sm"><b>${ps.length}</b> ${ps.length===1?'postulante':'postulantes'}</div>
- ${ps.length&&j.status!=='done'?`<div class="space-y-1.5">${ps.map(a=>`<div class="flex items-center gap-2 text-sm rounded-md p-2" style="background:var(--soft)"><span class="mr-auto truncate">${esc(a.name)}${a.user_id===j.assigned?' <b class="acc">· Elegido</b>':''}</span>${a.phone?`<a class="bo px-2.5 py-1 text-xs" target="_blank" rel="noopener" href="${waLink(a.phone,'Hola '+a.name+', te escribo por la changa “'+j.title+'”.')}">WhatsApp</a>`:''}${j.status==='open'?`<button class="bp px-2.5 py-1 text-xs" onclick="assign('${j.id}','${a.user_id}')">Elegir</button>`:''}</div>`).join('')}</div>`:''}
- <div class="flex flex-wrap gap-2">${j.status==='assigned'?`<button class="bp px-3 py-2 text-sm" onclick="setStatus('${j.id}','done')">Marcar como realizada</button><button class="bo px-3 py-2 text-sm" onclick="setStatus('${j.id}','open')">Reabrir</button>`:''}${j.status==='done'&&asg&&!reviewed(j.id)?`<button class="bp px-3 py-2 text-sm" onclick="rateForm('${j.id}','${j.assigned}')">Calificar a ${esc(asg.name)}</button>`:''}${j.status!=='done'?`<button class="bo px-3 py-2 text-sm" onclick="jobForm('${j.id}')">Editar</button>`:''}<button class="bo px-3 py-2 text-sm" style="color:var(--warn)" onclick="delMine('${j.id}',this)">Eliminar</button></div>`;
+ <div class="text-sm font-medium py-1"><b>${ps.length}</b> ${ps.length===1?'postulante':'postulantes'}</div>
+ ${ps.length&&j.status!=='done'?`<div class="space-y-2 divide-y" style="border-color:var(--line)">${ps.map(a=>`<div class="flex items-center gap-3 pt-2 text-sm"><div class="min-w-0 flex-1"><div class="font-semibold truncate">${esc(a.name)}${a.user_id===j.assigned?' <span class="tag u2 ml-1">Elegido</span>':''}</div><div class="text-xs mut">${a.phone?esc(a.phone):'Sin teléfono'}</div></div>${a.phone?`<a class="bo px-2.5 py-1 text-xs" target="_blank" rel="noopener" href="${waLink(a.phone,'Hola '+a.name+', te escribo por la changa “'+j.title+'”.')}">WhatsApp</a>`:''}${j.status==='open'?`<button class="bp px-2.5 py-1 text-xs" onclick="assign('${j.id}','${a.user_id}')">Elegir</button>`:''}</div>`).join('')}</div>`:''}
+ <div class="flex flex-wrap gap-2 pt-2">${j.status==='assigned'?`<button class="bp px-3 py-2 text-sm" onclick="setStatus('${j.id}','done')">Marcar como realizada</button><button class="bo px-3 py-2 text-sm" onclick="setStatus('${j.id}','open')">Reabrir</button>`:''}${j.status==='done'&&asg&&!reviewed(j.id)?`<button class="bp px-3 py-2 text-sm" onclick="rateForm('${j.id}','${j.assigned}')">Calificar a ${esc(asg.name)}</button>`:''}${j.status!=='done'?`<button class="bo px-3 py-2 text-sm" onclick="jobForm('${j.id}')">Editar</button>`:''}<button class="bo px-3 py-2 text-sm" style="color:var(--warn)" onclick="delMine('${j.id}',this)">Eliminar</button></div>`;
  return `<article class="card fade cd p-4 flex flex-col gap-3">
  <div class="flex items-center justify-between gap-2"><span class="tag ${u[1]}">${u[0]}</span><span class="text-xs mut">${ago(j.t)}</span></div>
  <div><h3 class="font-bold leading-snug">${esc(j.title)}</h3><p class="text-sm mut mt-1 line-clamp-2 cursor-pointer" onclick="this.classList.toggle('line-clamp-2')" title="Tocá para expandir">${esc(j.desc)}</p></div>
@@ -249,7 +251,7 @@ async function nextStep(){if(!stepOk())return;if(w.step<4){w.step++;return drawW
  const {data,error}=await sb.from('jobs').insert({title:w.title.trim(),cat:w.cat,descr:w.desc.trim(),pay:+w.pay,barrio:w.barrio,urg:w.urg,phone:w.phone.replace(/\D/g,''),photos:w.photos,author:ME.name||'Usuario'}).select().single();
  if(error){b.disabled=false;return toast(/limite_diario/.test(error.message||'')?'Llegaste al límite de 5 publicaciones por día.':'No se pudo publicar. Probá de nuevo.',false)}
  J.unshift(mapJob(data));V.phone=data.phone;saveV();closeModal();toast('Changa publicada');renderMine();renderFeed()}
-function addPhotos(files){[...files].slice(0,3-w.photos.length).forEach(f=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,240/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);w.photos.push(c.toDataURL('image/jpeg',.6));drawWizard()};im.src=r.result};r.readAsDataURL(f)})}
+async function addPhotos(files){[...files].slice(0,3-w.photos.length).forEach(f=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,240/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);w.photos.push(c.toDataURL('image/jpeg',.6));drawWizard()};im.src=r.result};r.readAsDataURL(f)})}
 
 const EYE='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 const EYEOFF='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.8 9.8 0 0112 6c6.4 0 10 6 10 6a17 17 0 01-3.2 3.9M6.6 6.7C3.9 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 004.2-1"/><path d="M9.9 9.9a3 3 0 004.2 4.2"/></svg>';
@@ -313,7 +315,7 @@ const emsg=x=>{const m=(x&&x.message||'').toLowerCase();return m.includes('alrea
 function showGate(){$('gate').classList.remove('hidden');document.body.style.overflow='';drawGate()}
 function drawGate(){const m=G.mode,f=(id,l,t,ac)=>t==='password'?pwField(id,l,ac):`<div><label class="text-sm font-semibold">${l}</label><input id="${id}" type="${t}" autocomplete="${ac}" class="in mt-1"></div>`;let b;
 
- // PANTALLA DE INTRODUCCIÓN CON EXPLICACIÓN Y BOTÓN AL REGISTRO
+ /* PANTALLA DE INTRODUCCIÓN CON EXPLICACIÓN Y BOTÓN AL REGISTRO */
  if(m==='intro'){
   b=`<div class="text-center sm:text-left space-y-4">
       <div>
