@@ -113,11 +113,8 @@ header{backdrop-filter:saturate(1.4) blur(8px)}
 main{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom,0px))!important}
 #toasts{bottom:6.8rem!important}
 #bnav{position:fixed;z-index:42;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:0 .75rem calc(.6rem + env(safe-area-inset-bottom,0px));pointer-events:none}
-.bn-in{pointer-events:auto;width:100%;max-width:30rem;display:grid;grid-template-columns:1fr 1.25fr 1fr 1fr;align-items:end;gap:.15rem;padding:.4rem;border-radius:24px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 12px 34px -10px rgba(10,25,50,.35)}
+.bn-in{pointer-events:auto;width:100%;max-width:30rem;display:grid;grid-template-columns:repeat(4,1fr);align-items:end;gap:.15rem;padding:.4rem;border-radius:24px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 12px 34px -10px rgba(10,25,50,.35)}
 .nv{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.55rem .25rem;border-radius:16px;color:var(--mut);font-size:.68rem;font-weight:600;transition:color .2s,background-color .2s}
-.nv.on{color:var(--acc);background:var(--soft)}
-.nv-main{background:var(--acc);color:var(--accink);transform:translateY(-12px);padding:.75rem .25rem .6rem;box-shadow:0 10px 22px -8px var(--acc);font-weight:700}
-.nv-main.on{background:var(--acc);color:var(--accink)}.nv-main svg{width:26px;height:26px}
 .hhero{position:relative;overflow:hidden;border-radius:24px;padding:2.5rem 1.5rem;color:#fff;background:radial-gradient(120% 90% at 85% 0,#2c6fb8 0,transparent 60%),linear-gradient(160deg,#0d2a4d,#143f73);text-align:center}
 .hhero::after{content:"";position:absolute;inset:auto -10% -45% -10%;height:70%;background:radial-gradient(closest-side,rgba(140,196,255,.28),transparent);animation:fl 9s ease-in-out infinite alternate}
 @keyframes fl{to{transform:translateY(-12%) scale(1.15)}}
@@ -152,6 +149,45 @@ main{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom,0px))!important}
 .tips{display:grid;gap:.55rem;margin:.2rem 0 1rem;padding:0;list-style:none}.tips li{display:flex;gap:.6rem;font-size:.88rem}.tips li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:99px;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231456a0' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat}
 #viewFind>.cd{border-radius:20px;padding:1rem}#q{min-height:52px;padding-left:2.9rem;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%235a6a7e' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat .95rem center}
 .card{border-radius:18px;overflow:hidden;position:relative}.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--acc),#5aa6e6)}
+
+/* ===== Pulido v3 ===== */
+:root{color-scheme:light}
+button{background:transparent;color:inherit;font-family:inherit}
+section[id^=view]:not(.hidden){animation:vin .4s cubic-bezier(.2,.7,.2,1)}
+@keyframes vin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.bn-in{position:relative}
+.nv{position:relative;z-index:1;background:transparent;color:var(--mut);transition:color .3s,transform .15s}
+.nv:active{transform:scale(.92)}
+.nv.on{color:var(--accink)}.nv.on svg{animation:pop .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.6) rotate(-12deg)}60%{transform:scale(1.22) rotate(4deg)}100%{transform:none}}
+.nv-pill{position:absolute;left:0;top:0;border-radius:18px;background:linear-gradient(160deg,color-mix(in srgb,var(--acc) 82%,#fff),var(--acc));box-shadow:0 8px 20px -8px var(--acc);transition:transform .5s cubic-bezier(.34,1.45,.64,1),width .3s,height .3s;pointer-events:none}
+.bp{background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 86%,#fff),var(--acc))}
+#themeBtn svg{transition:transform .6s cubic-bezier(.3,1.5,.5,1)}#themeBtn:hover svg{transform:rotate(40deg)}
+header{border-bottom:1px solid var(--line)}
+/* selector propio */
+.sx{display:flex;align-items:center;justify-content:space-between;gap:.5rem;width:100%;min-height:48px;padding:.6rem .9rem;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font-size:.95rem;font-weight:500;text-align:left;transition:border-color .2s,box-shadow .2s,background-color .2s}
+.sx span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sx.ph span{color:var(--mut)}
+.sx svg{flex:none;color:var(--mut)}.sx:hover{border-color:var(--acc);background:var(--soft)}.sx:active{transform:scale(.985)}
+.sxov{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,16,30,.5);backdrop-filter:blur(4px);animation:ovin .2s}
+.sxov.out{opacity:0;transition:opacity .18s}.sxov.out .sxp{transform:translateY(24px);transition:transform .18s}
+.sxp{width:100%;max-width:30rem;max-height:80vh;display:flex;flex-direction:column;background:var(--card);color:var(--ink);border-radius:26px 26px 0 0;box-shadow:0 -20px 60px -20px rgba(0,0,0,.5);animation:shin .32s cubic-bezier(.2,.9,.25,1);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(min-width:640px){.sxov{align-items:center}.sxp{border-radius:24px;max-height:70vh}}
+.sxh{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.1rem .5rem 1.25rem}.sxh b{font-size:1.05rem}
+.sxx{display:grid;place-items:center;width:36px;height:36px;border-radius:99px;background:var(--soft);color:var(--mut)}
+.sxsw{padding:.3rem 1rem .5rem}.sxs{min-height:44px}
+.sxl{overflow-y:auto;padding:.3rem .6rem 1.1rem;overscroll-behavior:contain}
+.sxg{padding:.9rem .7rem .3rem;font-size:.78rem;font-weight:700;color:var(--acc);letter-spacing:.01em}
+.sxo{display:flex;align-items:center;justify-content:space-between;gap:.6rem;width:100%;text-align:left;padding:.8rem .8rem;border-radius:12px;font-weight:500;transition:background-color .15s}
+.sxo:hover{background:var(--soft)}.sxo.on{background:var(--soft);color:var(--acc);font-weight:700}.sxe{padding:1.5rem;text-align:center;color:var(--mut)}
+/* perfil */
+.pid{padding:0 1.25rem;margin-top:-2.6rem}.pname{margin-top:.7rem}
+.vtiles{display:grid;gap:.7rem;grid-template-columns:1fr}@media(min-width:640px){.vtiles{grid-template-columns:repeat(3,1fr)}}
+.vt{display:block;cursor:pointer;border:2px dashed var(--line);border-radius:16px;background:var(--soft);transition:border-color .2s,transform .15s}
+.vt:hover{border-color:var(--acc)}.vt:active{transform:scale(.98)}.vt.ok{border-style:solid;border-color:var(--acc)}
+.vt-in{position:relative;display:grid;place-items:center;align-content:center;gap:.2rem;min-height:120px;padding:.8rem;text-align:center;color:var(--acc);overflow:hidden;border-radius:14px}
+.vt-in b{color:var(--ink);font-size:.88rem}.vt-in small{color:var(--mut);font-size:.74rem}.vt-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vt-c{position:absolute;left:0;right:0;bottom:0;padding:.35rem;font-size:.75rem;font-weight:600;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+.vst{display:flex;gap:.8rem;align-items:flex-start;padding:1rem;border-radius:14px;background:var(--soft);color:var(--acc)}.vst b{color:var(--ink)}.vst.ok{background:color-mix(in srgb,#1f9d62 14%,var(--card));color:#1f9d62}
 </style>
 </head>
 <body class="min-h-screen">
@@ -195,7 +231,7 @@ main{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom,0px))!important}
 <section id="viewMe" class="hidden"><div id="meBox"></div></section>
 </main>
 <span id="foot" class="hidden"></span>
-<nav id="bnav" aria-label="Principal"><div class="bn-in"><button class="nv" data-r="home"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Inicio</span></button><button class="nv nv-main" data-r="find"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg><span>Trabajos</span></button><button class="nv" data-r="post"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg><span>Publicar</span></button><button class="nv" data-r="me"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Perfil</span></button></div></nav>
+<nav id="bnav" aria-label="Principal"><div class="bn-in"><i class="nv-pill" aria-hidden="true"></i><button class="nv" data-r="home"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Inicio</span></button><button class="nv" data-r="find"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg><span>Trabajos</span></button><button class="nv" data-r="post"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg><span>Publicar</span></button><button class="nv" data-r="me"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Perfil</span></button></div></nav>
 <div id="legal" class="hidden fixed inset-0 z-[58] overflow-y-auto" style="background:var(--bg)"></div>
 
 
@@ -253,7 +289,7 @@ function avatar(name,sz='w-9 h-9 text-sm'){const c=['#3b6ea5','#4f7f8f','#6a5f9e
 function toast(msg,ok=true){const d=document.createElement('div');d.className='pointer-events-auto rounded-lg px-4 py-3 text-sm font-medium shadow-lg';d.style.cssText='animation:toast .3s ease both;background:'+(ok?'var(--ink);color:var(--bg)':'var(--warn);color:var(--bg)');d.textContent=msg;$('toasts').appendChild(d);setTimeout(()=>{d.style.transition='opacity .3s';d.style.opacity='0';setTimeout(()=>d.remove(),300)},3000)}
 function notify(t,b){notifs.unshift([t,b,true]);renderNotif()}
 function renderNotif(){const n=notifs.filter(x=>x[2]).length;$('badge').textContent=n;$('badge').style.display=n?'inline-block':'none';$('notif').innerHTML=!notifs.length?'<div class="p-2.5 text-sm mut">Sin avisos por ahora.</div>':notifs.slice(0,6).map(x=>`<div class="p-2.5 rounded-lg"><div class="text-sm font-semibold">${esc(x[0])}</div><div class="text-xs mut">${esc(x[1])}</div></div>`).join('')}
-function setTheme(t){V.theme=t;document.documentElement.classList.toggle('dark',t==='dark');$('themeBtn').textContent=t==='dark'?'Claro':'Oscuro';document.querySelector('meta[name=theme-color]').content=t==='dark'?'#0f1318':'#f3f6fa';saveV()}
+function setTheme(t){V.theme=t;document.documentElement.classList.toggle('dark',t==='dark');$('themeBtn').innerHTML=SVG(t==='dark'?SUNP:MOONP,18)+'<span class="ml-1.5 hidden sm:inline">'+(t==='dark'?'Claro':'Oscuro')+'</span>';$('themeBtn').setAttribute('aria-label',t==='dark'?'Cambiar a modo claro':'Cambiar a modo oscuro');document.querySelector('meta[name=theme-color]').content=t==='dark'?'#0f1318':'#f3f6fa';saveV()}
 function applyCfg(){const c=ST.cfg;$('brand').innerHTML=esc(c.name);if(role==='home')renderHome();$('heroT').textContent=c.heroT;$('heroS').textContent=c.heroS;$('foot').textContent='© '+new Date().getFullYear()+' '+c.name;document.title=c.name+' · Oficios y changas';const cur=$('fBar').value;$('fBar').innerHTML=barOpts(cur,'Todas las zonas')}
 function refreshAll(){applyCfg();renderFeed();if(role==='post')renderMine();if(!$('admin').classList.contains('hidden')&&aTab!=='cfg')renderAdmin()}
 
@@ -449,7 +485,7 @@ async function doLog(){if(!sb)return gerr('Falta configurar Supabase.');const e=
   lf=0;await startSession(data.user)}catch(x){$('gGo').disabled=false;gerr('No hay conexión con el servidor.')}}
 async function startSession(u){let n=(u.user_metadata&&u.user_metadata.nombre)||'',a=(u.user_metadata&&u.user_metadata.apellido)||'';
  try{const {data}=await sb.from('profiles').select('nombre,apellido').eq('id',u.id).maybeSingle();if(data){n=data.nombre||n;a=data.apellido||a}}catch(e){}
- ME={id:u.id,email:u.email||'',n,a,name:(n+' '+a).trim()||'Usuario'};VER=undefined;setRole('home');$('meBtn').textContent=((n[0]||'')+(a[0]||'')).toUpperCase()||'YO';
+ ME={id:u.id,email:u.email||'',n,a,name:(n+' '+a).trim()||'Usuario'};VER=undefined;VF={};VU={};setRole('home');$('meBtn').textContent=((n[0]||'')+(a[0]||'')).toUpperCase()||'YO';
  $('gate').classList.add('hidden');if(n)toast('Hola, '+n);loadJobs()}
 async function logoutUser(){try{await sb.auth.signOut()}catch(e){}ME={id:null,name:''};J=[];AP=new Set();APPS=[];notifs=[];renderNotif();renderFeed();closeModal();G={mode:'intro',email:'',last:0};showGate();toast('Sesión cerrada')}
 async function checkSession(){if(!sb){G.mode='intro';return showGate()}if(REC0){G.mode='newpw';return showGate()}try{const {data}=await sb.auth.getSession();data.session?startSession(data.session.user):showGate()}catch(e){showGate()}}
@@ -468,7 +504,7 @@ async function loadUsers(){const box=$('usrBox');if(!box)return;if(!sb){box.text
 
 
 /* NAVEGACIÓN */
-function setRole(r){role=r;[['Home','home'],['Find','find'],['Post','post'],['Me','me']].forEach(([k,v])=>$('view'+k).classList.toggle('hidden',v!==r));document.querySelectorAll('.nv').forEach(b=>{b.classList.toggle('on',b.dataset.r===r);b.dataset.r===r?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current')});scrollTo(0,0);
+function setRole(r){role=r;[['Home','home'],['Find','find'],['Post','post'],['Me','me']].forEach(([k,v])=>$('view'+k).classList.toggle('hidden',v!==r));document.querySelectorAll('.nv').forEach(b=>{b.classList.toggle('on',b.dataset.r===r);b.dataset.r===r?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current')});scrollTo(0,0);navPill();
  if(r==='home')renderHome();else if(r==='find')loadFeed();else if(r==='post'){renderMine();loadJobs()}else renderMe()}
 const SVG=(p,z=22)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const STARP='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z';
@@ -503,15 +539,15 @@ function renderMe(skip){if(!ME.id){$('meBox').innerHTML='';return}if(VER===undef
  const p=PF(),x=RATE[ME.id],rv=RV.filter(r=>r.reviewed_id===ME.id).slice(0,10),pct=Math.round([ME.n,ME.a,p.tel,p.zona,p.oficio,p.bio].filter(Boolean).length/6*100),
  bd=VER==='approved'?'<span class="tag u2">Cuenta verificada</span>':VER==='pending'?'<span class="tag u1">Verificación en revisión</span>':'<span class="tag u3">Sin verificar</span>',
  lock=VER==='approved'||VER==='pending';
- $('meBox').innerHTML=`<div class="cd pcard fade"><div class="pcover"></div><div class="pbody"><span class="pav">${avatar(ME.name,'w-20 h-20 text-2xl')}</span><div class="pb-1"><h2 class="text-xl">${esc(ME.name)}</h2><div class="text-sm mut">${esc(ME.email||'')}</div><div class="mt-2">${bd}</div></div></div>
+ $('meBox').innerHTML=`<div class="cd pcard fade"><div class="pcover"></div><div class="pid"><span class="pav">${avatar(ME.name,'w-20 h-20 text-2xl')}</span><div class="pname"><h2 class="text-xl">${esc(ME.name)}</h2><div class="text-sm mut">${esc(ME.email||'')}</div><div class="mt-2">${bd}</div></div></div>
  <div class="pstats"><div><b>${mine().filter(live).length}</b><span>Activas</span></div><div><b>${doneCount(ME.id)}</b><span>Realizadas</span></div><div><b>${x?x.avg.toFixed(1).replace('.',','):'—'}</b><span>Calificación</span></div></div>
  <div class="px-5 pb-5"><div class="meter"><i style="width:${pct}%"></i></div><div class="text-xs mut mt-1">Perfil completo al ${pct}%</div></div></div>
  <div class="cd psec"><h3>${SVG('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',20)}Datos personales</h3><p class="sub">Esta información ayuda a que te elijan con más confianza.</p>
  <div class="pg two"><div><label>Nombre</label><input id="pN" class="in" value="${esc(ME.n||'')}"></div><div><label>Apellido</label><input id="pA" class="in" value="${esc(ME.a||'')}"></div><div><label>Teléfono (WhatsApp)</label><input id="pT" class="in" inputmode="tel" value="${esc(p.tel||'')}"></div><div><label>Zona</label><select id="pZ" class="in">${barOpts(p.zona||'','Elegí tu zona')}</select></div></div>
  <div class="pg mt-3"><div><label>Oficio u ocupación</label><input id="pO" class="in" maxlength="60" value="${esc(p.oficio||'')}" placeholder="Ej: electricista, pintor, niñera"></div><div><label>Sobre mí</label><textarea id="pB" rows="3" maxlength="300" class="in" placeholder="Contá tu experiencia en pocas palabras">${esc(p.bio||'')}</textarea></div></div>
  <button class="bp mt-4 px-6" onclick="saveProfile()">Guardar cambios</button></div>
- <div class="cd psec"><h3>${SVG('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',20)}Verificación de cuenta</h3><p class="sub">Enviá tus datos y, una vez revisados, tu perfil muestra la insignia de cuenta verificada.</p>
- ${lock?`<p class="text-sm font-semibold">${VER==='approved'?'Tu cuenta está verificada.':'Recibimos tus datos y los estamos revisando.'}</p>`:`<div class="pg two"><div><label>Número de DNI</label><input id="vD" class="in" inputmode="numeric" maxlength="9" placeholder="Sin puntos"></div><div><label>Teléfono de contacto</label><input id="vT" class="in" inputmode="tel" value="${esc(p.tel||'')}"></div></div><p class="text-xs mut mt-2">Tus datos se usan solo para validar tu identidad y no se muestran a otros usuarios.</p><button class="bp mt-3 px-6" onclick="sendVer()">Enviar para verificar</button>`}</div>
+ <div class="cd psec"><h3>${SVG('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',20)}Verificación de cuenta</h3><p class="sub">Para cuidar a la comunidad pedimos tu DNI (frente y dorso) y una foto de tu rostro. Los revisamos y, si todo está bien, tu perfil muestra la insignia de cuenta verificada.</p>
+ ${verHtml(lock,p)}</div>
  <div class="cd psec"><h3>${SVG('<path d="'+STARP+'"/>',20)}Reseñas recibidas</h3><p class="sub">${x?stars(x.avg,16)+' '+x.avg.toFixed(1).replace('.',',')+' · '+x.n+(x.n===1?' reseña':' reseñas'):'Todavía no tenés reseñas. Aparecen cuando completás trabajos.'}</p>
  <div class="space-y-2">${rv.map(r=>`<div class="p-3 rounded-xl" style="background:var(--soft)"><div class="flex justify-between text-sm"><b>${esc(r.reviewer_name||'Usuario')}</b><span class="mut text-xs">${ago(Date.parse(r.created_at))}</span></div><div class="mt-0.5">${stars(r.stars,14)}</div>${r.comment?`<p class="text-sm mt-1">${esc(r.comment)}</p>`:''}</div>`).join('')}</div></div>
  <div class="cd psec"><h3>${SVG('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',20)}Seguridad</h3><p class="sub">Cuidate y cuidá a la comunidad.</p><ul class="tips"><li>Coordiná los detalles por WhatsApp antes de encontrarte.</li><li>No adelantes dinero a alguien que no conocés.</li><li>Revisá las reseñas y la insignia de verificación.</li><li>Nunca compartas tu contraseña. Denunciá lo que te parezca sospechoso.</li></ul>
@@ -520,9 +556,49 @@ async function saveProfile(){const n=$('pN').value.trim(),a=$('pA').value.trim()
  if(sb){const {error}=await sb.from('profiles').update({nombre:n,apellido:a}).eq('id',ME.id);if(error)return toast('No se pudo guardar.',false)}
  lsS('chya_pf_'+ME.id,{tel:phd($('pT').value),zona:$('pZ').value,oficio:$('pO').value.trim(),bio:$('pB').value.trim()});
  ME.n=n;ME.a=a;ME.name=n+' '+a;$('meBtn').textContent=(n[0]+a[0]).toUpperCase();toast('Perfil guardado');renderMe(1)}
-async function sendVer(){if(!sb)return toast('Falta configurar Supabase.',false);const d=digits($('vD').value),t=phd($('vT').value);if(d.length<7)return toast('Ingresá un DNI válido.',false);if(t.length<8)return toast('Ingresá un teléfono válido.',false);
- const {error}=await sb.from('verifications').insert({user_id:ME.id,dni:d,phone:t,status:'pending'});if(error)return toast('No se pudo enviar. Probá de nuevo más tarde.',false);VER='pending';toast('Datos enviados. Los revisamos a la brevedad.');renderMe(1)}
 async function changePw(){try{await sb.auth.resetPasswordForEmail(ME.email,{redirectTo:location.origin+location.pathname})}catch(e){}toast('Te enviamos un correo para crear una nueva contraseña.')}
+
+const SUNP='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',MOONP='<path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/>';
+function navPill(){const o=document.querySelector('.nv.on'),p=document.querySelector('.nv-pill');if(!o||!p||!o.offsetWidth)return;p.style.width=o.offsetWidth+'px';p.style.height=o.offsetHeight+'px';p.style.transform=`translate(${o.offsetLeft}px,${o.offsetTop}px)`}
+/* SELECTORES PROPIOS (reemplazan la lista gris del navegador) */
+const SXT={fCat:'Oficio',fPay:'Pago mínimo',fBar:'Zona',fUrg:'Urgencia',fSort:'Ordenar por',pZ:'Tu zona'};
+const CHEV='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+const norm=t=>String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+function sxSync(sel){const t=sel._sx;if(!t)return;const o=sel.options[sel.selectedIndex],x=o?o.textContent:'Elegí una opción',sp=t.firstChild;if(sp.textContent!==x)sp.textContent=x;t.classList.toggle('ph',!o||o.value==='')}
+function sxEnhance(sel){if(sel._sx||sel.multiple)return;const t=document.createElement('button');t.type='button';t.className='sx '+sel.className.replace(/\bin\b/,'').replace(/\s+/g,' ').trim();t.setAttribute('aria-haspopup','listbox');t.innerHTML='<span></span>'+CHEV;sel.style.display='none';sel.after(t);sel._sx=t;t.onclick=()=>sxOpen(sel);sxSync(sel)}
+function sxOpen(sel){const ov=document.createElement('div'),many=sel.options.length>10;ov.className='sxov';
+ const items=[...sel.children].flatMap(c=>c.tagName==='OPTGROUP'?[{g:c.label},...[...c.children].map(o=>({o}))]:[{o:c}]);
+ ov.innerHTML=`<div class="sxp" role="listbox"><div class="sxh"><b>${esc(SXT[sel.id]||sel.getAttribute('aria-label')||'Elegí una opción')}</b><button type="button" class="sxx" aria-label="Cerrar">${SVG('<path d="M6 6l12 12M18 6L6 18"/>',18)}</button></div>${many?'<div class="sxsw"><input class="in sxs" placeholder="Buscar…" autocomplete="off"></div>':''}<div class="sxl"></div></div>`;
+ const L=ov.querySelector('.sxl');
+ const draw=q=>{q=norm(q||'');let h='',g='',gh=0;items.forEach(it=>{if(it.g!==undefined){g=`<div class="sxg">${esc(it.g)}</div>`;gh=0;return}const o=it.o;if(q&&!norm(o.textContent).includes(q))return;if(g&&!gh){h+=g;gh=1}h+=`<button type="button" class="sxo ${o.index===sel.selectedIndex?'on':''}" role="option" data-i="${o.index}"><span>${esc(o.textContent)}</span>${o.index===sel.selectedIndex?SVG('<path d="M5 12.5l4.5 4.5L19 7.5"/>',18):''}</button>`});L.innerHTML=h||'<p class="sxe">No hay resultados.</p>'};
+ draw();
+ const close=()=>{document.removeEventListener('keydown',k,true);ov.classList.add('out');setTimeout(()=>ov.remove(),180)},k=e=>{if(e.key==='Escape'){e.stopPropagation();close()}};
+ document.addEventListener('keydown',k,true);
+ ov.onclick=e=>{if(e.target===ov||e.target.closest('.sxx'))return close();const b=e.target.closest('.sxo');if(b){sel.selectedIndex=+b.dataset.i;sel.dispatchEvent(new Event('change',{bubbles:true}));sxSync(sel);close()}};
+ const inp=ov.querySelector('.sxs');if(inp){inp.oninput=()=>draw(inp.value)}
+ document.body.appendChild(ov);const on=L.querySelector('.on');if(on)on.scrollIntoView({block:'center'});if(inp&&matchMedia('(pointer:fine)').matches)inp.focus()}
+const sxScan=()=>document.querySelectorAll('select').forEach(sxEnhance);
+new MutationObserver(sxScan).observe(document.body,{childList:true,subtree:true});sxScan();setInterval(()=>document.querySelectorAll('select').forEach(sxSync),400);
+/* VERIFICACIÓN CON FOTOS */
+let VF={},VU={};
+const VK=[['front','DNI: frente','<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M14 10h4M14 14h4M6 16c.6-1.6 5.4-1.6 6 0"/>'],['back','DNI: dorso','<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 14h6"/>'],['self','Tu rostro (selfie)','<circle cx="12" cy="9" r="4"/><path d="M5 20c0-3.5 3.5-5 7-5s7 1.5 7 5"/>']];
+const tileH=k=>{const v=VK.find(x=>x[0]===k);return VU[k]?`<img src="${VU[k]}" alt=""><span class="vt-c">Cambiar foto</span>`:`${SVG(v[2],30)}<b>${v[1]}</b><small>Tocá para ${k==='self'?'sacar o elegir':'subir'} la foto</small>`};
+function verHtml(lock,p){if(lock)return `<div class="vst ${VER==='approved'?'ok':''}">${SVG(VER==='approved'?'<path d="M5 12.5l4.5 4.5L19 7.5"/>':'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',22)}<div><b>${VER==='approved'?'Tu cuenta está verificada.':'Recibimos tus datos.'}</b><p class="text-sm mut">${VER==='approved'?'Tu perfil muestra la insignia de verificada.':'Estamos revisando tu identidad. Te avisamos cuando termine.'}</p></div></div>`;
+ return `${VER==='rejected'?'<p class="text-sm font-semibold mb-3" style="color:var(--warn)">No pudimos validar tus datos. Volvé a enviarlos con fotos más claras.</p>':''}
+ <div class="vtiles">${VK.map(v=>`<label class="vt ${VU[v[0]]?'ok':''}" id="vt_${v[0]}"><div class="vt-in">${tileH(v[0])}</div><input type="file" accept="image/*" ${v[0]==='self'?'capture="user"':''} hidden onchange="pickF('${v[0]}',this)"></label>`).join('')}</div>
+ <ul class="tips"><li>Que el DNI se vea completo, con buena luz y sin reflejos.</li><li>En la selfie mostrá tu rostro descubierto, sin lentes de sol ni gorra.</li></ul>
+ <div class="pg two"><div><label>Número de DNI</label><input id="vD" class="in" inputmode="numeric" maxlength="9" placeholder="Sin puntos" oninput="vChk()"></div><div><label>Teléfono de contacto</label><input id="vT" class="in" inputmode="tel" value="${esc(p.tel||'')}" oninput="vChk()"></div></div>
+ <p class="text-xs mut mt-2">Tus fotos se guardan de forma privada y solo las revisa el equipo de verificación. No se muestran a otros usuarios.</p><button id="vGo" class="bp mt-3 px-6" onclick="sendVer()" disabled>Enviar para verificar</button>`}
+function vChk(){const b=$('vGo');if(b)b.disabled=!(VF.front&&VF.back&&VF.self&&digits($('vD').value).length>=7&&phd($('vT').value).length>=8)}
+function shrink(f,m=1400){return new Promise((ok,no)=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):no(),'image/jpeg',.85)};im.onerror=()=>no();im.src=u})}
+async function pickF(k,inp){const f=inp.files&&inp.files[0];if(!f)return;if(!/^image\//.test(f.type))return toast('Elegí un archivo de imagen.',false);
+ try{const b=await shrink(f);if(VU[k])URL.revokeObjectURL(VU[k]);VF[k]=b;VU[k]=URL.createObjectURL(b);const t=$('vt_'+k);t.classList.add('ok');t.querySelector('.vt-in').innerHTML=tileH(k);vChk()}catch(e){toast('No se pudo leer la imagen.',false)}}
+async function sendVer(){if(!sb)return toast('Falta configurar Supabase.',false);const d=digits($('vD').value),t=phd($('vT').value);if(d.length<7)return toast('Ingresá un DNI válido.',false);if(t.length<8)return toast('Ingresá un teléfono válido.',false);if(!(VF.front&&VF.back&&VF.self))return toast('Faltan las fotos.',false);
+ const bt=$('vGo'),id=ME.id+'/'+Date.now(),Pt={};bt.disabled=true;bt.textContent='Enviando…';
+ try{for(const k of ['front','back','self']){const path=`${id}_${k}.jpg`,{error}=await sb.storage.from('verifications').upload(path,VF[k],{contentType:'image/jpeg'});if(error)throw error;Pt[k]=path}
+  const {error}=await sb.from('verifications').insert({user_id:ME.id,dni:d,phone:t,dni_front:Pt.front,dni_back:Pt.back,selfie:Pt.self,status:'pending'});if(error)throw error;
+  Object.values(VU).forEach(u=>URL.revokeObjectURL(u));VF={};VU={};VER='pending';toast('Datos enviados. Los revisamos a la brevedad.');renderMe(1)}
+ catch(e){bt.disabled=false;bt.textContent='Enviar para verificar';toast('No se pudo enviar. Probá de nuevo más tarde.',false)}}
 /* Inicio */
 $('q').oninput=e=>{F.q=e.target.value;renderFeed()};
 $('fCat').innerHTML='<option value="">Todos los oficios</option>'+catOpts('');$('fCat').onchange=e=>{F.cat=e.target.value;F.grp='';renderChips();renderFeed()};
@@ -534,7 +610,7 @@ $('bellBtn').onclick=e=>{e.stopPropagation();$('notif').classList.toggle('hidden
 document.addEventListener('click',e=>{if(!$('notif').contains(e.target))$('notif').classList.add('hidden')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('modal2');closeModal();$('legal').classList.add('hidden')}});
 document.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.target.tagName!=='INPUT'||e.target.type==='file')return;const r=e.target.closest('#gate,#modal,#modal2');if(!r)return;const b=r.querySelector('#gGo,#aGo,#next,button.bp.w-full');if(b&&!b.disabled){e.preventDefault();b.click()}});
-addEventListener('scroll',()=>document.querySelector('header').classList.toggle('sc',scrollY>4),{passive:true});
+addEventListener('resize',navPill);addEventListener('scroll',()=>document.querySelector('header').classList.toggle('sc',scrollY>4),{passive:true});
 $('meBtn').onclick=()=>setRole('me');$('newJob').onclick=openWizard;
 setInterval(()=>{if(ME.id&&!document.hidden)loadJobs()},30000);
 setTheme(V.theme);applyCfg();renderChips();renderNotif();setRole('home');checkSession();
