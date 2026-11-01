@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#f5f3ee">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#f3f6fa">
 <meta name="description" content="Publicá o encontrá changas y oficios en tu zona. Contacto directo por WhatsApp.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232f5d50'/%3E%3Cpath d='M9 21l5-10 3 6 2-3 4 7' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231456a0'/%3E%3Cpath d='M9 21l5-10 3 6 2-3 4 7' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>Changa Ya · Oficios y changas</title>
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <style>
-:root{--bg:#f5f3ee;--card:#fffdf9;--ink:#1f1d1a;--mut:#6b665e;--line:#dedad0;--acc:#2f5d50;--accink:#fff;--soft:#e8eee9;--warn:#8a3b1f;--warnbg:#f4e6df;--sh:0 1px 2px rgba(31,29,26,.05),0 10px 26px -16px rgba(31,29,26,.22);--f-ui:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-disp:"Fraunces",Georgia,"Times New Roman",serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-:root.dark{--bg:#161513;--card:#1d1c19;--ink:#ece8e0;--mut:#9b958a;--line:#32302b;--acc:#7fae9b;--accink:#14201b;--soft:#232a26;--warn:#d99a7f;--warnbg:#2c211b;--sh:0 1px 2px rgba(0,0,0,.35),0 12px 28px -16px rgba(0,0,0,.7);color-scheme:dark}
+:root{--bg:#f3f6fa;--card:#fff;--ink:#0f1c2e;--mut:#5a6a7e;--line:#d9e1ec;--acc:#1456a0;--accink:#fff;--soft:#e4edf8;--warn:#b4411b;--warnbg:#fbe9e1;--sh:0 1px 2px rgba(15,28,46,.06),0 12px 28px -16px rgba(15,28,46,.25);--f-ui:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-disp:var(--f-ui);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root.dark{--bg:#0a1220;--card:#111c2e;--ink:#e8eef7;--mut:#9aa9bd;--line:#223049;--acc:#6db0f0;--accink:#07121f;--soft:#16243a;--warn:#f0a07d;--warnbg:#2c1f1a;--sh:0 1px 2px rgba(0,0,0,.4),0 12px 28px -16px rgba(0,0,0,.75);color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .3s,color .3s}
-h1,h2,.ser{font-family:var(--f-disp);font-weight:700;letter-spacing:-.015em}
+h1,h2,.ser{font-family:var(--f-disp);font-weight:800;letter-spacing:-.025em}
 h3,h4{font-family:var(--f-ui);font-weight:700;letter-spacing:-.005em}
 h1{font-size:clamp(1.8rem,4.6vw,2.7rem);line-height:1.1}
 ::selection{background:var(--acc);color:var(--accink)}
@@ -64,6 +64,45 @@ header{transition:box-shadow .25s}header.sc{box-shadow:var(--sh)}
 #chips{scrollbar-width:none}#chips::-webkit-scrollbar{display:none}
 @media (pointer:coarse){.bp,.bo,.tb{min-height:44px}.bp.text-xs,.bo.text-xs{min-height:38px}.chip{min-height:40px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ===== Estilo v2 ===== */
+.bp,.bo{border-radius:12px;font-weight:700}
+.cd{border-radius:16px}.tag{font-weight:600}
+header{backdrop-filter:saturate(1.4) blur(8px)}
+#viewFind>h1{font-size:clamp(2rem,4.8vw,3rem);line-height:1.05;max-width:20ch}
+/* Pantalla de ingreso con ciudad animada */
+#gate{background:transparent!important}
+#gateBg{display:none;position:fixed;inset:0;z-index:44;overflow:hidden;background:#0a1a38}
+#gate:not(.hidden)+#gateBg{display:block}
+#gbSky{position:absolute;inset:0;background:linear-gradient(180deg,#0a1a38 0%,#1d4378 55%,#e59a5c 100%)}
+#gbSky::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#040a18 0%,#0c2146 60%,#27508a 100%);animation:dn 40s ease-in-out infinite alternate}
+@keyframes dn{from{opacity:0}to{opacity:1}}
+.cl{--h:calc(clamp(220px,24vw,560px)*var(--k));position:absolute;left:0;bottom:0;height:var(--h);width:calc(var(--h)*9);animation:pan linear infinite;will-change:transform}
+@keyframes pan{to{transform:translateX(-33.3333%)}}
+.wn{animation:tw 5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.12}50%{opacity:.95}}
+.gbshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,28,.62),rgba(6,14,28,.3) 45%,rgba(6,14,28,.7))}
+#gbPh{position:absolute;inset:0}
+#gbPh .ph{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.05);transition:opacity 1.6s ease}
+#gbPh .ph.on{opacity:1;animation:kb 20s ease-out forwards}
+#gbPh video.ph{width:100%;height:100%;object-fit:cover;transform:none;animation:none}
+@keyframes kb{to{transform:scale(1.18) translate(-1.5%,-1%)}}
+.hasph #gbSky,.hasph .cl{display:none}
+.gwrap{position:relative;z-index:1;min-height:100%;display:grid;place-items:center;padding:1.25rem}
+.gin{width:100%;max-width:26rem;display:grid;gap:1.5rem}
+.gin:not(.gi) .gl>div{justify-content:center}
+.gin.gi{max-width:64rem}
+@media(min-width:1024px){.gin.gi{grid-template-columns:1.15fr .85fr;gap:4.5rem;align-items:center}}
+.gl{color:#fff}.gl2{color:rgba(255,255,255,.78)}
+.gl h1{font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.04;color:#fff;max-width:14ch}
+.gsub{margin-top:1rem;font-size:1.05rem;line-height:1.55;color:rgba(255,255,255,.82);max-width:34rem}
+.gsteps{list-style:none;margin:1.75rem 0 0;padding:0;display:grid;gap:.6rem;max-width:34rem;counter-reset:s}
+.gsteps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;column-gap:.85rem;padding:.8rem 1rem;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px)}
+.gsteps li::before{content:counter(s);grid-row:span 2;display:grid;place-items:center;width:2rem;height:2rem;border-radius:999px;background:#fff;color:#0f2a4a;font-weight:800;font-size:.85rem}
+.gsteps b{font-size:.95rem}.gsteps span{font-size:.85rem;color:rgba(255,255,255,.78)}
+@media(max-width:639px){.gsteps{display:none}}
+.gtrust{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem;padding-top:1.1rem;border-top:1px solid var(--line)}
+.gtrust span{font-size:.72rem;font-weight:600;padding:.25rem .6rem;border-radius:999px;background:var(--soft);color:var(--acc)}
 </style>
 </head>
 <body class="min-h-screen">
@@ -109,7 +148,8 @@ header{transition:box-shadow .25s}header.sc{box-shadow:var(--sh)}
 <footer class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-xs mut flex flex-wrap gap-2 justify-between border-t" style="border-color:var(--line)"><span id="foot"></span><span><button class="underline mr-4" onclick="openTerms()">Términos y privacidad</button><button id="admLink" class="underline">Acceso administrador</button></span></footer>
 
 <!-- MODAL DE INTRODUCCIÓN Y REGISTRO -->
-<div id="gate" class="hidden fixed inset-0 z-[45] overflow-y-auto" style="background:var(--bg)"></div>
+<div id="gate" class="hidden fixed inset-0 z-[45] overflow-y-auto"></div>
+<div id="gateBg" aria-hidden="true"><div id="gbSky"></div><div id="gbPh"></div><div id="gbCity"></div><div class="gbshade"></div></div>
 <div id="modal" class="hidden fixed inset-0 z-50 ov grid place-items-end sm:place-items-center"></div>
 <div id="admin" class="hidden fixed inset-0 z-[55] overflow-y-auto" style="background:var(--bg)"></div>
 <div id="modal2" class="hidden fixed inset-0 z-[60] ov grid place-items-end sm:place-items-center"></div>
@@ -157,11 +197,11 @@ const mine=()=>J.filter(j=>j.user===ME.id);
 const mode=()=>sb?'shared':'local';
 
 function ago(t){const s=Math.max(1,Math.round((Date.now()-t)/60000));if(s<60)return 'hace '+s+' min';const h=Math.round(s/60);return h<24?'hace '+h+' h':'hace '+Math.round(h/24)+' d'}
-function avatar(name,sz='w-9 h-9 text-sm'){const c=['#6b7d6a','#8a7560','#5f7280','#7d6a7a','#8c7b4f','#667a76'],n=(name||'?').trim()||'?',i=n.split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();return `<span class="${sz} rounded-full grid place-items-center font-semibold text-white shrink-0" style="background:${c[n.charCodeAt(0)%6]}">${esc(i)}</span>`}
+function avatar(name,sz='w-9 h-9 text-sm'){const c=['#3b6ea5','#4f7f8f','#6a5f9e','#a0623f','#3f7d6b','#7a5c8a'],n=(name||'?').trim()||'?',i=n.split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();return `<span class="${sz} rounded-full grid place-items-center font-semibold text-white shrink-0" style="background:${c[n.charCodeAt(0)%6]}">${esc(i)}</span>`}
 function toast(msg,ok=true){const d=document.createElement('div');d.className='pointer-events-auto rounded-lg px-4 py-3 text-sm font-medium shadow-lg';d.style.cssText='animation:toast .3s ease both;background:'+(ok?'var(--ink);color:var(--bg)':'var(--warn);color:var(--bg)');d.textContent=msg;$('toasts').appendChild(d);setTimeout(()=>{d.style.transition='opacity .3s';d.style.opacity='0';setTimeout(()=>d.remove(),300)},3000)}
 function notify(t,b){notifs.unshift([t,b,true]);renderNotif()}
 function renderNotif(){const n=notifs.filter(x=>x[2]).length;$('badge').textContent=n;$('badge').style.display=n?'inline-block':'none';$('notif').innerHTML=!notifs.length?'<div class="p-2.5 text-sm mut">Sin avisos por ahora.</div>':notifs.slice(0,6).map(x=>`<div class="p-2.5 rounded-lg"><div class="text-sm font-semibold">${esc(x[0])}</div><div class="text-xs mut">${esc(x[1])}</div></div>`).join('')}
-function setTheme(t){V.theme=t;document.documentElement.classList.toggle('dark',t==='dark');$('themeBtn').textContent=t==='dark'?'Claro':'Oscuro';document.querySelector('meta[name=theme-color]').content=t==='dark'?'#161513':'#f5f3ee';saveV()}
+function setTheme(t){V.theme=t;document.documentElement.classList.toggle('dark',t==='dark');$('themeBtn').textContent=t==='dark'?'Claro':'Oscuro';document.querySelector('meta[name=theme-color]').content=t==='dark'?'#0a1220':'#f3f6fa';saveV()}
 function setRole(r){role=r;$('viewFind').classList.toggle('hidden',r!=='find');$('viewPost').classList.toggle('hidden',r!=='post');document.querySelectorAll('.tb[data-r]').forEach(b=>b.classList.toggle('on',b.dataset.r===r));r==='find'?loadFeed():(renderMine(),loadJobs())}
 function applyCfg(){const c=ST.cfg;$('brand').innerHTML=esc(c.name);$('heroT').textContent=c.heroT;$('heroS').textContent=c.heroS;$('foot').textContent='© '+new Date().getFullYear()+' '+c.name;document.title=c.name+' · Oficios y changas';const cur=$('fBar').value;$('fBar').innerHTML=barOpts(cur,'Todas las zonas')}
 function refreshAll(){applyCfg();renderFeed();if(role==='post')renderMine();if(!$('admin').classList.contains('hidden')&&aTab!=='cfg')renderAdmin()}
@@ -312,46 +352,36 @@ let sb=null;try{if(window.supabase&&!SB_URL.startsWith('PEGA'))sb=supabase.creat
 let G={mode:'intro',email:'',last:0},lf=0,ll=0;
 const gerr=m=>{const e=$('gE');if(e)e.textContent=m};
 const emsg=x=>{const m=(x&&x.message||'').toLowerCase();return m.includes('already')?'Ese correo ya tiene cuenta. Ingresá con tu contraseña.':m.includes('rate')||m.includes('seconds')?'Pediste demasiados correos. Esperá un minuto y probá de nuevo.':m.includes('password')?'La contraseña no cumple los requisitos.':'No se pudo completar la operación. Probá de nuevo.'};
-function showGate(){$('gate').classList.remove('hidden');document.body.style.overflow='';drawGate()}
+/* FONDO DE LA PANTALLA DE INGRESO
+   Sin configurar: ciudad animada (skyline con parallax, día a noche, ventanas que titilan).
+   Con fotos: poné URLs en images y se muestran en cruce con zoom lento.
+   Con video: poné la URL (mp4/webm) en video. */
+const GATE_BG={images:[],video:''};
+function cityTile(seed,hMin,hMax,fill,lit){let q=seed;const r=()=>(q=q*16807%2147483647)/2147483647,W=1200,H=400;let x=0,o='';
+ while(x<W){let w=34+r()*58;if(W-x-w<30)w=W-x;const h=hMin+r()*(hMax-hMin);o+=`<rect x="${x.toFixed(1)}" y="${(H-h).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="${fill}"/>`;
+  if(lit)for(let wx=x+6;wx<x+w-8;wx+=11)for(let wy=H-h+10;wy<H-8;wy+=15){const p=r();if(p<.2)o+=`<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="5" height="7" fill="#ffd98e" ${p<.035?`class="wn" style="animation-delay:-${(r()*6).toFixed(1)}s"`:'opacity=".85"'}/>`}
+  x+=w+r()*4}
+ return o}
+function initGateBg(){if(initGateBg.d)return;initGateBg.d=1;const g=GATE_BG,root=$('gateBg');
+ if(g.video||(g.images&&g.images.length)){root.classList.add('hasph');const box=$('gbPh');
+  if(g.video){box.innerHTML=`<video class="ph on" src="${esc(g.video)}" autoplay muted loop playsinline></video>`;return}
+  box.innerHTML=g.images.map(u=>`<div class="ph" style="background-image:url('${esc(u)}')"></div>`).join('');
+  const ph=[...box.children];let i=0;ph[0].classList.add('on');
+  if(ph.length>1)setInterval(()=>{ph[i].classList.remove('on');i=(i+1)%ph.length;ph[i].classList.add('on')},7000);return}
+ const L=[[11,60,170,'#27487a',0,.6,150],[23,90,240,'#17325c',1,.8,110],[37,120,330,'#0a1730',1,1,75]];
+ $('gbCity').innerHTML=L.map(([sd,a,b,c,l,k,sp])=>`<svg class="cl" style="--k:${k};animation-duration:${sp}s" viewBox="0 0 3600 400" preserveAspectRatio="xMinYMax meet">${[0,1,2].map(n=>`<g transform="translate(${n*1200})">${cityTile(sd,a,b,c,l)}</g>`).join('')}</svg>`).join('')}
+function showGate(){$('gate').classList.remove('hidden');document.body.style.overflow='';initGateBg();drawGate()}
 function drawGate(){const m=G.mode,f=(id,l,t,ac)=>t==='password'?pwField(id,l,ac):`<div><label class="text-sm font-semibold">${l}</label><input id="${id}" type="${t}" autocomplete="${ac}" class="in mt-1"></div>`;let b;
 
  /* PANTALLA DE INTRODUCCIÓN CON EXPLICACIÓN Y BOTÓN AL REGISTRO */
  if(m==='intro'){
-  b=`<div class="text-center sm:text-left space-y-4">
-      <div>
-       <span class="tag u2 mb-2">Plataforma comunitaria</span>
-       <h2 class="ser text-2xl sm:text-3xl font-bold mt-1">¿Qué es ${esc(ST.cfg.name)} y cómo funciona?</h2>
-      </div>
-      <p class="text-sm mut leading-relaxed">
-       <b>Changa-Ya</b> es la solución ideal para conectar de forma directa, rápida y sin intermediarios a personas que necesitan resolver tareas urgentes u oficio en la zona con trabajadores independientes dispuestos a realizarlas.
-      </p>
-      <div class="grid gap-3 pt-2 text-left">
-       <div class="cd p-3 flex gap-3 items-start">
-        <span class="tag u2 shrink-0 font-bold">1</span>
-        <div class="text-sm"><b>Publicá o encontrá:</b> Buscá changas por categoría, barrio y urgencia, o publicá tu propio requerimiento en pocos segundos.</div>
-       </div>
-       <div class="cd p-3 flex gap-3 items-start">
-        <span class="tag u2 shrink-0 font-bold">2</span>
-        <div class="text-sm"><b>Postulate al instante:</b> Anotate con un toque y conectá directamente mediante chat de WhatsApp para coordinar los detalles.</div>
-       </div>
-       <div class="cd p-3 flex gap-3 items-start">
-        <span class="tag u2 shrink-0 font-bold">3</span>
-        <div class="text-sm"><b>Calificá y crecé:</b> Completá los trabajos y calificá a la otra parte para generar confianza en la comunidad.</div>
-       </div>
-      </div>
-      <div class="pt-4 space-y-2">
-       <button class="bp w-full py-3 text-base shadow-md" onclick="G.mode='reg';drawGate()">Quiero registrarme</button>
-       <div class="flex justify-between items-center text-sm pt-2">
-        <span class="mut">¿Ya tenés una cuenta?</span>
-        <button class="acc font-semibold underline" onclick="G.mode='login';drawGate()">Iniciar sesión</button>
-       </div>
-      </div>
-     </div>`;
+  b=`<h2 class="text-xl font-extrabold">Entrá a ${esc(ST.cfg.name)}</h2><p class="text-sm mut mt-1">Creá tu cuenta gratis o ingresá para ver las changas de tu zona.</p><div class="pt-5 space-y-3"><button class="bp w-full py-3 text-base" onclick="G.mode='reg';drawGate()">Crear cuenta</button><button class="bo w-full py-3 text-base" onclick="G.mode='login';drawGate()">Ya tengo cuenta</button></div><div class="gtrust"><span>Sin intermediarios</span><span>WhatsApp directo</span><span>Calificaciones entre usuarios</span></div>`;
  }
  else if(m==='forgot')b=`<h3 class="font-bold text-lg mb-1">Recuperar contraseña</h3><p class="text-sm mut mb-4">Ingresá tu correo y te enviamos un enlace para crear una nueva.</p>${f('gM','Correo electrónico','email','username')}<p id="gE" class="text-sm mt-3 min-h-5" style="color:var(--warn)"></p><button id="gGo" class="bp w-full py-2.5" onclick="doForgot()">Enviar enlace</button><button class="text-sm mut underline mt-3 w-full" onclick="G.mode='login';drawGate()">Volver a ingresar</button>`;
  else if(m==='newpw')b=`<h3 class="font-bold text-lg mb-1">Nueva contraseña</h3><p class="text-sm mut mb-4">Elegí una contraseña nueva para tu cuenta.</p><div class="space-y-3">${f('gP','Nueva contraseña','password','new-password')}${f('gP2','Repetir contraseña','password','new-password')}</div><p id="gE" class="text-sm mt-3 min-h-5" style="color:var(--warn)"></p><button id="gGo" class="bp w-full py-2.5" onclick="doNewPw()">Guardar contraseña</button>`;
  else b=`<div class="flex border-b mb-4" style="border-color:var(--line)"><button class="tb flex-1 ${m==='reg'?'on':''}" onclick="G.mode='reg';drawGate()">Crear cuenta</button><button class="tb flex-1 ${m==='login'?'on':''}" onclick="G.mode='login';drawGate()">Ingresar</button></div><div class="space-y-3">${m==='reg'?`<div class="grid grid-cols-2 gap-3">${f('gN','Nombre','text','given-name')}${f('gA','Apellido','text','family-name')}</div>`:''}${f('gM','Correo electrónico','email','username')}${f('gP','Contraseña','password',m==='reg'?'new-password':'current-password')}${m==='reg'?f('gP2','Repetir contraseña','password','new-password'):''}${m==='reg'?'<label class="flex gap-2 text-sm items-start"><input type="checkbox" id="gT" class="mt-1"><span>Acepto los <button type="button" class="underline acc" onclick="openTerms()">términos y la política de privacidad</button>.</span></label>':''}</div><p id="gE" class="text-sm mt-3 min-h-5" style="color:var(--warn)">${sb?'':'Falta configurar Supabase.'}</p><button id="gGo" class="bp w-full py-2.5" onclick="${m==='reg'?'doReg()':'doLog()'}">${m==='reg'?'Crear cuenta':'Entrar'}</button><div class="flex justify-between items-center mt-3"><button class="text-sm mut underline" onclick="G.mode='intro';drawGate()">← Volver a la introducción</button>${m==='login'?'<button class="text-sm mut underline" onclick="G.mode=\'forgot\';drawGate()">¿Olvidaste tu contraseña?</button>':''}</div>`;
- $('gate').innerHTML=`<div class="min-h-full grid place-items-center p-4"><div class="w-full max-w-lg"><div class="flex items-center justify-center gap-2.5 mb-5"><svg class="w-10 h-10" viewBox="0 0 32 32" fill="none"><rect x="1.5" y="1.5" width="29" height="29" rx="8" stroke="var(--ink)" stroke-width="2"/><path d="M9 21l5-10 3 6 2-3 4 7" stroke="var(--acc)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ser text-3xl">${esc(ST.cfg.name)}</span></div><div class="cd p-6 sm:p-8 fade">${b}</div><p class="text-xs mut text-center mt-4">Tus datos se usan solo para el funcionamiento de la plataforma.</p><p class="text-center mt-3"><button class="underline text-xs mut" onclick="openAdmin()">Acceso administrador</button></p></div></div>`}
+ const nm=esc(ST.cfg.name),intro=m==='intro',brand=`<div class="flex items-center gap-2.5"><svg class="w-10 h-10" viewBox="0 0 32 32" fill="none"><rect x="1.5" y="1.5" width="29" height="29" rx="8" stroke="currentColor" stroke-width="2"/><path d="M9 21l5-10 3 6 2-3 4 7" stroke="#8cc4ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-2xl font-extrabold tracking-tight">${nm}</span></div>`,hero=intro?`<h1 class="mt-8">Changas y oficios de tu zona, en un toque.</h1><p class="gsub">Conectá directo con quien necesita una mano o con quien sabe hacerla. Sin intermediarios.</p><ol class="gsteps"><li><b>Publicá o encontrá</b><span>Buscá por oficio, barrio y urgencia, o publicá lo que necesitás en segundos.</span></li><li><b>Postulate al instante</b><span>Anotate con un toque y coordiná los detalles por WhatsApp.</span></li><li><b>Calificá y crecé</b><span>Completá el trabajo y calificá a la otra parte para generar confianza.</span></li></ol>`:'';
+ $('gate').innerHTML=`<div class="gwrap"><div class="gin ${intro?'gi':''}"><div class="gl"><div class="flex">${brand}</div>${hero}</div><div><div class="cd p-6 sm:p-8 fade">${b}</div><p class="text-xs text-center mt-4 gl2">Tus datos se usan solo para el funcionamiento de la plataforma.</p><p class="text-center mt-2"><button class="underline text-xs gl2" onclick="openAdmin()">Acceso administrador</button></p></div></div></div>`}
 async function doReg(){if(!sb)return gerr('Falta configurar Supabase.');const n=$('gN').value.trim(),a=$('gA').value.trim(),e=$('gM').value.trim().toLowerCase(),p=$('gP').value;
  if(n.length<2||a.length<2)return gerr('Ingresá tu nombre y apellido.');
  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e))return gerr('Ingresá un correo válido.');
