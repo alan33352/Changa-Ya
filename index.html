@@ -190,7 +190,7 @@ header{border-bottom:1px solid var(--line)}
 .vst{display:flex;gap:.8rem;align-items:flex-start;padding:1rem;border-radius:14px;background:var(--soft);color:var(--acc)}.vst b{color:var(--ink)}.vst.ok{background:var(--soft);background:color-mix(in srgb,#1f9d62 14%,var(--card));color:#1f9d62}
 
 /* ===== v4: animaciones en celular, avatar, admin ===== */
-@media (prefers-reduced-motion:reduce){html:not(.anim-on) .cl,html:not(.anim-on) .hhero::after,html:not(.anim-on) #gbPh .ph.on{animation:none}}
+
 html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation:none!important;transition:none!important}
 .bn-in{-webkit-backdrop-filter:blur(14px)}header{-webkit-backdrop-filter:saturate(1.4) blur(8px)}.sxov{-webkit-backdrop-filter:blur(4px)}.gsteps li{-webkit-backdrop-filter:blur(6px)}
 .avs{position:relative;overflow:hidden}.av-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
@@ -208,6 +208,110 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation:none!im
 .vaph.na{display:grid;place-items:center;cursor:default}.vaph.na span{position:static;background:none;color:var(--mut);text-align:center}
 .lb{position:fixed;inset:0;z-index:95;display:grid;place-items:center;background:rgba(0,0,0,.9);animation:ovin .2s;cursor:zoom-out}.lb img{max-width:96vw;max-height:92vh;border-radius:12px}
 .lbx{position:absolute;top:calc(1rem + env(safe-area-inset-top,0px));right:1rem;display:grid;place-items:center;width:44px;height:44px;border-radius:99px;background:rgba(255,255,255,.15);color:#fff}
+
+/* ===== v5: rediseño (marino + celeste + ámbar) ===== */
+:root{--navy:#0b2447;--navy2:#143f73;--blue2:#2c6fb8;--sky:#8cc4ff;--amber:#f2a65a;--amber2:#e5833b;--ok:#1f9d62;--grad:linear-gradient(135deg,#1456a0,#2c6fb8 60%,#4f93d8);--glow:0 10px 24px -10px color-mix(in srgb,var(--acc) 75%,transparent)}
+:root.dark{--grad:linear-gradient(135deg,#3a7fc8,#5aa6e6 60%,#8cc4ff)}
+/* botones */
+.bp{position:relative;overflow:hidden;isolation:isolate;background:var(--grad);color:#fff;border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),var(--glow)}
+:root.dark .bp{color:#07121f}
+.bp::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-120%)}
+.bp:not(:disabled):hover::after,.bp:not(:disabled):active::after{animation:shine .8s ease}
+@keyframes shine{to{transform:translateX(120%)}}
+.bp:hover{transform:translateY(-1px);filter:none}
+.bp:active,.bo:active{transform:scale(.96)}
+.bo{border:1.5px solid var(--line);background:var(--card)}
+.bo:hover{transform:translateY(-1px);box-shadow:0 10px 20px -14px var(--acc)}
+.ba{background:linear-gradient(135deg,#f8be80,var(--amber2));color:#3a1a05!important;border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 12px 26px -10px rgba(229,131,59,.75)}
+.cta-pulse{animation:cpulse 2.8s ease-in-out infinite}
+@keyframes cpulse{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 0 rgba(242,166,90,.55)}60%{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 14px rgba(242,166,90,0)}}
+.chip.bo{border-radius:999px}.chip.bp{border-radius:999px}
+.chip{transition:transform .2s,background-color .2s,box-shadow .2s}
+.tb{border:0;border-radius:999px;padding:.5rem 1rem}.tb.on{background:var(--soft);color:var(--acc)}
+.cd{border-radius:18px}
+/* menú inferior */
+.bn-in{border-radius:26px;box-shadow:0 18px 40px -14px rgba(10,25,50,.5),0 0 0 1px color-mix(in srgb,var(--sky) 18%,transparent)}
+.nv-pill{background:var(--grad);box-shadow:0 10px 22px -8px var(--acc)}
+.nv.on span{animation:nvl .45s ease}@keyframes nvl{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+/* revelar al scrollear */
+.rv{opacity:0;transform:translateY(22px) scale(.985);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+/* INICIO */
+.hhero{padding:2.6rem 1.25rem 0;border-radius:28px;background:linear-gradient(176deg,#081a36 0%,#143f73 52%,#2c6fb8 80%,#f2a65a 138%);box-shadow:0 30px 60px -30px rgba(11,36,71,.7)}
+.hhero::after{display:none}
+.hsky{position:absolute;inset:0;pointer-events:none}.hsky i{position:absolute;width:3px;height:3px;border-radius:9px;background:#fff;animation:tw 3.4s ease-in-out infinite}
+.hmoon{position:absolute;top:1.4rem;right:1.6rem;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff7e0,#f8d79a);box-shadow:0 0 40px 10px rgba(248,215,154,.35);animation:moon 6s ease-in-out infinite alternate}
+@keyframes moon{to{transform:translateY(8px);box-shadow:0 0 56px 16px rgba(248,215,154,.5)}}
+.hcont{padding-bottom:1.4rem}
+.hlogo{animation:flt 5s ease-in-out infinite;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}@keyframes flt{50%{transform:translateY(-7px)}}
+.hbrand{font-size:clamp(2.3rem,8vw,3.8rem);line-height:1;text-shadow:0 6px 24px rgba(0,0,0,.3)}
+.hbtns{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1.4rem}
+.hcta{margin:0;min-height:48px;padding:.8rem 1.5rem;border-radius:16px;font-weight:800;position:relative;overflow:hidden;isolation:isolate}
+.hcta::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%);transform:translateX(-120%);animation:shine 3.2s ease-in-out 1s infinite}
+.hcta2{min-height:48px;padding:.8rem 1.4rem;border-radius:16px;font-weight:700;color:#fff;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .2s,background-color .2s}
+.hcta2:hover,.hcta2:active{background:rgba(255,255,255,.22);transform:translateY(-1px) scale(.98)}
+.hcity{position:relative;z-index:1;display:block;width:calc(100% + 2.5rem);margin:0 -1.25rem;height:96px}
+.hcity .wn{fill:#f2a65a}
+.hmq{overflow:hidden;margin:1rem -.25rem 0;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.hmq div{display:flex;gap:.55rem;width:max-content;animation:mq 26s linear infinite}@keyframes mq{to{transform:translateX(-50%)}}
+.hmq span{padding:.4rem .9rem;border-radius:999px;font-size:.82rem;font-weight:700;background:var(--card);border:1px solid var(--line);color:var(--acc);white-space:nowrap}
+.hh{font-size:clamp(1.5rem,4vw,2rem);margin:3rem 0 .7rem;display:flex;align-items:center;gap:.7rem}
+.hh::before{content:"";width:6px;height:1.4em;border-radius:9px;background:linear-gradient(var(--acc),var(--amber))}
+.hgrid .cd{padding:1.25rem;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.hgrid .cd:hover,.hgrid .cd:active{transform:translateY(-5px);border-color:var(--acc)}
+.hgrid .cd:nth-child(1) .ic{background:var(--grad);color:#fff}
+.hgrid .cd:nth-child(2) .ic{background:linear-gradient(135deg,#f8be80,var(--amber2));color:#3a1a05}
+.hgrid .cd:nth-child(3) .ic{background:linear-gradient(135deg,#2fb877,var(--ok));color:#fff}
+.hgrid .ic{width:48px;height:48px;border-radius:15px;box-shadow:0 10px 20px -10px rgba(0,0,0,.4);animation:flt 4.5s ease-in-out infinite}
+.hgrid .cd:nth-child(2) .ic{animation-delay:-1.5s}.hgrid .cd:nth-child(3) .ic{animation-delay:-3s}
+.hstep{border-left:5px solid var(--acc);transition:transform .3s,box-shadow .3s}.hstep:nth-child(2){border-left-color:var(--amber2)}.hstep:nth-child(3){border-left-color:var(--ok)}
+.hstep:hover,.hstep:active{transform:translateX(5px)}
+.faq details{transition:border-color .25s,box-shadow .25s}.faq details[open]{border-color:var(--acc);box-shadow:var(--sh)}
+.faq summary::after{display:grid;place-items:center;flex:none;width:28px;height:28px;border-radius:99px;background:var(--soft);transition:transform .3s,background-color .3s}
+.faq details[open] summary::after{background:var(--acc);color:var(--accink);transform:rotate(180deg)}
+.faq details[open] p{animation:fade .35s ease}
+.hcred{background:linear-gradient(160deg,var(--card),var(--soft))}
+/* TRABAJOS */
+#viewFind>h1{letter-spacing:-.035em}
+#viewFind>.cd{position:relative;box-shadow:0 24px 50px -28px var(--acc),var(--sh);border-color:color-mix(in srgb,var(--acc) 25%,var(--line))}
+#q{border-radius:14px;transition:box-shadow .25s,border-color .25s}
+.card{border-radius:20px;padding:1.1rem!important}
+.card::before{height:4px;background:linear-gradient(90deg,var(--acc),var(--sky),var(--acc));background-size:200% 100%;animation:sh 4s linear infinite}
+.card:has(.tag.u1:first-child)::before{background:linear-gradient(90deg,var(--amber2),var(--amber),var(--amber2));background-size:200% 100%}
+.card:hover,.card:active{border-color:var(--acc);transform:translateY(-5px);box-shadow:0 24px 40px -24px var(--acc)}
+.card .ser.acc{font-size:1.65rem;letter-spacing:-.04em;background:var(--soft);padding:.1rem .7rem;border-radius:12px;color:var(--acc)}
+.card .tag.u1{animation:tw2 2.2s ease-in-out infinite}@keyframes tw2{50%{box-shadow:0 0 0 5px rgba(242,166,90,.25)}}
+.card .avs{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--acc)}
+#count{font-weight:700;color:var(--ink)}
+/* PUBLICAR */
+.pubhero{position:relative;overflow:hidden;border-radius:26px;padding:2.2rem 1.4rem;text-align:center;color:#fff;background:linear-gradient(160deg,#0b2447,#1456a0 70%,#2c6fb8);box-shadow:0 28px 54px -30px #0b2447}
+.pubhero::before,.pubhero::after{content:"";position:absolute;border-radius:50%;pointer-events:none;filter:blur(2px)}
+.pubhero::before{width:220px;height:220px;right:-70px;top:-90px;background:radial-gradient(closest-side,rgba(242,166,90,.55),transparent);animation:flt 7s ease-in-out infinite}
+.pubhero::after{width:260px;height:260px;left:-90px;bottom:-130px;background:radial-gradient(closest-side,rgba(140,196,255,.4),transparent);animation:flt 9s ease-in-out infinite reverse}
+.pubhero>*{position:relative;z-index:1}.pubhero h2{font-size:clamp(1.5rem,4.5vw,2.2rem);line-height:1.1;max-width:20ch;margin:0 auto}.pubhero p{color:rgba(255,255,255,.85);margin:.7rem auto 0;max-width:34rem}
+.pubsteps{list-style:none;margin:1.4rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem}@media(min-width:640px){.pubsteps{grid-template-columns:repeat(4,1fr)}}
+.pubsteps li{display:flex;align-items:center;gap:.55rem;padding:.6rem .7rem;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:.8rem;font-weight:600;text-align:left;animation:fade .6s backwards}
+.pubsteps li:nth-child(2){animation-delay:.1s}.pubsteps li:nth-child(3){animation-delay:.2s}.pubsteps li:nth-child(4){animation-delay:.3s}
+.pubsteps i{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:99px;background:#fff;color:#0b2447;font-style:normal;font-weight:800;font-size:.8rem}
+#newJob.pubgo{margin-top:1.4rem;min-height:52px;padding:.85rem 2rem;font-size:1rem;border-radius:16px}
+.sech{display:flex;align-items:center;gap:.6rem;font-size:1.15rem;margin:2.2rem 0 .8rem!important}
+.sech::before{content:"";width:6px;height:1.3em;border-radius:9px;background:linear-gradient(var(--acc),var(--amber))}
+/* PERFIL */
+.pcover{height:120px;position:relative;overflow:hidden;background:linear-gradient(120deg,#0b2447,#1456a0,#2c6fb8,#f2a65a);background-size:260% 260%;animation:cvr 12s ease-in-out infinite alternate}
+@keyframes cvr{to{background-position:100% 50%}}
+.pcover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 120%,rgba(255,255,255,.28),transparent 45%),radial-gradient(circle at 85% -20%,rgba(255,255,255,.22),transparent 40%);animation:flt 6s ease-in-out infinite}
+.pav-up .avs{box-shadow:0 14px 28px -12px rgba(11,36,71,.6)}
+.pav-cam{background:linear-gradient(135deg,#f8be80,var(--amber2));color:#3a1a05;transition:transform .25s}.pav-up:hover .pav-cam,.pav-up:active .pav-cam{transform:translate(15%,15%) scale(1.15) rotate(-8deg)}
+.pstats{border:0;gap:.6rem}.pstats div{background:var(--soft);border-radius:16px;padding:.8rem .3rem}.pstats div+div{border-left:0}
+.pstats b{font-size:1.5rem;letter-spacing:-.03em;color:var(--acc)}.pstats div:nth-child(2) b{color:var(--amber2)}.pstats div:nth-child(3) b{color:var(--ok)}
+.meter{height:10px}.meter i{position:relative;overflow:hidden;background:var(--grad);transition:width 1s cubic-bezier(.2,.8,.2,1);animation:mfill 1.2s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes mfill{from{width:0!important}}
+.meter i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:sh 2.2s linear infinite;background-size:200% 100%}
+.psec{border-radius:20px}.psec h3{font-size:1.1rem}.psec h3 svg{flex:none;box-sizing:content-box;padding:8px;width:20px;height:20px;border-radius:12px;background:var(--soft);color:var(--acc)}
+.psec:nth-of-type(2) h3 svg{background:color-mix(in srgb,var(--ok) 16%,var(--card));color:var(--ok)}
+.sw.on{background:var(--grad)}
+.vt{border-radius:18px;transition:border-color .2s,transform .2s,box-shadow .2s}.vt:hover,.vt:active{box-shadow:0 14px 26px -18px var(--acc)}
+/* en celular: lo que en PC es hover, acá se anima al tocar */
+@media(hover:none){.logo:active{transform:rotate(-6deg)}#themeBtn:active svg{transform:rotate(40deg)}.vaph:active img{transform:scale(1.05)}}
 </style>
 </head>
 <body class="min-h-screen">
@@ -244,9 +348,9 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation:none!im
   <div id="feed" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
  </section>
  <section id="viewPost" class="hidden">
-  <div class="cd p-6 sm:p-10 text-center fade"><h2 class="text-2xl sm:text-3xl font-bold">¿Necesitás una mano? Publicá tu changa</h2><p class="mut mt-2 max-w-xl mx-auto">En 4 pasos simples tu laburo queda visible para los laburantes de tu zona.</p><button id="newJob" class="bp mt-5 px-6 py-3">Publicar laburo</button></div>
-  <h3 class="font-bold text-lg mt-8 mb-3">Mis changas publicadas</h3><div id="mine" class="grid sm:grid-cols-2 gap-4"></div>
-  <h3 class="font-bold text-lg mt-8 mb-3">Mis postulaciones</h3><div id="myApps" class="grid sm:grid-cols-2 gap-4"></div>
+  <div class="pubhero fade"><h2>¿Necesitás una mano? Publicá tu changa</h2><p>En 4 pasos simples tu laburo queda visible para los laburantes de tu zona.</p><ol class="pubsteps"><li><i>1</i>Contá qué necesitás</li><li><i>2</i>Elegí zona y urgencia</li><li><i>3</i>Definí el pago</li><li><i>4</i>Publicá</li></ol><button id="newJob" class="bp ba pubgo cta-pulse">Publicar laburo</button></div>
+  <h3 class="sech font-bold">Mis changas publicadas</h3><div id="mine" class="grid sm:grid-cols-2 gap-4"></div>
+  <h3 class="sech font-bold">Mis postulaciones</h3><div id="myApps" class="grid sm:grid-cols-2 gap-4"></div>
  </section>
 <section id="viewMe" class="hidden"><div id="meBox"></div></section>
 </main>
@@ -536,8 +640,10 @@ const ILL=[
 const HSTEPS=[['Publicá o encontrá','Buscá por oficio, barrio y urgencia, o publicá lo que necesitás en pocos segundos.'],['Postulate al instante','Anotate con un toque y coordiná los detalles directo por WhatsApp.'],['Calificá y crecé','Cuando el trabajo termina, calificá a la otra persona. Cada reseña suma confianza.']];
 const HVAL=[['Sin intermediarios','<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>','Hablás directo con quien publica o con quien se postula. Los acuerdos son entre ustedes.'],['Contacto por WhatsApp','<path d="M4 5h16v11H9l-5 4z"/>','Un toque y abrís el chat para coordinar horario, precio y detalles.'],['Reputación real','<path d="'+STARP+'"/>','Las calificaciones entre usuarios te ayudan a elegir con más tranquilidad.']];
 const FAQ=[['¿Tiene costo usar la app?','Crear tu cuenta, publicar una changa y postularte no tiene costo dentro de la app.'],['¿Cómo se paga el trabajo?','El pago lo acuerdan directamente las dos partes. La app no procesa ni retiene pagos.'],['¿Cómo me comunico con la otra persona?','Desde cada changa podés escribir por WhatsApp. Al postularte, quien publicó también ve tu contacto.'],['¿Cuánto tiempo se ve una changa?','Las changas abiertas se muestran hasta 30 días. Podés editarlas, cerrarlas o eliminarlas cuando quieras.'],['¿Cómo verifico mi cuenta?','En la pestaña Perfil completá la sección Verificación con tu DNI y teléfono. Revisamos los datos y, si todo está bien, tu perfil muestra la insignia de verificada.'],['¿Qué hago si veo algo sospechoso?','Usá el botón Denunciar de la publicación. Revisamos cada denuncia y podemos ocultar o eliminar contenido.']];
+function cityS(){const B=[[0,60,52],[60,48,78],[108,70,44],[178,54,86],[232,64,58],[296,50,92],[346,72,50],[418,56,80],[474,66,60],[540,52,96],[592,70,46],[662,56,74],[718,82,56]];let w='';B.forEach((b,i)=>{for(let y=b[2]>70?12:10;y<b[2]-8;y+=14)for(let x=b[0]+9;x<b[0]+b[1]-9;x+=14)if((x*7+y*3+i)%5<3)w+=`<rect class="wn" x="${x}" y="${140-b[2]+y-8}" width="6" height="7" rx="1" style="animation-delay:${((x+y)%9)*.55}s"/>`});return `<svg class="hcity" viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true">${B.map(b=>`<rect x="${b[0]}" y="${140-b[2]}" width="${b[1]}" height="${b[2]}" fill="#081a36"/>`).join('')}${w}</svg>`}
 function renderHome(){const nm=esc(ST.cfg.name),mail='changaya.app0@gmail.com',tel='+5493765034704',lg='<svg class="hlogo" viewBox="0 0 32 32" fill="none"><rect x="1.5" y="1.5" width="29" height="29" rx="8" stroke="currentColor" stroke-width="2"/><path d="M9 21l5-10 3 6 2-3 4 7" stroke="#8cc4ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
- $('viewHome').innerHTML=`<div class="hhero">${lg}<div class="hbrand">${nm}</div><p>Changas y oficios de tu zona, con contacto directo por WhatsApp.</p><button class="hcta" onclick="setRole('find')">Ver trabajos disponibles</button></div>
+ $('viewHome').innerHTML=`<div class="hhero"><div class="hsky">${[[8,12],[22,30],[37,10],[52,24],[66,8],[78,34],[90,16],[15,48],[60,44]].map((p,i)=>`<i style="left:${p[0]}%;top:${p[1]}%;animation-delay:${i*.45}s"></i>`).join('')}</div><div class="hmoon"></div><div class="hcont">${lg}<div class="hbrand">${nm}</div><p>Changas y oficios de tu zona, con contacto directo por WhatsApp.</p><div class="hbtns"><button class="hcta ba cta-pulse" onclick="setRole('find')">Ver trabajos disponibles</button><button class="hcta2" onclick="setRole('post')">Publicar una changa</button></div></div>${cityS()}</div>
+ <div class="hmq" aria-hidden="true"><div>${[0,1].map(()=>['Plomería','Electricidad','Pintura','Albañilería','Jardinería','Fletes','Limpieza','Carpintería','Gas','Cuidado de personas'].map(t=>`<span>${t}</span>`).join('')).join('')}</div></div>
  <h2 class="hh">Más información</h2><p class="hp"><b>${nm}</b> conecta a personas que necesitan resolver una tarea u oficio con trabajadores independientes de la zona dispuestos a hacerla. Todo en un solo lugar, rápido y sin vueltas.</p>
  <div class="hgrid">${HVAL.map(v=>`<div class="cd"><div class="ic">${SVG(v[1])}</div><h3>${v[0]}</h3><p class="text-sm mut mt-1">${v[2]}</p></div>`).join('')}</div>
  <h2 class="hh">Cómo usar la app</h2><div class="hsteps">${HSTEPS.map((x,i)=>`<article class="cd hstep"><div class="ill">${ILL[i]}</div><div><span class="tag u2">Paso ${i+1}</span><h3 class="text-lg mt-2">${x[0]}</h3><p class="mut mt-1">${x[1]}</p></div></article>`).join('')}</div>
@@ -571,7 +677,7 @@ function renderMe(skip){if(!ME.id){$('meBox').innerHTML='';return}if((VER===unde
  ${verHtml(lock,p)}</div>
  <div class="cd psec"><h3>${SVG('<path d="'+STARP+'"/>',20)}Reseñas recibidas</h3><p class="sub">${x?stars(x.avg,16)+' '+x.avg.toFixed(1).replace('.',',')+' · '+x.n+(x.n===1?' reseña':' reseñas'):'Todavía no tenés reseñas. Aparecen cuando completás trabajos.'}</p>
  <div class="space-y-2">${rv.map(r=>`<div class="p-3 rounded-xl" style="background:var(--soft)"><div class="flex justify-between text-sm"><b>${esc(r.reviewer_name||'Usuario')}</b><span class="mut text-xs">${ago(Date.parse(r.created_at))}</span></div><div class="mt-0.5">${stars(r.stars,14)}</div>${r.comment?`<p class="text-sm mt-1">${esc(r.comment)}</p>`:''}</div>`).join('')}</div></div>
- <div class="cd psec"><h3>${SVG('<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.3.9a7 7 0 00-2-1.2L14 3h-4l-.6 2.6a7 7 0 00-2 1.2l-2.3-.9-2 3.4 2 1.5a7 7 0 000 2.4l-2 1.5 2 3.4 2.3-.9a7 7 0 002 1.2L10 21h4l.6-2.6a7 7 0 002-1.2l2.3.9 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/>',20)}Preferencias</h3><div class="flex items-center justify-between gap-4 mt-3"><div><b class="text-sm">Animaciones</b><p class="text-xs mut">${matchMedia('(prefers-reduced-motion:reduce)').matches&&V.motion===undefined?'Tu teléfono pide reducir el movimiento. Activalas para ver todos los efectos.':'Efectos y movimiento en la app.'}</p></div><button class="sw ${motionOn()?'on':''}" role="switch" aria-checked="${motionOn()}" aria-label="Animaciones" onclick="toggleMotion(this)"><i></i></button></div></div>
+ <div class="cd psec"><h3>${SVG('<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.3.9a7 7 0 00-2-1.2L14 3h-4l-.6 2.6a7 7 0 00-2 1.2l-2.3-.9-2 3.4 2 1.5a7 7 0 000 2.4l-2 1.5 2 3.4 2.3-.9a7 7 0 002 1.2L10 21h4l.6-2.6a7 7 0 002-1.2l2.3.9 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/>',20)}Preferencias</h3><div class="flex items-center justify-between gap-4 mt-3"><div><b class="text-sm">Animaciones</b><p class="text-xs mut">Efectos y movimiento en la app.</p></div><button class="sw ${motionOn()?'on':''}" role="switch" aria-checked="${motionOn()}" aria-label="Animaciones" onclick="toggleMotion(this)"><i></i></button></div></div>
  <div class="cd psec"><h3>${SVG('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',20)}Seguridad</h3><p class="sub">Cuidate y cuidá a la comunidad.</p><ul class="tips"><li>Coordiná los detalles por WhatsApp antes de encontrarte.</li><li>No adelantes dinero a alguien que no conocés.</li><li>Revisá las reseñas y la insignia de verificación.</li><li>Nunca compartas tu contraseña. Denunciá lo que te parezca sospechoso.</li></ul>
  <div class="flex flex-wrap gap-2"><button class="bo px-4" onclick="changePw()">Cambiar contraseña</button><button class="bo px-4" style="color:var(--warn)" onclick="logoutUser()">Cerrar sesión</button></div></div>`}
 async function saveProfile(){const n=$('pN').value.trim(),a=$('pA').value.trim();if(n.length<2||a.length<2)return toast('Ingresá nombre y apellido.',false);
@@ -623,7 +729,7 @@ async function sendVer(){if(!sb)return toast('Falta configurar Supabase.',false)
  catch(e){bt.disabled=false;bt.textContent='Enviar para verificar';toast('No se pudo enviar. Probá de nuevo más tarde.',false)}}
 
 /* ANIMACIONES: respeta "reducir movimiento" solo en lo grande; se puede forzar en Perfil */
-const motionOn=()=>V.motion==='on'||(V.motion!=='off'&&!matchMedia('(prefers-reduced-motion:reduce)').matches);
+const motionOn=()=>V.motion!=='off';
 function applyMotion(){const h=document.documentElement;h.classList.toggle('anim-on',V.motion==='on');h.classList.toggle('anim-off',V.motion==='off')}
 function toggleMotion(b){V.motion=motionOn()?'off':'on';saveV();applyMotion();const on=motionOn();b.classList.toggle('on',on);b.setAttribute('aria-checked',on);toast(on?'Animaciones activadas':'Animaciones reducidas')}
 /* FOTO DE PERFIL (visible para los demás usuarios) */
@@ -677,6 +783,11 @@ document.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.target.tagName!=='
 addEventListener('resize',navPill);addEventListener('scroll',()=>document.querySelector('header').classList.toggle('sc',scrollY>4),{passive:true});
 $('meBtn').onclick=()=>setRole('me');$('newJob').onclick=openWizard;
 setInterval(()=>{if(ME.id&&!document.hidden)loadJobs()},30000);
+
+/* REVELAR AL SCROLLEAR (PC y celular) */
+(function(){if(!('IntersectionObserver' in window))return;const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -6% 0px'});let t=0;
+function scan(){t=0;document.querySelectorAll('main .hgrid>.cd,main .hstep,main .psec,main .faq details,main .hcred,main .pstats,main #mine>*,main #myApps>*,main .hh').forEach(el=>{if(el.classList.contains('rv')||el.classList.contains('fade'))return;el.classList.add('rv');io.observe(el)})}
+new MutationObserver(()=>{if(!t)t=requestAnimationFrame(scan)}).observe(document.querySelector('main'),{childList:true,subtree:true});scan()})();
 setTheme(V.theme);applyMotion();applyCfg();renderChips();renderNotif();setRole('home');checkSession();
 loadSite();
 </script>
