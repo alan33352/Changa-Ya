@@ -312,6 +312,43 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation:none!im
 .vt{border-radius:18px;transition:border-color .2s,transform .2s,box-shadow .2s}.vt:hover,.vt:active{box-shadow:0 14px 26px -18px var(--acc)}
 /* en celular: lo que en PC es hover, acá se anima al tocar */
 @media(hover:none){.logo:active{transform:rotate(-6deg)}#themeBtn:active svg{transform:rotate(40deg)}.vaph:active img{transform:scale(1.05)}}
+
+/* ===== v3 PREMIUM (capa añadida, no altera lógica ni paleta) ===== */
+:root{--navy:#0b2447;--azul:#1456a0;--cel:#2c6fb8;--amb:#f2a65a;--nar:#e5833b}
+/* Fondo ambiental: gradientes de marca + partículas (canvas #amb) */
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(60vmax 40vmax at 10% -5%,rgba(44,111,184,.16),transparent 60%),radial-gradient(50vmax 36vmax at 100% 10%,rgba(242,166,90,.13),transparent 60%),radial-gradient(50vmax 40vmax at 40% 110%,rgba(20,86,160,.12),transparent 60%)}
+:root.dark body::before{background:radial-gradient(60vmax 40vmax at 10% -5%,rgba(44,111,184,.22),transparent 60%),radial-gradient(50vmax 36vmax at 100% 10%,rgba(229,131,59,.10),transparent 60%)}
+#amb{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55}
+/* Header en vidrio + CTA ámbar */
+header{background:color-mix(in srgb,var(--bg) 78%,transparent)!important;backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px)}
+.hcta3{display:inline-flex;align-items:center;gap:.4rem;height:40px;padding:0 .95rem;border-radius:12px;font-weight:800;font-size:.85rem;color:var(--navy);background:linear-gradient(135deg,var(--amb),var(--nar));box-shadow:0 8px 18px -10px var(--nar);position:relative;overflow:hidden;transition:transform .15s,box-shadow .2s}
+.hcta3::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);transition:transform .6s}
+.hcta3:hover::after{transform:translateX(120%)}.hcta3:hover{box-shadow:0 12px 22px -10px var(--nar)}.hcta3:active{transform:scale(.96)}
+@media(max-width:420px){.hcta3 .tx{display:none}.hcta3{padding:0 .7rem}}
+#bellBtn{position:relative;padding:0 .7rem}#bellBtn svg{transition:transform .4s}#bellBtn:hover svg{animation:ring .7s}
+#badge{position:absolute;top:-5px;right:-5px;margin:0!important;min-width:18px;height:18px;line-height:18px;font-size:.68rem;font-weight:800;border:2px solid var(--bg)}
+@keyframes ring{20%{transform:rotate(14deg)}40%{transform:rotate(-12deg)}60%{transform:rotate(8deg)}80%{transform:rotate(-4deg)}}
+/* Botón principal con gradiente de marca */
+.bp{background:linear-gradient(135deg,var(--azul),var(--cel))}
+/* Tooltips ligeros */
+[data-tip]{position:relative}[data-tip]::before{content:attr(data-tip);position:absolute;top:calc(100% + 8px);left:50%;transform:translate(-50%,4px);background:var(--navy);color:#fff;font-size:.7rem;font-weight:600;padding:.3rem .55rem;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.18s;z-index:60}
+@media(hover:hover){[data-tip]:hover::before{opacity:1;transform:translate(-50%,0)}}
+/* Tarjetas: punto vivo en urgencia + brillo al hover */
+.card .tag.u1::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:.4rem;animation:lp 1.2s infinite}
+@keyframes lp{50%{opacity:.25;transform:scale(1.6)}}
+.card{position:relative;overflow:hidden}.card::after{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0),rgba(44,111,184,.14),transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none}.card:hover::after{opacity:1}
+/* Bloque de confianza (home) */
+.trust{display:grid;gap:.75rem;grid-template-columns:repeat(2,1fr);margin:2.2rem 0 0}
+@media(min-width:768px){.trust{grid-template-columns:repeat(4,1fr)}}
+.trust>div{display:flex;flex-direction:column;gap:.35rem;padding:1rem;border-radius:16px;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(8px);transition:transform .25s,border-color .25s}
+.trust>div:hover{transform:translateY(-3px);border-color:var(--cel)}
+.trust svg{width:26px;height:26px;color:var(--acc)}.trust b{font-size:.95rem}.trust small{color:var(--mut);font-size:.78rem;line-height:1.35}
+.trust .n{font-size:1.9rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--azul),var(--nar));-webkit-background-clip:text;background-clip:text;color:transparent}
+.testi{display:grid;gap:.75rem;margin-top:.75rem}@media(min-width:768px){.testi{grid-template-columns:repeat(3,1fr)}}
+/* Botón flotante de WhatsApp (sobre la barra inferior en móvil) */
+#waFab{position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:41;display:flex;align-items:center;gap:.5rem;height:48px;padding:0 .9rem;border-radius:999px;background:#25d366;color:#07351a;font-weight:800;font-size:.85rem;box-shadow:0 12px 24px -10px rgba(37,211,102,.7);transition:transform .2s}
+#waFab:hover{transform:translateY(-2px) scale(1.03)}#waFab .tx{display:none}@media(min-width:640px){#waFab{bottom:22px}#waFab .tx{display:inline}}
+@media(prefers-reduced-motion:reduce){#amb{display:none}.card .tag.u1::before,#bellBtn:hover svg{animation:none}}
 </style>
 </head>
 <body class="min-h-screen">
@@ -321,8 +358,9 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation:none!im
    <svg class="logo w-8 h-8" viewBox="0 0 32 32" fill="none"><rect x="1.5" y="1.5" width="29" height="29" rx="8" stroke="var(--ink)" stroke-width="2"/><path d="M9 21l5-10 3 6 2-3 4 7" stroke="var(--acc)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
    <span class="ser font-bold text-lg truncate" id="brand"></span>
   </div>
+  <button id="hdrCta" class="hcta3" onclick="setRole('post')" aria-label="Publicar changa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="tx">Publicar changa</span></button>
   <button id="themeBtn" class="bo px-2.5 sm:px-3 py-1.5 text-sm"></button>
-  <div class="relative"><button id="bellBtn" class="bo px-2.5 sm:px-3 py-1.5 text-sm">Avisos <span id="badge" class="ml-1 inline-block min-w-5 px-1 rounded-full text-xs text-center" style="background:var(--warn);color:var(--bg)"></span></button>
+  <div class="relative"><button id="bellBtn" class="bo px-2.5 sm:px-3 py-1.5 text-sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0112 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 21a2 2 0 004 0"/></svg><span class="sr-only">Avisos</span> <span id="badge" class="ml-1 inline-block min-w-5 px-1 rounded-full text-xs text-center" style="background:var(--warn);color:var(--bg)"></span></button>
    <div id="notif" class="hidden cd absolute right-0 mt-2 w-72 max-w-[85vw] p-2 shadow-lg"></div></div>
   <button id="meBtn" class="bp w-9 h-9 text-sm" aria-label="Mi perfil">MP</button>
  </div>
@@ -365,6 +403,7 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation:none!im
 <div id="modal" class="hidden fixed inset-0 z-50 ov grid place-items-end sm:place-items-center"></div>
 <div id="admin" class="hidden fixed inset-0 z-[55] overflow-y-auto" style="background:var(--bg)"></div>
 <div id="modal2" class="hidden fixed inset-0 z-[60] ov grid place-items-end sm:place-items-center"></div>
+<a id="waFab" href="https://wa.me/5493765034704" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-12 7l-5 1 1.5-4.5A8 8 0 1121 12z"/></svg><span class="tx">Contactar por WhatsApp</span></a>
 <div id="toasts" class="fixed z-[70] left-1/2 -translate-x-1/2 bottom-4 flex flex-col gap-2 items-center w-[92vw] max-w-sm pointer-events-none"></div>
 
 <script>
@@ -790,6 +829,29 @@ function scan(){t=0;document.querySelectorAll('main .hgrid>.cd,main .hstep,main 
 new MutationObserver(()=>{if(!t)t=requestAnimationFrame(scan)}).observe(document.querySelector('main'),{childList:true,subtree:true});scan()})();
 setTheme(V.theme);applyMotion();applyCfg();renderChips();renderNotif();setRole('home');checkSession();
 loadSite();
+</script>
+
+<script>
+/* ===== v3: partículas, spotlight en tarjetas, bloque de confianza, tooltips ===== */
+(function(){
+ // Partículas sutiles (se pausan con la pestaña oculta; desactivadas con "reducir movimiento")
+ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const c=document.createElement('canvas');c.id='amb';document.body.prepend(c);const x=c.getContext('2d');let W,H,P=[];
+  const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight;P=Array.from({length:Math.min(38,W/32|0)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.6,v:Math.random()*.25+.08,a:Math.random()*.5+.2,o:Math.random()>.7}))};
+  rs();addEventListener('resize',rs);
+  (function t(){if(!document.hidden){x.clearRect(0,0,W,H);P.forEach(p=>{p.y-=p.v;if(p.y<-4){p.y=H+4;p.x=Math.random()*W}x.beginPath();x.arc(p.x,p.y,p.r,0,6.3);x.fillStyle=p.o?'rgba(242,166,90,'+p.a+')':'rgba(44,111,184,'+p.a+')';x.fill()})}requestAnimationFrame(t)})();
+ }
+ // Spotlight que sigue al mouse en las tarjetas del feed
+ document.addEventListener('pointermove',e=>{const k=e.target.closest&&e.target.closest('.card');if(k){const r=k.getBoundingClientRect();k.style.setProperty('--mx',e.clientX-r.left+'px');k.style.setProperty('--my',e.clientY-r.top+'px')}},{passive:true});
+ // Tooltips (los textos nuevos no tocan la lógica existente)
+ const tip=(id,t)=>{const e=document.getElementById(id);if(e)e.setAttribute('data-tip',t)};tip('themeBtn','Cambiar tema');tip('bellBtn','Avisos');tip('meBtn','Mi perfil');
+ // Bloque de confianza en la home (se inserta después de renderHome original)
+ const I=p=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+ const TESTI=[]; // Ej: ['Marcela, Posadas','"Encontré plomero en 10 minutos."'] — se muestra solo si lo completás con testimonios reales
+ const T=()=>'<div class="trust fade"><div><span class="n" id="trJobs">'+(document.getElementById('stJobs')?.textContent||'0')+'</span><b>changas activas</b><small>Publicadas hoy en tu zona.</small></div><div>'+I('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>')+'<b>Cuentas verificadas</b><small>Identidad revisada por el equipo.</small></div><div>'+I('<path d="M21 12a8 8 0 01-12 7l-5 1 1.5-4.5A8 8 0 1121 12z"/>')+'<b>Contacto directo</b><small>Hablás por WhatsApp, sin intermediarios.</small></div><div>'+I('<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.2 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>')+'<b>Reseñas reales</b><small>Calificá y mirá la reputación.</small></div></div>'+(TESTI.length?'<div class="testi">'+TESTI.map(t=>'<div class="cd p-4"><p class="text-sm">'+t[1]+'</p><p class="text-xs mut mt-2 font-semibold">'+t[0]+'</p></div>').join('')+'</div>':'');
+ if(typeof renderHome==='function'){const o=renderHome;renderHome=function(){o.apply(this,arguments);const m=document.querySelector('#viewHome .hmq');if(m)m.insertAdjacentHTML('afterend',T())}}
+ const sj=document.getElementById('stJobs');if(sj)new MutationObserver(()=>{const n=document.getElementById('trJobs');if(n)n.textContent=sj.textContent}).observe(sj,{childList:true,characterData:true,subtree:true});
+})();
 </script>
 </body>
 </html>
