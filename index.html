@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -349,6 +352,20 @@ header{background:color-mix(in srgb,var(--bg) 78%,transparent)!important;backdro
 #waFab{position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:41;display:flex;align-items:center;gap:.5rem;height:48px;padding:0 .9rem;border-radius:999px;background:#25d366;color:#07351a;font-weight:800;font-size:.85rem;box-shadow:0 12px 24px -10px rgba(37,211,102,.7);transition:transform .2s}
 #waFab:hover{transform:translateY(-2px) scale(1.03)}#waFab .tx{display:none}@media(min-width:640px){#waFab{bottom:22px}#waFab .tx{display:inline}}
 @media(prefers-reduced-motion:reduce){#amb{display:none}.card .tag.u1::before,#bellBtn:hover svg{animation:none}}
+
+/* ===== Directorio de negocios ===== */
+.bn-in{grid-template-columns:repeat(5,1fr)!important;max-width:34rem}
+.dchip{display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;padding:.4rem .9rem;border-radius:999px;border:1px solid var(--line);background:var(--card);font-weight:600;font-size:.82rem;transition:.2s}.dchip.on{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--azul),var(--cel))}
+.dc{--c:var(--azul);border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:var(--sh);transition:transform .25s,box-shadow .25s;animation:fade .5s backwards}.dc:hover{transform:translateY(-4px);border-color:var(--c)}
+.dc .cv{aspect-ratio:16/10;background:linear-gradient(135deg,var(--navy),var(--c));background-size:cover;background-position:center;position:relative;display:grid;place-items:center;color:#fff}
+.dc .cv::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(11,36,71,.6))}.dc .bd{position:absolute;top:10px;left:10px;z-index:1;display:flex;gap:6px}
+.bg1,.bg2{font-size:.68rem;font-weight:800;padding:.2rem .55rem;border-radius:999px}.bg1{background:linear-gradient(135deg,var(--amb),var(--nar));color:var(--navy)}.bg2{background:#fff;color:var(--azul)}
+.dcat{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:700;color:var(--c)}
+.dwa{background:#25d366;color:#07351a;font-weight:800}
+.dstep{display:flex;gap:6px;margin:.5rem 0 1rem}.dstep i{flex:1;height:5px;border-radius:9px;background:var(--line);transition:.3s}.dstep i.on{background:linear-gradient(90deg,var(--azul),var(--amb))}
+.dpub{background:linear-gradient(135deg,var(--amb),var(--nar) 45%,var(--azul));color:#fff;font-weight:800;border-radius:12px;min-height:46px;padding:0 1.1rem}.dpub:disabled{opacity:.5}
+.dcg{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}.dcg button{--c:var(--azul);display:flex;align-items:center;gap:.5rem;padding:.55rem;border:1px solid var(--line);border-radius:12px;font-size:.8rem;font-weight:600;text-align:left}.dcg button.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.ferr{color:var(--warn);font-size:.74rem;min-height:1rem}.in.bad{border-color:var(--warn)}.in.ok{border-color:#2e9e6a}
 </style>
 </head>
 <body class="min-h-screen">
@@ -390,6 +407,7 @@ header{background:color-mix(in srgb,var(--bg) 78%,transparent)!important;backdro
   <h3 class="sech font-bold">Mis changas publicadas</h3><div id="mine" class="grid sm:grid-cols-2 gap-4"></div>
   <h3 class="sech font-bold">Mis postulaciones</h3><div id="myApps" class="grid sm:grid-cols-2 gap-4"></div>
  </section>
+<section id="viewDir" class="hidden"><div id="dirBox"></div></section>
 <section id="viewMe" class="hidden"><div id="meBox"></div></section>
 </main>
 <span id="foot" class="hidden"></span>
@@ -851,6 +869,111 @@ loadSite();
  const T=()=>'<div class="trust fade"><div><span class="n" id="trJobs">'+(document.getElementById('stJobs')?.textContent||'0')+'</span><b>changas activas</b><small>Publicadas hoy en tu zona.</small></div><div>'+I('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>')+'<b>Cuentas verificadas</b><small>Identidad revisada por el equipo.</small></div><div>'+I('<path d="M21 12a8 8 0 01-12 7l-5 1 1.5-4.5A8 8 0 1121 12z"/>')+'<b>Contacto directo</b><small>Hablás por WhatsApp, sin intermediarios.</small></div><div>'+I('<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.2 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>')+'<b>Reseñas reales</b><small>Calificá y mirá la reputación.</small></div></div>'+(TESTI.length?'<div class="testi">'+TESTI.map(t=>'<div class="cd p-4"><p class="text-sm">'+t[1]+'</p><p class="text-xs mut mt-2 font-semibold">'+t[0]+'</p></div>').join('')+'</div>':'');
  if(typeof renderHome==='function'){const o=renderHome;renderHome=function(){o.apply(this,arguments);const m=document.querySelector('#viewHome .hmq');if(m)m.insertAdjacentHTML('afterend',T())}}
  const sj=document.getElementById('stJobs');if(sj)new MutationObserver(()=>{const n=document.getElementById('trJobs');if(n)n.textContent=sj.textContent}).observe(sj,{childList:true,characterData:true,subtree:true});
+})();
+</script>
+
+<script>
+/* ===== DIRECTORIO DE NEGOCIOS v2: pago por WhatsApp + aprobación manual del admin ===== */
+(function(){
+const WA='5493765034704',BK='negocios',MAXI=6;
+const C=[['Gastronomía','#e5833b','<path d="M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10M17 3c-2 2-2 6 0 8v10"/>'],['Comercios','#1456a0','<path d="M4 8h16l-1 12H5zM8 8a4 4 0 018 0"/>'],['Servicios','#2c6fb8','<path d="M14 6l4 4-9 9H5v-4zM13 7l4 4"/>'],['Salud y Bienestar','#2c6fb8','<path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2 4.5 4.5 0 018 2c0 6-8 11-8 11z"/>'],['Educación','#f2a65a','<path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5"/>'],['Eventos','#e5833b','<path d="M5 21l4-12 8 8zM14 4l1 3M19 9l-3 1M18 3v2"/>'],['Automotriz','#0b2447','<path d="M3 15l2-6h14l2 6v4H3zM7 19v2M17 19v2M6 15h.01M18 15h.01"/>'],['Hogar y Construcción','#1456a0','<path d="M3 11l9-8 9 8M6 10v10h12V10M10 20v-5h4v5"/>'],['Tecnología','#2c6fb8','<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'],['Mascotas','#f2a65a','<circle cx="6" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="10" cy="5" r="2"/><circle cx="14" cy="5" r="2"/><path d="M8 18c0-4 8-4 8 0 0 3-8 3-8 0z"/>']];
+const DAYS=[['lun','Lunes'],['mar','Martes'],['mie','Miércoles'],['jue','Jueves'],['vie','Viernes'],['sab','Sábado'],['dom','Domingo']],DT=['Celular','Página web','Instagram','Facebook','Otro'];
+const ic=(p,z=18)=>SVG(p,z),cat=n=>C.find(c=>c[0]===n)||C[0],$$=id=>document.getElementById(id),now=()=>new Date().toISOString();
+const f12=h=>{const[a,b]=h.split(':');return ((+a%12)||12)+':'+b+(+a<12?' a.m.':' p.m.')};
+const SW='w-full sm:max-w-2xl max-h-[92dvh] overflow-y-auto rounded-t-2xl sm:rounded-2xl p-5 sh-in';
+
+// Seguridad: solo http(s) en links, solo fotos de NUESTRO bucket, horas con formato válido
+const su=u=>/^https?:\/\/[^\s"'<>`]+$/i.test(u||'')?u:'';
+const okImg=u=>typeof u==='string'&&u.startsWith(SB_URL+'/storage/v1/object/public/'+BK+'/')&&!/["'<>\s]/.test(u);
+const okH=h=>Array.isArray(h)&&h.every(x=>/^([01]\d|2[0-3]):[0-5]\d$/.test(x));
+const norm=n=>{n.imgs=(n.imgs||[]).filter(okImg);n.maps_link=su(n.maps_link);n.horarios=n.horarios&&typeof n.horarios==='object'?n.horarios:{};n.detalles=Array.isArray(n.detalles)?n.detalles:[];return n};
+const D={c:'',q:'',list:[],all:[],mine:null,adm:false,af:'pendiente',ld:true,F:{}};
+const ST_={pendiente:['Pendiente de pago','u1'],activo:['Pagado · publicado','u2'],rechazado:['Rechazado','u1'],expirado:['Expirado','u1']};
+async function dirLoad(){D.ld=true;draw();if(!sb){D.ld=false;return draw()}
+ try{const r=await sb.from('negocios').select('*').eq('estado','activo').gt('expira_at',now()).order('destacado',{ascending:false}).order('created_at',{ascending:false});D.list=(r.data||[]).map(norm);
+ if(ME&&ME.id){const m=await sb.from('negocios').select('*').eq('owner',ME.id).maybeSingle();D.mine=m.data?norm(m.data):null;const a=await sb.from('admins').select('user_id').eq('user_id',ME.id).maybeSingle();D.adm=!!a.data;if(D.adm){const x=await sb.from('negocios').select('*').order('created_at',{ascending:false});D.all=(x.data||[]).map(norm)}}}catch(e){toast('No se pudo cargar el directorio',false)}
+ D.ld=false;draw()}
+window.dirInit=dirLoad;
+/* ---------- Directorio público ---------- */
+function card(n,i){const k=cat(n.cat),nuevo=Date.now()-Date.parse(n.created_at)<7*864e5,tel=String(n.tel).replace(/\D/g,'');
+ return `<article class="dc cursor-pointer" style="--c:${k[1]};animation-delay:${i*.05}s" onclick="dirMore('${n.id}')"><div class="cv" ${n.imgs[0]?`style="background-image:url('${esc(n.imgs[0])}')"`:''}><div class="bd">${n.destacado?'<span class="bg1">★ Destacado</span>':''}${nuevo?'<span class="bg2">Nuevo</span>':''}</div>${n.imgs[0]?'':ic(k[2],44)}</div><div class="p-4 flex flex-col gap-2"><span class="dcat">${ic(k[2],14)}${esc(n.cat)}</span><h3 class="font-bold text-lg leading-tight">${esc(n.nombre)}</h3><p class="text-sm mut" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(n.descr)}</p><p class="text-xs mut">📍 ${esc(n.zona)}</p><div class="flex gap-2 mt-1"><a class="bp dwa flex-1 text-sm" style="background:#25d366" target="_blank" rel="noopener" onclick="event.stopPropagation()" href="https://wa.me/${tel}?text=${encodeURIComponent('Hola, vi tu negocio en Changa Ya')}">WhatsApp</a><button class="bo flex-1 text-sm">Ver más</button></div></div></article>`}
+function draw(){$$('dirBox').innerHTML=`<div class="flex flex-wrap items-end gap-3 mb-4"><div class="mr-auto"><h1>Negocios y emprendimientos</h1><p class="mut mt-1">Encontrá locales de tu zona y hablales directo por WhatsApp.</p></div><button class="bo" onclick="dirMine()">Mi anuncio</button><button class="dpub" onclick="dirStart()">Publicar negocio · $5.000/mes</button></div>
+<input class="in mb-3" placeholder="Buscar negocio o rubro…" value="${esc(D.q)}" oninput="D.q=this.value;dirList()"><div class="flex gap-2 overflow-x-auto pb-2 mb-4" style="scrollbar-width:none"><button class="dchip ${D.c?'':'on'}" onclick="dirCat('')">Todos</button>${C.map(c=>`<button class="dchip ${D.c===c[0]?'on':''}" onclick="dirCat('${c[0]}')"><span style="color:${D.c===c[0]?'#fff':c[1]}">${ic(c[2],16)}</span>${c[0]}</button>`).join('')}</div>${D.adm?'<div id="admN"></div>':''}<div id="dirList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>`;dirList();if(D.adm)admDraw()}
+function dirList(){const q=D.q.toLowerCase(),L=D.list.filter(n=>(!D.c||n.cat===D.c)&&(!q||(n.nombre+n.cat+n.descr).toLowerCase().includes(q)));
+ $$('dirList').innerHTML=D.ld?[1,2,3].map(()=>'<div class="dc"><div class="sk" style="aspect-ratio:16/10"></div><div class="p-4 space-y-2"><div class="sk h-4 w-1/3"></div><div class="sk h-5 w-3/4"></div><div class="sk h-4"></div></div></div>').join(''):L.length?L.map(card).join(''):`<div class="cd p-8 text-center col-span-full"><div style="color:var(--acc);display:grid;place-items:center">${ic('<path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/>',56)}</div><h3 class="mt-2">Todavía no hay negocios acá</h3><p class="mut text-sm">Sé el primero en anunciar el tuyo.</p></div>`}
+window.dirCat=c=>{D.c=c;draw()};
+/* ---------- Anuncio completo + reseñas ---------- */
+const stars=n=>'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));
+window.dirMore=async id=>{const n=D.list.concat(D.all,D.mine?[D.mine]:[]).find(x=>x.id===id);if(!n)return;const k=cat(n.cat);
+ openModal(`<div class="${SW}" style="${sheetS}"><div class="sk" style="height:200px"></div></div>`);
+ let R=[];try{R=(await sb.from('resenas').select('*').eq('negocio_id',id).order('created_at',{ascending:false})).data||[]}catch(e){}
+ const avg=R.length?R.reduce((a,r)=>a+r.estrellas,0)/R.length:0,H=n.horarios||{},hs=DAYS.filter(d=>okH(H[d[0]])),mine=R.find(r=>r.user_id===(ME&&ME.id)),own=ME&&ME.id===n.owner;window.__rs=mine?mine.estrellas:5;
+ const dl=(n.detalles||[]).map(d=>{const v=esc(d.v),u=d.t==='Celular'?(/^\+?[\d\s-]{6,20}$/.test(d.v)?'tel:'+d.v.replace(/[\s-]/g,''):''):su(/^https?:/i.test(d.v)?d.v:/^[\w.-]+\.[a-z]{2,}(\/\S*)?$/i.test(d.v)?'https://'+d.v:'');return `<div class="flex justify-between gap-3 text-sm py-1.5 border-b" style="border-color:var(--line)"><span class="mut">${esc(d.t)}</span>${u?`<a class="acc font-semibold underline break-all text-right" target="_blank" rel="noopener nofollow" href="${esc(u)}">${v}</a>`:`<b class="text-right">${v}</b>`}</div>`}).join('');
+ openModal(`<div class="${SW}" style="${sheetS}"><button onclick="closeModal()" class="bo px-3 py-1.5 text-sm mb-3">← Volver</button>
+ ${n.imgs.length?`<div class="flex gap-2 overflow-x-auto snap-x pb-2 mb-3">${n.imgs.map(u=>`<img src="${esc(u)}" loading="lazy" class="rounded-xl h-52 sm:h-64 object-cover snap-center">`).join('')}</div>`:''}
+ <span class="dcat" style="--c:${k[1]}">${ic(k[2],14)}${esc(n.cat)}</span><h2 class="text-3xl font-extrabold leading-tight mt-1">${esc(n.nombre)}</h2>
+ <p class="text-sm mt-1" style="color:var(--amb)">${R.length?`${stars(avg)} <span class="mut">${avg.toFixed(1)} · ${R.length} reseña${R.length>1?'s':''}</span>`:'<span class="mut">Sin reseñas todavía</span>'}</p><p class="mt-3 whitespace-pre-line">${esc(n.descr)}</p>
+ ${hs.length?`<h4 class="font-bold mt-5 mb-1">Horarios</h4>${hs.map(d=>`<div class="flex justify-between text-sm py-1"><span>${d[1]}</span><b>${f12(H[d[0]][0])} – ${f12(H[d[0]][1])}</b></div>`).join('')}`:''}
+ <h4 class="font-bold mt-5 mb-1">Ubicación</h4><p class="text-sm">📍 ${esc(n.zona)}</p>${n.maps_link?`<a class="bp mt-2 text-sm inline-flex" target="_blank" rel="noopener" href="${esc(n.maps_link)}">Ver en Google Maps</a>`:''}
+ ${dl?`<h4 class="font-bold mt-5 mb-1">Más datos</h4>${dl}`:''}
+ <a class="bp mt-5 w-full" style="background:#25d366;color:#07351a" target="_blank" rel="noopener" href="https://wa.me/${String(n.tel).replace(/\D/g,'')}?text=${encodeURIComponent('Hola, vi tu negocio en Changa Ya')}">Escribir por WhatsApp</a>
+ <h4 class="font-bold mt-6 mb-2">Reseñas y comentarios</h4>
+ ${own?'':`<div class="cd p-3 mb-3"><div id="rs" class="text-2xl mb-1">${[1,2,3,4,5].map(i=>`<button onclick="__rs=${i};document.querySelectorAll('#rs button').forEach((b,j)=>b.style.opacity=j<${i}?1:.3)" style="color:var(--amb);opacity:${i<=__rs?1:.3}">★</button>`).join('')}</div><textarea id="rt" rows="2" maxlength="400" class="in" placeholder="Contá tu experiencia…">${esc(mine?mine.texto||'':'')}</textarea><button class="bp mt-2 text-sm" onclick="dirRev('${n.id}')">${mine?'Actualizar mi reseña':'Publicar reseña'}</button></div>`}
+ ${R.map(r=>`<div class="py-2 border-b" style="border-color:var(--line)"><b class="text-sm">${esc(r.nombre)}</b> <span style="color:var(--amb)" class="text-sm">${stars(r.estrellas)}</span>${r.texto?`<p class="text-sm mt-1">${esc(r.texto)}</p>`:''}${D.adm?`<button class="text-xs mut underline" onclick="dirDelRev('${r.id}','${n.id}')">eliminar</button>`:''}</div>`).join('')||'<p class="text-sm mut">Sé el primero en opinar.</p>'}</div>`)};
+window.dirRev=async id=>{if(!ME||!ME.id){closeModal();return showGate()}const r=await sb.from('resenas').upsert({negocio_id:id,user_id:ME.id,nombre:ME.name||'Usuario',estrellas:window.__rs,texto:$$('rt').value.trim()},{onConflict:'negocio_id,user_id'});r.error?toast('No se pudo guardar la reseña',false):(toast('¡Gracias por tu reseña!'),dirMore(id))};
+window.dirDelRev=async(rid,id)=>{await sb.from('resenas').delete().eq('id',rid);dirMore(id)};
+/* ---------- Formulario (crear / editar; también lo usa el admin) ---------- */
+const V={nombre:v=>v.trim().length>=3||'Mínimo 3 letras',descr:v=>v.trim().length>=20||'Contá un poco más (20+ letras)',zona:v=>v.trim().length>=3||'Indicá barrio o dirección',tel:v=>/^\+?\d{8,15}$/.test(v.replace(/[\s-]/g,''))||'Teléfono inválido (solo números)'};
+window.dirV=el=>{const k=el.id.slice(1),F=D.F;F[k]=el.value;if(!V[k])return;const r=V[k](el.value),ok=r===true;el.classList.toggle('bad',!ok);el.classList.toggle('ok',ok);const e=$$('e_'+el.id);if(e)e.textContent=ok?'':r};
+window.dirStart=()=>{if(!ME||!ME.id)return showGate();if(D.mine)return dirMine();openForm({nombre:'',cat:'',descr:'',zona:'',tel:'',maps_link:'',destacado:false,imgs:[],files:[],horarios:{},detalles:[],showH:false})};
+function openForm(n,admin){D.F=JSON.parse(JSON.stringify({...n,files:[]}));D.F.files=[];D.F.admin=!!admin;D.F.showH=Object.keys(D.F.horarios||{}).length>0;D.F.horarios=D.F.horarios||{};D.F.detalles=D.F.detalles||[];D.F.imgs=D.F.imgs||[];dirForm()}
+const lab=t=>`<label class="text-sm font-semibold">${t}</label>`;
+function dirForm(){const F=D.F,edit=!!F.id;
+ const hor=F.showH?`<div class="cd p-3 space-y-2">${DAYS.map(d=>{const h=F.horarios[d[0]],on=!!h;return `<div class="grid items-center gap-2" style="grid-template-columns:7.2rem 1fr 1fr"><label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" ${on?'checked':''} onchange="dirDay('${d[0]}',this.checked)">${d[1]}</label><div><div class="text-[10px] mut">Abre (a.m.)</div><input type="time" class="in" ${on?'':'disabled'} value="${on?h[0]:''}" onchange="dirTime('${d[0]}',0,this.value)"></div><div><div class="text-[10px] mut">Cierra (p.m.)</div><input type="time" class="in" ${on?'':'disabled'} value="${on?h[1]:''}" onchange="dirTime('${d[0]}',1,this.value)"></div></div>`}).join('')}<p class="text-xs mut">Tildá solo los días que abrís. Solo esos se mostrarán en el anuncio.</p></div>`:`<button type="button" class="bo w-full" onclick="D.F.showH=true;dirForm()">🕒 Agregar horarios</button>`;
+ openModal(`<div class="${SW}" style="${sheetS}"><div class="flex items-center gap-2 mb-3"><button onclick="${edit?'dirBack()':'closeModal()'}" class="bo px-3 py-1.5 text-sm">← Atrás</button><span class="mr-auto font-bold">${F.admin?'Editar petición (admin)':edit?'Editar anuncio':'Nuevo anuncio'}</span></div><div class="space-y-4">
+ <div>${lab('Nombre del local')}<input id="fnombre" class="in" style="font-size:1.5rem;font-weight:800;min-height:56px" maxlength="60" oninput="dirV(this)" placeholder="Ej: Pizzería Don Luis" value="${esc(F.nombre)}"><div class="ferr" id="e_fnombre"></div></div>
+ <div>${lab('Descripción')}<textarea id="fdescr" rows="4" maxlength="600" class="in" oninput="dirV(this)" placeholder="Qué vendés o qué hacés">${esc(F.descr)}</textarea><div class="ferr" id="e_fdescr"></div></div>
+ <div>${lab('Categoría')}<div class="dcg mt-1">${C.map(c=>`<button type="button" style="--c:${c[1]}" class="${F.cat===c[0]?'on':''}" onclick="D.F.cat='${c[0]}';dirForm()"><span style="color:${c[1]}">${ic(c[2])}</span>${c[0]}</button>`).join('')}</div></div>
+ <div>${lab('Horarios')}<div class="mt-1">${hor}</div></div>
+ <div>${lab('Ubicación del local (dirección / barrio)')}<input id="fzona" class="in" oninput="dirV(this)" placeholder="Calle, número y barrio" value="${esc(F.zona)}"><div class="ferr" id="e_fzona"></div></div>
+ <div>${lab('WhatsApp de contacto')}<input id="ftel" class="in" inputmode="tel" oninput="dirV(this)" placeholder="3764123456" value="${esc(F.tel)}"><div class="ferr" id="e_ftel"></div></div>
+ <div>${lab('Detalles (celular, página, redes…)')}<div class="space-y-2 mt-1">${F.detalles.map((d,i)=>`<div class="flex gap-2"><select class="in" style="width:8.5rem" onchange="D.F.detalles[${i}].t=this.value">${DT.map(t=>`<option ${t===d.t?'selected':''}>${t}</option>`).join('')}</select><input class="in" placeholder="Número, link o usuario" value="${esc(d.v)}" oninput="D.F.detalles[${i}].v=this.value"><button type="button" class="bo px-3" aria-label="Quitar" onclick="D.F.detalles.splice(${i},1);dirForm()">×</button></div>`).join('')}<button type="button" class="bo text-sm" onclick="D.F.detalles.push({t:'Celular',v:''});dirForm()">+ Agregar detalle</button></div></div>
+ <div>${lab('Fotos del local, menú o lo que quieras (hasta '+MAXI+')')}<div class="flex flex-wrap gap-2 my-2">${F.imgs.map((u,i)=>`<div class="relative"><img src="${esc(u)}" class="rounded-lg w-20 h-20 object-cover"><button type="button" class="absolute -top-2 -right-2 bg-white text-black rounded-full w-6 h-6 shadow" onclick="D.F.imgs.splice(${i},1);dirForm()">×</button></div>`).join('')}${F.files.map(b=>`<img src="${URL.createObjectURL(b)}" class="rounded-lg w-20 h-20 object-cover" style="outline:2px solid var(--amb)">`).join('')}</div>${F.imgs.length+F.files.length<MAXI?`<input type="file" accept="image/*" multiple class="in" onchange="dirFiles(this)">`:''}<p class="text-xs mut">La 1ª foto es la portada. Se optimizan automáticamente.</p></div>
+ ${F.admin?`<div class="cd p-3 space-y-2" style="border-color:var(--amb)">${lab('Link de Google Maps (solo admin)')}<input id="fmaps" class="in" placeholder="https://maps.app.goo.gl/…" value="${esc(F.maps_link||'')}" oninput="D.F.maps_link=this.value"><label class="text-sm flex gap-2"><input type="checkbox" ${F.destacado?'checked':''} onchange="D.F.destacado=this.checked"> ★ Destacado</label></div>`:''}
+ </div><button id="fSave" class="dpub w-full mt-5" onclick="dirSave()">${edit?'Guardar cambios':'Publicar anuncio'}</button></div>`);
+ ['nombre','descr','zona','tel'].forEach(k=>{const e=$$('f'+k);if(e&&e.value)dirV(e)})}
+window.dirDay=(k,on)=>{on?D.F.horarios[k]=['09:00','20:00']:delete D.F.horarios[k];dirForm()};
+window.dirTime=(k,i,v)=>{D.F.horarios[k][i]=v};
+window.dirBack=()=>D.F.admin?closeModal():dirMine();
+function comp(f){return new Promise((res,rej)=>{if(!/^image\/(jpeg|png|webp|gif|heic|heif)?/.test(f.type)||f.size>15e6)return rej(new Error('Foto no válida o muy pesada (máx. 15 MB)'));const u=URL.createObjectURL(f),i=new Image();i.onerror=()=>{URL.revokeObjectURL(u);rej(new Error('No se pudo leer la foto. Usá JPG o PNG.'))};i.onload=()=>{const k=Math.min(1,1000/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext('2d').drawImage(i,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?res(b):rej(new Error('No se pudo optimizar la foto')),'image/webp',.8)};i.src=u})}
+window.dirFiles=async el=>{const F=D.F,room=MAXI-F.imgs.length-F.files.length;let bad=0;for(const f of [...el.files].slice(0,room)){try{F.files.push(await comp(f))}catch(e){bad++;toast(e.message,false)}}el.value='';dirForm()};
+window.dirSave=async()=>{const F=D.F;if(!F.cat)return toast('Elegí una categoría',false);for(const k of Object.keys(V))if(V[k](F[k]||'')!==true){const e=$$('f'+k);e&&(e.focus(),dirV(e));return toast('Revisá los campos marcados',false)}
+ const b=$$('fSave');b.disabled=true;b.textContent='Guardando…';
+ try{const owner=F.owner||ME.id,urls=[];for(const [i,f] of F.files.entries()){const p=`${owner}/${Date.now()}-${i}.webp`,u=await sb.storage.from(BK).upload(p,f,{contentType:'image/webp'});if(u.error)throw u.error;urls.push(sb.storage.from(BK).getPublicUrl(p).data.publicUrl)}
+ const hor={};DAYS.forEach(d=>{const h=F.horarios[d[0]];if(h&&h[0]&&h[1])hor[d[0]]=h});
+ const row={nombre:F.nombre.trim(),cat:F.cat,descr:F.descr.trim(),zona:F.zona.trim(),tel:F.tel.replace(/[\s-]/g,''),imgs:[...F.imgs,...urls],horarios:hor,detalles:F.detalles.filter(d=>d.v.trim())};
+ if(F.admin){row.maps_link=(F.maps_link||'').trim()||null;row.destacado=!!F.destacado}
+ const r=F.id?await sb.from('negocios').update(row).eq('id',F.id).select().single():await sb.from('negocios').insert(row).select().single();if(r.error)throw r.error;
+ if(!F.id){D.mine=r.data;toast('¡Petición enviada!');payModal(r.data)}else{toast('Cambios guardados');closeModal();dirLoad()}}
+ catch(e){b.disabled=false;b.textContent=F.id?'Guardar cambios':'Publicar anuncio';toast('Error: '+(e.message||'no se pudo guardar'),false)}};
+/* ---------- Pago por WhatsApp ---------- */
+const waPay=n=>`https://wa.me/${WA}?text=${encodeURIComponent('Hola buenas quiero publicar mi anuncio, '+n.nombre)}`;
+function payModal(n){openModal(`<div class="${sheet}" style="${sheetS}"><h3 class="font-bold text-xl">Publicá tu negocio por $5.000/mes</h3><ol class="text-sm mut my-3 space-y-1 list-decimal pl-5"><li>Tocá “Pagar $5.000/mes”: se abre mi WhatsApp con tu mensaje.</li><li>Te paso el alias y hacés la transferencia.</li><li>Cuando confirmo el pago, tu anuncio se publica.</li></ol><a class="dpub w-full flex items-center justify-center" target="_blank" rel="noopener" href="${waPay(n)}">Pagar $5.000/mes por WhatsApp</a><button class="bo w-full mt-2" onclick="closeModal();dirLoad()">Después</button></div>`)}
+/* ---------- Mi anuncio ---------- */
+window.dirMine=()=>{if(!ME||!ME.id)return showGate();const m=D.mine;if(!m)return dirStart();const d=m.expira_at?Math.ceil((Date.parse(m.expira_at)-Date.now())/864e5):0,ok=m.estado==='activo'&&d>0,st=ok?ST_.activo:m.estado==='activo'?ST_.expirado:ST_[m.estado]||ST_.pendiente,k=cat(m.cat);
+ openModal(`<div class="${SW}" style="${sheetS}"><div class="flex items-center gap-2 mb-3"><button onclick="closeModal()" class="bo px-3 py-1.5 text-sm">← Atrás</button><span class="mr-auto font-bold">Mi anuncio</span></div>
+ ${m.imgs[0]?`<img src="${esc(m.imgs[0])}" class="rounded-xl w-full h-44 object-cover mb-3">`:''}<span class="dcat" style="--c:${k[1]}">${esc(m.cat)}</span><h2 class="text-3xl font-extrabold leading-tight">${esc(m.nombre)}</h2><span class="tag ${st[1]} mt-2">${st[0]}</span>
+ <p class="text-sm mut mt-3">${ok?`Te quedan <b>${d} días</b> de suscripción.`:m.estado==='rechazado'?'Tu petición fue rechazada. Escribime por WhatsApp para resolverlo.':'Tu anuncio todavía no se publicó: falta confirmar el pago.'}</p>
+ <div class="grid gap-2 mt-4"><button class="bp" onclick="openForm(D.mine)">✏️ Editar anuncio</button>${ok?`<button class="bo" onclick="dirMore('${m.id}')">Ver cómo se ve</button>`:''}<a class="dpub flex items-center justify-center" target="_blank" rel="noopener" href="${waPay(m)}">${ok?'Renovar':'Pagar'} $5.000/mes por WhatsApp</a></div></div>`)};
+/* ---------- Administración de peticiones ---------- */
+function admDraw(){const L=D.all.filter(n=>D.af==='todos'||n.estado===D.af),cnt=e=>D.all.filter(n=>n.estado===e).length;
+ $$('admN').innerHTML=`<div class="cd p-4 mb-4"><h3 class="mb-2">Peticiones de anuncios</h3><div class="flex gap-2 flex-wrap mb-3">${[['pendiente','Pendientes'],['activo','Pagados'],['rechazado','Rechazados'],['todos','Todos']].map(t=>`<button class="dchip ${D.af===t[0]?'on':''}" onclick="D.af='${t[0]}';admDraw()">${t[1]}${t[0]!=='todos'?' ('+cnt(t[0])+')':''}</button>`).join('')}</div><div class="space-y-3">${L.map(n=>`<div class="p-3 rounded-xl" style="border:1px solid var(--line)"><div class="flex flex-wrap items-center gap-2"><b class="mr-auto">${esc(n.nombre)} <span class="tag ${(ST_[n.estado]||ST_.pendiente)[1]}">${(ST_[n.estado]||ST_.pendiente)[0]}</span></b><span class="text-xs mut">${esc(n.cat)} · ${esc(n.tel)}${n.maps_link?' · 📍':' · sin mapa'}</span></div><div class="flex flex-wrap gap-2 mt-2"><button class="bp text-xs" onclick="adm('${n.id}','activo')">✓ Pagado</button><button class="bo text-xs" onclick="adm('${n.id}','pendiente')">Pendiente</button><button class="bo text-xs" onclick="adm('${n.id}','rechazado')">✕ Rechazar</button><button class="bo text-xs" onclick="dirAdmEdit('${n.id}')">✏️ Editar / agregar mapa</button><button class="bo text-xs" onclick="dirMore('${n.id}')">Ver</button><button class="bo text-xs" onclick="adm('${n.id}',null)">Eliminar</button></div></div>`).join('')||'<p class="mut text-sm">No hay anuncios en esta lista.</p>'}</div></div>`}
+window.dirAdmEdit=id=>openForm(D.all.find(x=>x.id===id),true);
+window.adm=async(id,e)=>{const n=D.all.find(x=>x.id===id);let r;if(e===null){if(!confirm('¿Eliminar este anuncio?'))return;r=await sb.from('negocios').delete().eq('id',id)}else{const u={estado:e};if(e==='activo'){const base=Math.max(Date.now(),n.expira_at?Date.parse(n.expira_at):0);u.expira_at=new Date(base+30*864e5).toISOString()}r=await sb.from('negocios').update(u).eq('id',id)}r.error?toast('Sin permiso',false):(toast('Listo'),dirLoad())};
+/* ---------- Navegación ---------- */
+const o=setRole;setRole=function(r){o(r);$$('viewDir').classList.toggle('hidden',r!=='dir');if(r==='dir')dirLoad()};
+const nv=document.querySelector('.nv[data-r="find"]');if(nv&&!document.querySelector('.nv[data-r="dir"]')){const b=nv.cloneNode(true);b.dataset.r='dir';b.querySelector('span').textContent='Negocios';b.querySelector('svg').innerHTML='<path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/>';nv.after(b);b.onclick=()=>setRole('dir')}
+window.D=D;window.openForm=openForm;window.dirLoad=dirLoad;window.dirForm=dirForm;
 })();
 </script>
 </body>
