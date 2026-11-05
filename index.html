@@ -353,6 +353,8 @@ header{background:color-mix(in srgb,var(--bg) 78%,transparent)!important;backdro
 #waFab:hover{transform:translateY(-2px) scale(1.03)}#waFab .tx{display:none}@media(min-width:640px){#waFab{bottom:22px}#waFab .tx{display:inline}}
 @media(prefers-reduced-motion:reduce){#amb{display:none}.card .tag.u1::before,#bellBtn:hover svg{animation:none}}
 
+/* Las ventanas (Editar, Ver, formulario) deben quedar POR ENCIMA del Panel de control (z-55); modal2 sigue en 60 */
+#modal{z-index:58!important}
 /* ===== Directorio de negocios ===== */
 .bn-in{grid-template-columns:repeat(5,1fr)!important;max-width:34rem}
 .dchip{display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;padding:.4rem .9rem;border-radius:999px;border:1px solid var(--line);background:var(--card);font-weight:600;font-size:.82rem;transition:.2s}.dchip.on{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--azul),var(--cel))}
@@ -407,7 +409,7 @@ header{background:color-mix(in srgb,var(--bg) 78%,transparent)!important;backdro
   <h3 class="sech font-bold">Mis changas publicadas</h3><div id="mine" class="grid sm:grid-cols-2 gap-4"></div>
   <h3 class="sech font-bold">Mis postulaciones</h3><div id="myApps" class="grid sm:grid-cols-2 gap-4"></div>
  </section>
-<section id="viewDir" class="hidden"><div id="dirBox"></div></section>
+<section id="viewDir" class="hidden"><div id="dirBox" class="max-w-5xl mx-auto px-4 pt-6 pb-32"></div></section>
 <section id="viewMe" class="hidden"><div id="meBox"></div></section>
 </main>
 <span id="foot" class="hidden"></span>
