@@ -413,6 +413,270 @@ header #brand,header b{font-family:var(--f-disp);font-stretch:78%;font-weight:90
 .hgiant{font-size:clamp(3.5rem,19vw,11rem);font-stretch:62%;font-weight:900;line-height:.82;color:var(--amb)!important;white-space:nowrap;margin:0 -.5rem -.12em;letter-spacing:-.02em;user-select:none}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&display=swap" rel="stylesheet">
+<style id="ds-editorial">
+/* ==========================================================================
+   SISTEMA VISUAL EDITORIAL (design.md) — aplicado SOLO a Trabajos, Negocios y Publicar
+   (#viewFind, #viewDir, #viewPost y las ventanas #modal de esos flujos).
+   NO toca: Inicio, encabezado, logo, barra inferior, tipografías (Archivo + Plus Jakarta Sans)
+   ni la paleta (--ink, --bg, --card, --soft, --line, --mut, --warn…): solo cambia la forma.
+   Reglas: plano (sin sombras ni degradés), radio 0 en tarjetas/imágenes/tags, 4px en botones e
+   inputs, CTA principal = botón fantasma de 1px, acción compacta = botón relleno, tags en texto
+   plano, pestañas de texto con la activa rellena, espaciado compacto base 4px y 64px entre secciones.
+   ========================================================================== */
+
+/* ---- Títulos de página (misma fuente; solo escala editorial 30px) ---- */
+#viewFind>h1,#viewDir h1{font-size:clamp(1.6rem,3.2vw,1.875rem);line-height:1.2}
+#viewFind>#heroS,#viewDir h1+p{font-size:14px;line-height:1.4;letter-spacing:.025em;margin-top:8px}
+#count{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+#clear{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-underline-offset:3px}
+
+/* ---- Panel de filtros: sin caja, solo líneas finas ---- */
+#viewFind>.cd{background:transparent;border:0;box-shadow:none;border-radius:0;padding:0!important;margin-top:32px}
+#viewFind>.cd>*+*{margin-top:16px}
+#viewFind .in,#viewDir>#dirBox .in{background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;box-shadow:none;min-height:40px;padding:8px 0;letter-spacing:.025em}
+#viewFind .in:focus,#viewDir .in:focus{box-shadow:none;border-bottom-width:2px;padding-bottom:7px}
+#viewFind .in::placeholder,#viewDir .in::placeholder{color:var(--mut);opacity:.7}
+#viewFind select.in{padding-right:1.6rem;background-position:right 0 center}
+
+/* ---- Pestañas de categoría: texto plano, la activa rellena y rectangular ---- */
+#chips{gap:6px!important}
+#viewFind .chip,#viewDir .dchip,#modal .chip{min-height:32px;padding:6px 12px;border:0!important;border-radius:0!important;background:transparent!important;color:var(--ink)!important;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none!important;filter:none;transform:none}
+#viewFind .chip:hover,#viewDir .dchip:hover,#modal .chip:hover{background:var(--soft)!important}
+#viewFind .chip.bp,#viewDir .dchip.on,#modal .chip.bp{background:var(--ink)!important;color:var(--bg)!important}
+#viewDir .dchip>span{color:currentColor!important}
+#viewDir .dchip svg{display:none}
+
+/* ---- Botones: fantasma (principal) y relleno compacto (secundario), radio 4px, sin sombra ---- */
+#viewFind .bo,#viewPost .bo,#viewDir .bo,#modal .bo{background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:4px;min-height:36px;padding:6px 16px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none;filter:none}
+#viewFind .bo:hover,#viewPost .bo:hover,#viewDir .bo:hover,#modal .bo:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#viewFind .bo:disabled,#viewPost .bo:disabled,#viewDir .bo:disabled,#modal .bo:disabled{opacity:.5}
+#viewFind .bp,#viewPost .bp,#viewDir .bp,#modal .bp{background:var(--ink)!important;color:var(--bg)!important;border:1px solid var(--ink);border-radius:4px;min-height:36px;padding:6px 16px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none!important;filter:none}
+#viewFind .bp:hover,#viewPost .bp:hover,#viewDir .bp:hover,#modal .bp:hover{opacity:.85}
+#viewFind .bp:disabled,#viewPost .bp:disabled,#viewDir .bp:disabled,#modal .bp:disabled{opacity:.4}
+/* CTA principal = fantasma, sin pulso ni degradé */
+#newJob,#viewDir .dpub,#modal .dpub{background:transparent!important;color:var(--ink)!important;border:1px solid var(--ink)!important;border-radius:4px;min-height:36px;padding:6px 24px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none!important;animation:none!important;filter:none}
+#newJob::before,#newJob::after{display:none}
+#newJob:hover,#viewDir .dpub:hover,#modal .dpub:hover{background:var(--ink)!important;color:var(--bg)!important}
+#modal .dpub:disabled{opacity:.4}
+
+/* ---- Tags y etiquetas: texto plano, sin píldora; urgente = subrayado fino ---- */
+#viewFind .tag,#viewPost .tag,#viewDir .tag,#modal .tag{background:transparent!important;border:0!important;border-radius:0;padding:0;font-size:11px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);box-shadow:none!important;animation:none!important}
+#viewFind .tag.u1,#viewPost .tag.u1,#modal .tag.u1{color:var(--ink);font-weight:500;border-bottom:1px solid var(--ink)!important}
+#viewFind .tag.u2,#viewPost .tag.u2,#modal .tag.u2{color:var(--ink);font-weight:500}
+
+/* ---- Tarjetas de changa: sin caja ni sombra, solo una línea fina arriba ---- */
+:is(#viewFind,#viewPost) .card,:is(#viewFind,#viewPost) .cd:not(.card){background:transparent;border:0;border-top:1px solid var(--ink);border-radius:0;box-shadow:none;padding:16px 0 0!important;transform:none!important;overflow:visible}
+:is(#viewFind,#viewPost) .card::before,:is(#viewFind,#viewPost) .card::after{display:none}
+:is(#viewFind,#viewPost) .card:hover,:is(#viewFind,#viewPost) .card:active{border-color:var(--ink);box-shadow:none;transform:none}
+:is(#viewFind,#viewPost) .card:hover h3{text-decoration:underline;text-underline-offset:3px}
+:is(#viewFind,#viewPost) .card h3{font-size:16px;line-height:1.3;letter-spacing:.01em}
+:is(#viewFind,#viewPost) .card img{border-radius:0!important}
+:is(#viewFind,#viewPost) .card .avs{box-shadow:none}
+:is(#viewFind,#viewPost) .card .ser.acc{background:transparent;padding:0;border-radius:0;color:var(--ink);font-size:1.4rem;letter-spacing:-.01em}
+#viewFind #feed,#viewPost #mine,#viewPost #myApps{gap:48px 24px}
+
+/* ---- Publicar: encabezado plano alineado a la izquierda, pasos numerados con línea fina ---- */
+#viewPost .pubhero{background:var(--soft);color:var(--ink);text-align:left;border-radius:0;box-shadow:none;padding:32px 24px;overflow:visible}
+#viewPost .pubhero::before,#viewPost .pubhero::after{display:none}
+#viewPost .pubhero h2{margin:0;max-width:22ch;font-size:clamp(1.6rem,3.2vw,1.875rem);line-height:1.2}
+#viewPost .pubhero p{color:var(--mut);margin:12px 0 0;max-width:34rem;font-size:14px;line-height:1.4;letter-spacing:.025em}
+#viewPost .pubsteps{gap:0;margin:32px 0 0;border-top:1px solid var(--ink)}
+#viewPost .pubsteps li{background:transparent;border:0;border-radius:0;padding:12px 16px 12px 0;color:var(--ink);font-size:13px;font-weight:500;letter-spacing:.025em;animation:none}
+#viewPost .pubsteps i{background:transparent;color:var(--mut);width:auto;height:auto;border-radius:0;font-size:12px;font-weight:700}
+#viewPost .pubgo{margin-top:24px;border-radius:4px}
+#viewPost .sech{font-size:20px;font-weight:700;letter-spacing:.025em;margin:64px 0 16px!important}
+#viewPost .sech::before{display:none}
+
+/* ---- Negocios: imagen a sangre sin redondeo, texto debajo, sin caja ni sombra ---- */
+#viewDir .dc{background:transparent;border:0;border-radius:0;box-shadow:none;overflow:visible}
+#viewDir .dc:hover{transform:none;border:0;box-shadow:none}
+#viewDir .dc:hover h3{text-decoration:underline;text-underline-offset:3px}
+#viewDir .dc .cv{aspect-ratio:4/5;border-radius:0}
+#viewDir .dc .cv:not([style*="url"]){background:var(--soft);color:var(--ink)}
+#viewDir .dc .cv::after{display:none}
+#viewDir .dc>div:last-child{padding:12px 0 0!important}
+#viewDir .dc h3{font-size:16px;line-height:1.3;letter-spacing:.01em}
+#viewDir .dcat{color:var(--ink);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+#viewDir .dcat svg{display:none}
+#viewDir .dwa{background:var(--ink)!important;color:var(--bg)!important;font-weight:500}
+#viewDir .bg1,#viewDir .bg2,#modal .bg1,#modal .bg2{border-radius:0;padding:3px 8px;font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--bg)}
+#viewDir .bg2,#modal .bg2{background:var(--bg);color:var(--ink)}
+#viewDir .cd{background:transparent;border:0;border-top:1px solid var(--ink);border-radius:0;box-shadow:none}
+#viewDir .sk,#viewFind .sk{border-radius:0}
+
+/* ---- Ventanas de publicar changa / negocio / ver anuncio ---- */
+#modal>*{border-radius:0!important;box-shadow:none!important}
+#modal .in{background:transparent;border:1px solid var(--ink);border-radius:4px;box-shadow:none}
+#modal .in:focus{box-shadow:inset 0 0 0 1px var(--ink)}
+#modal .in.bad{border-color:var(--warn)}
+#modal .dcg button{border:1px solid var(--line);border-radius:4px;font-size:12px;font-weight:500;letter-spacing:.04em}
+#modal .dcg button.on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+#modal .dstep{gap:4px}
+#modal .dstep i{height:2px;border-radius:0;background:var(--line)}
+#modal .dstep i.on{background:var(--ink)}
+#modal img{border-radius:0!important}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style id="ds-fullpage">
+/* ==========================================================================
+   SISTEMA VISUAL EDITORIAL (design.md) — PÁGINA COMPLETA
+   Inicio · Trabajos · Negocios · Publicar · Perfil + encabezado, barra inferior y pie.
+   NO cambia: la paleta (--bg, --ink, --acc, --soft, --line, --mut, --navy, --amb…),
+   el logo (isotipo SVG y wordmark Archivo) ni la lógica. Solo forma y tipografía.
+   Tipografía: Favorit → sustituto Inter (400/500/700, ss01+cv11, tracking .025em).
+   Plano: sin sombras ni degradés · radio 0 en tarjetas/imágenes · 4px en botones/inputs.
+   ========================================================================== */
+:root{--f-ui:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-disp:var(--f-ui);--f-logo:"Archivo","Plus Jakarta Sans",system-ui,sans-serif}
+body,button,input,select,textarea{font-family:var(--f-ui);font-feature-settings:"ss01" on,"cv11" on;letter-spacing:.025em}
+body{font-size:14px;line-height:1.4;font-weight:400}
+h1,h2,h3,h4,.ser,.plan h3,.cmp th{font-family:var(--f-ui);font-stretch:100%;letter-spacing:.025em}
+h1,h2{font-weight:400;line-height:1.2}
+h3,h4{font-weight:700}
+/* Logo intacto */
+header #brand,.hbrand,.hgiant{font-family:var(--f-logo)}
+header .border-t b{font-family:var(--f-ui);font-stretch:100%;font-weight:700}
+/* Plano: sin fondo ambiental */
+body::before,#amb{display:none!important}
+main.max-w-6xl,header .max-w-6xl{max-width:1440px}
+.cd,.card,.dc,.plan,.trust>div,.faq details,.promo,.cmp,.pcard,.psec,.hstep,.vt,.vst{box-shadow:none!important}
+
+/* ---------- Encabezado: barra negra de anuncio + navegación con línea fina ---------- */
+header{display:flex;flex-direction:column;position:sticky;top:0!important;margin:0!important;border:0!important;border-bottom:1px solid var(--ink)!important;border-radius:0!important;background:var(--bg)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important}
+header>.border-t{order:-1;background:var(--ink);color:var(--bg);border:0!important}
+header>.border-t>div{justify-content:center;padding-top:5px;padding-bottom:5px;font-size:9px;font-weight:400;letter-spacing:.08em;text-transform:uppercase}
+header>.border-t *{color:var(--bg)!important}
+header>.border-t .rounded-full{background:var(--bg)!important}
+header .hcta3,header #themeBtn,header #bellBtn{height:36px;min-height:36px;padding:6px 16px;border:1px solid var(--ink)!important;border-radius:4px;background:transparent!important;color:var(--ink)!important;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none!important;animation:none}
+header .hcta3::after{display:none}
+header .hcta3:hover,header #themeBtn:hover,header #bellBtn:hover{background:var(--ink)!important;color:var(--bg)!important}
+header #meBtn{width:36px;height:36px;min-height:36px;border-radius:4px;background:var(--ink)!important;color:var(--bg)!important;border:1px solid var(--ink);box-shadow:none!important;font-size:12px;font-weight:500}
+header #badge{border-radius:0;font-size:9px;font-weight:500;line-height:16px;height:16px;min-width:16px;border:0}
+#notif{border-radius:0;border:1px solid var(--ink);box-shadow:none!important}
+
+/* ---------- Barra inferior: franja plana, pestaña activa rellena ---------- */
+#bnav{padding:0}
+.bn-in{max-width:none!important;width:100%;border-radius:0!important;border:0;border-top:1px solid var(--ink);background:var(--bg)!important;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none!important;padding:0;gap:0;padding-bottom:env(safe-area-inset-bottom,0px)}
+.nv-pill{display:none!important}
+.nv{border-radius:0;padding:10px 4px;font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.nv svg{width:20px;height:20px}
+.nv.on{background:var(--ink);color:var(--bg)!important}
+.nv.on svg,.nv.on span{animation:none}
+#waFab{border-radius:4px;box-shadow:none;height:40px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+
+/* ---------- Botones: fantasma 1px (principal), relleno compacto (secundario) ---------- */
+#viewHome .bo,#viewMe .bo,#legal .bo,#admin .bo{background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:4px;min-height:36px;padding:6px 16px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none;transform:none}
+#viewHome .bo:hover,#viewMe .bo:hover,#legal .bo:hover,#admin .bo:hover{background:var(--ink);color:var(--bg)}
+#viewHome .bp,#viewMe .bp,#admin .bp{background:var(--ink)!important;color:var(--bg)!important;border:1px solid var(--ink);border-radius:4px;min-height:36px;padding:6px 16px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none!important;transform:none;filter:none}
+#viewHome .bp::after,#viewMe .bp::after{display:none}
+#viewHome .bp:hover,#viewMe .bp:hover{opacity:.85}
+.dpub{border-radius:4px}
+
+/* ---------- Campos: solo línea inferior ---------- */
+#viewMe .in,#admin .in{background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;box-shadow:none;min-height:40px;padding:8px 0}
+#viewMe .in:focus,#admin .in:focus{box-shadow:none;border-bottom-width:2px;padding-bottom:7px}
+#viewMe select.in{padding-right:1.6rem;background-position:right 0 center}
+#viewMe textarea.in{border:1px solid var(--ink);border-radius:4px;padding:8px 12px}
+#viewMe .pg label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.sxp{border-radius:0!important;box-shadow:none!important;border:1px solid var(--ink)}
+.sx{border-radius:0;border:0;border-bottom:1px solid var(--ink);background:transparent;padding-left:0;padding-right:0}
+.sxo,.sxx{border-radius:0}.sxo.on{background:var(--ink);color:var(--bg)}
+
+/* ---------- Tags: texto plano ---------- */
+#viewHome .tag,#viewMe .tag{background:transparent!important;border:0!important;border-radius:0;padding:0;font-size:11px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+#viewHome .tag.u2,#viewMe .tag.u2,#viewMe .tag.u1{color:var(--ink);font-weight:500}
+#viewMe .tag.u1{border-bottom:1px solid var(--ink)!important}
+
+/* ================= INICIO ================= */
+#viewHome .hhero{border-radius:0;background:var(--navy)!important;box-shadow:none;padding:64px 24px;text-align:center}
+.hsky,.hmoon,.hcity{display:none!important}
+.hhero .hcont{padding:0}
+.hlogo{animation:none;filter:none;width:56px;height:56px}
+.hbrand{text-shadow:none;margin-top:16px}
+.hhero p{font-size:14px;line-height:1.4;letter-spacing:.025em;margin-top:12px;max-width:34rem}
+.hbtns{gap:12px;margin-top:32px}
+.hcta,.hcta2{min-height:36px;padding:6px 24px;border-radius:4px;background:transparent!important;color:#fff!important;border:1px solid #fff;box-shadow:none!important;animation:none!important;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:none;transform:none}
+.hcta::after{display:none}
+.hcta:hover,.hcta2:hover{background:#fff!important;color:var(--navy)!important;transform:none}
+.hmq{margin:0;border-bottom:1px solid var(--ink);mask-image:none;-webkit-mask-image:none}
+.hmq div{gap:0}
+.hmq span{background:transparent;border:0;border-radius:0;padding:12px 24px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+#viewHome .hh{display:block;text-align:left;font-size:20px;font-weight:700;letter-spacing:.025em;margin:64px 0 16px;line-height:1.2}
+#viewHome .hh::before{display:none}
+#viewHome .hp{font-size:14px;line-height:1.4;max-width:42rem}
+#viewHome .cd,.hcred.cd{background:transparent;border:0;border-top:1px solid var(--ink);border-radius:0;padding:16px 0 0;transform:none}
+.hgrid{gap:32px 24px}
+.hgrid .cd:hover,.hgrid .cd:active,.hstep:hover,.hstep:active,.trust>div:hover{transform:none;border-color:var(--ink)}
+.hgrid .cd .ic{width:auto;height:auto;border-radius:0;background:none!important;color:var(--ink)!important;box-shadow:none!important;animation:none!important;place-items:start;margin-bottom:12px}
+.hgrid .cd h3{font-size:16px;line-height:1.3}
+.hgrid .cd p{font-size:13px}
+.hsteps{gap:48px}
+.hstep{border-left:0;padding:16px 0 0}
+.ill{border-radius:0;border:0;background:var(--soft);padding:0}
+.hstep h3{font-size:16px}
+.trust{gap:32px 24px}
+.trust>div{background:transparent;backdrop-filter:none;border:0;border-top:1px solid var(--ink);border-radius:0;padding:16px 0 0}
+.trust svg{width:20px;height:20px;color:var(--ink)}
+.trust .n{font-size:30px;font-weight:400;background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink)}
+.trust b{font-size:14px}
+/* Planes y comparativa */
+.plan{background:transparent;border:0;border-top:1px solid var(--ink);border-radius:0;padding:16px 0 0}
+.plan.hi{border:0;border-top:3px solid var(--ink)}
+.plan .chip{background:transparent;color:var(--ink);padding:0;border-radius:0;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.plan h3{font-size:20px;font-weight:700;line-height:1.2}
+.plan li::before{color:var(--ink)}
+.cmp{border:0;border-top:1px solid var(--ink);border-radius:0;background:transparent}
+.cmp th{font-size:14px;font-weight:700}
+.cmp tr.band td{background:var(--soft);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:11px}
+.ck{background:transparent;color:var(--ink);border-radius:0;width:auto;height:auto;font-size:14px;font-weight:500}
+/* FAQ */
+.faq details{background:transparent;border:0;border-top:1px solid var(--ink);border-radius:0;padding:0;margin-top:0}
+.faq details:last-child{border-bottom:1px solid var(--ink)}
+.faq summary{font-weight:500;letter-spacing:.025em}
+.faq summary::after,.faq details[open] summary::after{width:auto;height:auto;border-radius:0;background:none;color:var(--ink);transform:none}
+/* Promo + pie */
+.promo{border-radius:0;padding:48px 24px;gap:16px}
+.promo h2{font-size:clamp(1.6rem,3.2vw,1.875rem);font-weight:400;line-height:1.2}
+.promo .dpub{background:transparent!important;color:#fff!important;border:1px solid #fff!important;min-height:36px;padding:6px 24px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;box-shadow:none!important;animation:none}
+.promo .dpub:hover{background:#fff!important;color:var(--navy)!important}
+#viewHome footer.hcred{border-radius:0!important;border-top:0!important;background:var(--navy)!important;padding:48px 24px 0!important}
+.hlinks b{color:#fff!important;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+.hlinks button{font-size:13px}.hlinks button:hover{color:#fff!important;text-decoration:underline}
+.lg button{font-size:12px}
+
+/* ================= TRABAJOS / NEGOCIOS: 4 columnas ================= */
+@media(min-width:1024px){#feed[class*="lg:grid-cols-3"],#dirBox [class*="lg:grid-cols-3"]{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* ================= PERFIL ================= */
+#viewMe .pcard{border:0;padding:0;background:transparent}
+.pcover{height:96px;background:var(--navy)!important;animation:none;border-radius:0}
+.pcover::after{display:none}
+.pav,.pav .avs,.pav-up .avs{border-radius:0!important;box-shadow:none!important}
+.pav{border:4px solid var(--bg)}
+.pav-cam{background:var(--ink)!important;color:var(--bg)!important;border-radius:0;border-color:var(--bg)}
+.pname h2{font-size:20px;font-weight:700}
+.pstats{margin:24px 0;gap:0;border:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);border-radius:0}
+.pstats div{background:transparent;border-radius:0;padding:16px 4px}
+.pstats div+div{border-left:1px solid var(--line)}
+.pstats b,.pstats div:nth-child(2) b,.pstats div:nth-child(3) b{font-size:30px;font-weight:400;letter-spacing:.025em;color:var(--ink)}
+.pstats span{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.meter{height:2px;border-radius:0;background:var(--line)}
+.meter i{background:var(--ink)!important;border-radius:0;animation:none;box-shadow:none}
+.meter i::after{display:none}
+#viewMe .psec{background:transparent;border:0;border-top:1px solid var(--ink);border-radius:0;padding:24px 0 0;margin-top:48px}
+#viewMe .psec h3{font-size:20px;font-weight:700}
+#viewMe .psec h3 svg,#viewMe .psec:nth-of-type(2) h3 svg{padding:0;width:18px;height:18px;border-radius:0;background:none;color:var(--ink)}
+.psec .sub{font-size:13px}
+.vt{border:1px dashed var(--ink);border-radius:0;background:transparent}.vt.ok{border-style:solid}
+.vt-in{border-radius:0}.vt:hover,.vt:active{box-shadow:none}
+.vst{border-radius:0;background:var(--soft)}
+.vagrid div{border-radius:0}.vaph{border-radius:0}
+.sw{border-radius:0}.sw i{border-radius:0;box-shadow:none}.sw.on,.sw.on{background:var(--ink)}
+#rvBox{border-radius:0!important;border-width:1px!important;background:transparent!important}
+#viewMe img{border-radius:0}
+#legal h1{font-size:30px;font-weight:400}
+#legal .tb{border-radius:0;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}#legal .tb.on{background:var(--ink);color:var(--bg)}
+@media(prefers-reduced-motion:reduce){.hmq div{animation:none}}
+</style>
 </head>
 <body class="min-h-screen">
 <header class="sticky top-0 z-40 border-b" style="background:var(--bg);border-color:var(--line)">
