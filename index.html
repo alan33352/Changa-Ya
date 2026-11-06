@@ -368,7 +368,51 @@ header{background:color-mix(in srgb,var(--bg) 78%,transparent)!important;backdro
 .dpub{background:linear-gradient(135deg,var(--amb),var(--nar) 45%,var(--azul));color:#fff;font-weight:800;border-radius:12px;min-height:46px;padding:0 1.1rem}.dpub:disabled{opacity:.5}
 .dcg{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}.dcg button{--c:var(--azul);display:flex;align-items:center;gap:.5rem;padding:.55rem;border:1px solid var(--line);border-radius:12px;font-size:.8rem;font-weight:600;text-align:left}.dcg button.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
 .ferr{color:var(--warn);font-size:.74rem;min-height:1rem}.in.bad{border-color:var(--warn)}.in.ok{border-color:#2e9e6a}
+
+/* ===== ESTILO "HANDSHAKE" sobre la paleta Changa Ya: tipografía display condensada, tarjetas con borde fino, botones navy + ámbar, pie oscuro ===== */
+:root{--f-disp:"Archivo","Plus Jakarta Sans",system-ui,sans-serif}
+h1,h2,.ser,.hbrand,.plan h3,.hgiant{font-family:var(--f-disp);font-stretch:82%;font-weight:800;letter-spacing:-.02em}
+body{background:var(--bg)}
+/* Header flotante tipo "pastilla" */
+header{position:sticky;top:10px!important;margin:10px 12px 0;border:1px solid var(--line)!important;border-radius:16px;box-shadow:0 10px 30px -18px rgba(11,36,71,.45)}
+header #brand,header b{font-family:var(--f-disp);font-stretch:78%;font-weight:900;letter-spacing:-.01em}
+/* Botones: navy sólido (principal), borde fino (secundario), ámbar (destacado) */
+:root:not(.dark) .bp{background:var(--navy);color:#fff;border-radius:10px}:root:not(.dark) .bp:hover{background:var(--azul)}
+.bo{border-radius:10px;border:1px solid color-mix(in srgb,var(--ink) 70%,transparent);font-weight:700}.bo:hover{background:var(--soft)}
+.hcta,.hcta3,.dpub,.dchip.on{border-radius:10px}
+.hcta,.hcta3,.dpub{background:var(--amb)!important;color:var(--navy)!important;font-weight:800;box-shadow:none}.hcta:hover,.hcta3:hover,.dpub:hover{background:var(--nar)!important}
+.hcta2{border-radius:10px;border:1.5px solid #fff;background:transparent;color:#fff}
+.dchip.on{background:var(--navy)}
+/* Tarjetas, chips y entradas */
+.cd,.card,.dc,.plan,.trust>div{border-radius:18px;box-shadow:none;border:1px solid var(--line)}
+.card:hover,.dc:hover{box-shadow:0 18px 34px -22px rgba(11,36,71,.5)}
+.tag{background:var(--soft);border-color:transparent;font-weight:600;color:var(--mut)}.tag.u1{background:var(--warnbg);color:var(--warn)}.tag.u2{background:color-mix(in srgb,var(--cel) 16%,transparent);color:var(--azul)}
+.in{border-radius:10px}
+/* Hero: degradé azul de marca que se funde con el fondo */
+.hhero{background:linear-gradient(180deg,var(--navy) 0%,var(--azul) 55%,var(--cel) 100%)!important;border-radius:0 0 28px 28px}
+.hbrand{font-size:clamp(3rem,13vw,5.5rem)!important;font-weight:900!important;font-stretch:70%!important;line-height:.95}
+.hh{font-family:var(--f-disp);font-stretch:80%;font-weight:800;font-size:clamp(1.9rem,5vw,2.8rem);text-align:center;margin:3rem 0 1.2rem}
+.faq details{border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.hh{justify-content:center}.hh::before{display:none}
+.hcred,.hcred [style*="--ink"],.hcred b{color:#fff!important}.hcred .ct,.hcred a{color:#fff!important}.hcred p{max-width:100%}.hlinks button{background:none;border:0;padding:.25rem 0;cursor:pointer}.hgiant{display:block;overflow:hidden}
+/* Barra inferior (las 5 secciones) */
+.nv-pill{background:var(--navy)!important;box-shadow:none!important}.nv.on{color:var(--amb)!important}
+/* Planes + comparativa */
+.plans{display:grid;gap:1rem;max-width:56rem;margin:0 auto}@media(min-width:768px){.plans{grid-template-columns:1fr 1fr}}
+.plan{display:flex;flex-direction:column;gap:.7rem;padding:1.5rem;background:var(--card)}.plan.hi{border:2px solid var(--navy)}
+.plan .chip{align-self:flex-start;font-size:.72rem;font-weight:700;padding:.2rem .6rem;border-radius:8px;background:var(--soft);color:var(--azul)}
+.plan h3{font-size:2rem;line-height:1}.plan .pr{font-size:.85rem;color:var(--mut)}.plan ul{list-style:none;padding:0;margin:.4rem 0 0;display:grid;gap:.55rem;font-size:.9rem}.plan li{display:flex;gap:.55rem}.plan li::before{content:"✓";color:var(--cel);font-weight:900}
+.cmpw{overflow-x:auto;max-width:56rem;margin:1.5rem auto 0}.cmp{width:100%;min-width:480px;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);font-size:.88rem}
+.cmp th{padding:1rem;text-align:center;font-family:var(--f-disp);font-stretch:82%;font-weight:800;font-size:1.05rem}.cmp th:first-child{text-align:left;width:50%}
+.cmp td{padding:.8rem 1rem;border-top:1px solid var(--line);text-align:center}.cmp td:first-child{text-align:left}.cmp tr.band td{background:var(--soft);font-weight:800;text-align:left}
+.ck{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--cel);color:#fff;font-size:.7rem;font-weight:900}.no{color:var(--line)}
+/* Tarjeta promo + pie oscuro con wordmark gigante */
+.promo{margin:3rem 0 0;border-radius:22px;background:var(--navy);color:#fff;padding:clamp(1.5rem,5vw,3rem);display:grid;gap:1rem}.promo h2{font-size:clamp(2rem,6vw,3.4rem);line-height:1;text-align:left;margin:0;max-width:32rem}.promo p{color:#c8d6ea;max-width:30rem}
+.hcred{background:var(--navy)!important;color:#fff;border:0!important;border-radius:24px 24px 0 0;margin-top:2.5rem;padding:2rem 1.25rem 0!important;overflow:hidden}.hcred *{color:inherit}.hcred .mut{color:#b9c9e0}.hcred .ct{color:#fff}
+.hlinks{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.8rem 0;font-size:.85rem}.hlinks b{display:block;color:var(--amb)!important;margin-bottom:.5rem}.hlinks button{display:block;padding:.25rem 0;color:#fff;text-align:left;opacity:.85}.hlinks button:hover{opacity:1;color:var(--amb)}
+.hgiant{font-size:clamp(3.5rem,19vw,11rem);font-stretch:62%;font-weight:900;line-height:.82;color:var(--amb)!important;white-space:nowrap;margin:0 -.5rem -.12em;letter-spacing:-.02em;user-select:none}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&display=swap" rel="stylesheet">
 </head>
 <body class="min-h-screen">
 <header class="sticky top-0 z-40 border-b" style="background:var(--bg);border-color:var(--line)">
@@ -994,6 +1038,26 @@ window.admRender=admRender;
 const o=setRole;setRole=function(r){o(r);$$('viewDir').classList.toggle('hidden',r!=='dir');if(r==='dir')dirLoad()};
 const nv=document.querySelector('.nv[data-r="find"]');if(nv&&!document.querySelector('.nv[data-r="dir"]')){const b=nv.cloneNode(true);b.dataset.r='dir';b.querySelector('span').textContent='Negocios';b.querySelector('svg').innerHTML='<path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/>';nv.after(b);b.onclick=()=>setRole('dir')}
 window.D=D;window.openForm=openForm;window.dirLoad=dirLoad;window.dirForm=dirForm;
+})();
+</script>
+
+<script>
+/* ===== Handshake: planes, comparativa, promo y pie oscuro en Inicio (se agregan DESPUÉS de renderHome; no borra nada) ===== */
+(function(){
+ const Y='<span class="ck">✓</span>',N='<span class="no">—</span>',B=t=>`<tr class="band"><td colspan="3">${t}</td></tr>`,R=(t,a,b)=>`<tr><td>${t}</td><td>${a}</td><td>${b}</td></tr>`;
+ const planes=()=>`<h2 class="hh">Elegí cómo usar Changa Ya</h2><div class="plans"><div class="plan"><span class="chip">Individuos</span><h3>Changas</h3><p>Buscá o publicá trabajos y oficios cerca tuyo.</p><span class="pr">Gratis</span><button class="bo w-full" onclick="setRole('post')">Publicar una changa</button><ul><li>Contacto directo por WhatsApp</li><li>Cuentas verificadas y reseñas</li><li>Postulaciones y avisos</li></ul></div>
+ <div class="plan hi"><span class="chip">Negocios</span><h3>Tu local en el directorio</h3><p>Mostrá tu negocio o emprendimiento a toda tu zona.</p><span class="pr">$5.000 por mes</span><button class="bp w-full" onclick="setRole('dir');setTimeout(()=>dirStart(),50)">Publicar negocio</button><ul><li>Anuncio con hasta 6 fotos</li><li>Horarios por día y ubicación en Google Maps</li><li>Reseñas y comentarios de clientes</li><li>Botón de WhatsApp en tu anuncio</li></ul></div></div>
+ <h2 class="hh" style="margin-top:2.5rem">Compará planes</h2><div class="cmpw"><table class="cmp"><thead><tr><th></th><th>Changas</th><th>Negocios</th></tr></thead><tbody>
+ ${B('Contacto y confianza')}${R('Buscar y publicar changas',Y,Y)}${R('Contacto directo por WhatsApp',Y,Y)}${R('Cuentas verificadas',Y,Y)}${R('Reseñas y reputación',Y,Y)}
+ ${B('Directorio de negocios')}${R('Anuncio propio en el directorio',N,Y)}${R('Hasta 6 fotos del local o menú',N,Y)}${R('Horarios por día y mapa',N,Y)}${R('Reseñas y comentarios en tu anuncio',N,Y)}${R('Insignia “Destacado” (a criterio del administrador)',N,Y)}
+ ${B('Precio')}${R('Costo','Gratis','$5.000 / mes')}</tbody></table></div>`;
+ const promo=()=>`<div class="promo"><h2>Descubrí cómo Changa Ya mueve tu zona</h2><p>Encontrá quién te resuelva una tarea hoy, o mostrá tu negocio a tus vecinos.</p><div class="flex flex-wrap gap-2"><button class="dpub px-5" onclick="setRole('post')">Publicar changa</button><button class="hcta2 px-5" style="min-height:46px" onclick="setRole('dir')">Ver negocios →</button></div></div>`;
+ const links=()=>`<div class="hlinks"><div><b>Explorar</b><button onclick="setRole('find');scrollTo(0,0)">Trabajos</button><button onclick="setRole('dir')">Negocios</button><button onclick="setRole('post')">Publicar</button></div><div><b>Cuenta</b><button onclick="setRole('me')">Mi perfil</button><button onclick="setRole('home')">Inicio</button></div><div><b>Ayuda</b><button onclick="document.querySelector('#viewHome .faq')?.scrollIntoView({behavior:'smooth'})">Preguntas frecuentes</button></div></div>`;
+ const extra=()=>{const v=document.getElementById('viewHome');if(!v)return;const h=[...v.querySelectorAll('h2.hh')].find(x=>/Preguntas/.test(x.textContent)),f=v.querySelector('.faq'),ft=v.querySelector('footer.hcred');
+  if(h)h.insertAdjacentHTML('beforebegin',planes());if(f)f.insertAdjacentHTML('afterend',promo());
+  if(ft){const nm=(ft.querySelector('b')||{}).textContent||'Changa Ya';ft.insertAdjacentHTML('beforeend',links()+'<div class="hgiant" aria-hidden="true"></div>');const g=ft.querySelector('.hgiant');g.textContent=nm;const fit=()=>{g.style.fontSize='';g.style.display='inline-block';let fs=parseFloat(getComputedStyle(g).fontSize);const mx=ft.clientWidth-6;while(g.scrollWidth>mx&&fs>24){fs-=2;g.style.fontSize=fs+'px'}};fit();document.fonts&&document.fonts.ready.then(fit);addEventListener('resize',fit)}};
+ if(typeof renderHome==='function'){const o=renderHome;renderHome=function(){o.apply(this,arguments);try{extra()}catch(e){console.error(e)}}}
+ try{renderHome()}catch(e){}
 })();
 </script>
 </body>
